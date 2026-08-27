@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "KEPT Prototype",
-  description: "A clickable prototype that turns open-trip promises into verifiable proof.",
+  title: "KEPT — Find a Trip Worth Trusting",
+  description: "Jelajahi open trip melalui janji yang tercatat dan bukti dari peserta terverifikasi.",
   icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
 };
 
