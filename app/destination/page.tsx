@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type SyntheticEvent } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -49,15 +49,17 @@ type Destination = {
 
 const bromoImages = [
   "/bromo.webp",
-  "https://cdn.medcom.id/dynamic/content/2023/08/28/1607236/59pjBTMe4y.JPG?w=1024",
+  "https://static-cms.routard.com/web-routard/uploads/xlarge_jeep_-_caldeira_0224f2164a.jpg",
+  "https://ourglobaltrek.com/images/indonesia-bromo-29.jpg",
+  "https://hellomedia.id/wp-content/uploads/2023/08/mountainous-landscape-with-fog-scaled.jpg",
+  "https://radartegal.disway.id/upload/29407a32a2d7114c5dff836acdcedaa8.png",
+  "https://astraotoshop.com/_next/image?q=75&url=https%3A%2F%2Fastraotoshop.com%2Fasset%2Farticle-aop%2Fwisata+bromo_20250715.webp&w=828",
   "https://i0.wp.com/michellefranclee.com/wp-content/uploads/2019/02/Bromo-Travel-Blog-Michelle-FrancLee-11.jpg?resize=940%2C627&ssl=1",
-  "https://wisato.id/wp-content/uploads/2020/03/89695916_523884001649193_4021152322953757929_n.jpg",
-  "https://asset.kompas.com/crops/NdmO1H_qBoRmSAoMd38ASw8x_0g%3D/0x625%3A1200x1425/750x500/data/photo/2021/10/29/617b83965f569.png",
   "https://www.indonesia.travel/contentassets/9a3a6fa005ba4003b5155f5f33effe73/bromo3-1.jpg",
-  "https://image.jimcdn.com/app/cms/image/transf/dimension%3D1920x400%3Aformat%3Djpg/path/s45f8c3db950408ef/image/i2610cfbadf7ea9f6/version/1693556107/image.jpg",
   "https://indonesiajuara.asia/en/wp-content/uploads/2025/07/Berkuda-di-Pasir-Berbisik-Gunung-Bromo-IndonesiaJuara-Trip_11zon_11zon-900x900.webp",
-  "https://cdn.getyourguide.com/image/format%3Dauto%2Cfit%3Dcrop%2Cgravity%3Dauto%2Cquality%3D60%2Cwidth%3D400%2Cheight%3D265%2Cdpr%3D2/tour_img/9b918c9a9d1dd2c2024c99c119a2783b34d796e48bebcb14d25cad8eae70fea5.png",
 ];
+
+const bromoPhotoLabels = ["Panorama Bromo", "Jeep Lautan Pasir", "Sunrise Kaldera", "Kabut Tengger", "Bromo & Semeru", "Jeep Sunrise", "Bukit Teletubbies", "Pura Luhur Poten", "Pasir Berbisik"];
 
 const destinationFacts: Record<string, { label: string; value: string }[]> = {
   "gunung-bromo": [
@@ -139,6 +141,10 @@ export default function DestinationPage() {
     src: destination.images[(index + 1) % destination.images.length],
     originalIndex: (index + 1) % destination.images.length,
   }));
+  const fallbackImage = destination.slug === "gunung-bromo" ? "/bromo.webp" : destination.slug === "labuan-bajo" ? "/labuan-bajo.webp" : destination.slug === "dieng-plateau" ? "/dieng.webp" : "";
+  const repairImage = (event: SyntheticEvent<HTMLImageElement>) => {
+    if (fallbackImage && !event.currentTarget.src.endsWith(fallbackImage)) event.currentTarget.src = fallbackImage;
+  };
   const tours = useMemo(() => toursFor(destination), [destination]);
   const filteredTours = useMemo(() => tours.filter((tour) => {
     const departureMatch = departure === "Semua" || tour.departure === departure;
@@ -154,7 +160,7 @@ export default function DestinationPage() {
     <section className="destination-hero section-wrap" id="about-place">
       <div className="breadcrumb"><a href="/">Beranda</a><span>/</span><a href="/#destinations">Destinasi</a><span>/</span><strong>{destination.name}</strong></div>
       <div className="place-hero">
-        <img src={destination.images[0]} alt={`Pemandangan utama ${destination.name}`} />
+        <img src={destination.images[0]} onError={repairImage} alt={`Pemandangan utama ${destination.name}`} />
         <div className="place-hero-overlay">
           <span className="place-eyebrow">{destination.category} · {destination.place}</span>
           <h1>{destination.name}</h1>
@@ -171,7 +177,7 @@ export default function DestinationPage() {
         </article>
         <aside className="place-gallery-card">
           <div className="place-gallery-heading"><div><span className="detail-kicker">GALERI</span><h2>Lihat lebih dekat</h2></div><small>Foto asli destinasi</small></div>
-          <div className="place-thumbnail-grid">{galleryImages.map((image, index) => <button key={`${image.src}-${index}`} onClick={() => setSelectedPhoto(image.originalIndex)} aria-label={`Buka foto ${index + 1} ${destination.name}`}><img src={image.src} alt={`${destination.name}, foto ${index + 1}`} /></button>)}</div>
+          <div className="place-thumbnail-grid">{galleryImages.map((image, index) => <button key={`${image.src}-${index}`} onClick={() => setSelectedPhoto(image.originalIndex)} aria-label={`Buka foto ${index + 1} ${destination.name}`}><img src={image.src} onError={repairImage} alt={`${destination.name}, foto ${index + 1}`} /><span>{destination.slug === "gunung-bromo" ? bromoPhotoLabels[image.originalIndex] : `Sudut ${index + 1}`}</span></button>)}</div>
           <button className="show-all-photos" onClick={() => setSelectedPhoto(0)}><BadgeCheck /> Lihat semua foto <ArrowRight /></button>
         </aside>
       </div>
@@ -188,7 +194,7 @@ export default function DestinationPage() {
 
       <div className="tour-card-grid">
         {filteredTours.length ? filteredTours.map((tour) => <article className="tour-market-card" key={tour.slug}>
-          <a className="tour-market-image" href={`/tour?slug=${tour.slug}`}><img src={tour.image} alt={tour.name} /><span>{tour.duration}</span></a>
+          <a className="tour-market-image" href={`/tour?slug=${tour.slug}`}><img src={tour.image} onError={repairImage} alt={tour.name} /><span>{tour.duration}</span></a>
           <div className="tour-market-body"><div className="operator-chip"><BadgeCheck />{tour.operator}</div><h3>{tour.name}</h3><p>{tour.summary}</p><div className="tour-mini-meta"><span><CalendarDays />{tour.date}</span><span><MapPin />Dari {tour.departure}</span><span><Users />Maks. {tour.participants}</span></div><div className="tour-market-footer"><div><small>Mulai dari</small><strong>{formatPrice(tour.price)}</strong></div><div><small>Janji dipenuhi</small><strong className="kept-score"><ShieldCheck />{tour.rating}%</strong></div></div><a className="full-tour-link" href={`/tour?slug=${tour.slug}`}>Lihat detail & bukti <ArrowRight /></a></div>
         </article>) : <div className="empty-state">Tidak ada tour yang sesuai dengan filter ini.</div>}
       </div>
@@ -201,12 +207,12 @@ export default function DestinationPage() {
         <DialogTitle className="sr-only">Galeri foto {destination.name}</DialogTitle>
         {selectedPhoto !== null && <>
           <div className="lightbox-stage">
-            <img src={destination.images[selectedPhoto]} alt={`${destination.name}, foto besar ${selectedPhoto + 1}`} />
+            <img src={destination.images[selectedPhoto]} onError={repairImage} alt={`${destination.name}, foto besar ${selectedPhoto + 1}`} />
             <button className="lightbox-nav previous" onClick={() => setSelectedPhoto((selectedPhoto - 1 + destination.images.length) % destination.images.length)} aria-label="Foto sebelumnya"><ArrowLeft /></button>
             <button className="lightbox-nav next" onClick={() => setSelectedPhoto((selectedPhoto + 1) % destination.images.length)} aria-label="Foto berikutnya"><ArrowRight /></button>
             <span className="lightbox-count">{selectedPhoto + 1} / {destination.images.length}</span>
           </div>
-          <div className="lightbox-thumbs">{destination.images.map((image, index) => <button key={`${image}-lightbox`} className={index === selectedPhoto ? "active" : ""} onClick={() => setSelectedPhoto(index)}><img src={image} alt={`Thumbnail ${index + 1}`} /></button>)}</div>
+          <div className="lightbox-thumbs">{destination.images.map((image, index) => <button key={`${image}-lightbox`} className={index === selectedPhoto ? "active" : ""} onClick={() => setSelectedPhoto(index)}><img src={image} onError={repairImage} alt={`Thumbnail ${index + 1}`} /></button>)}</div>
         </>}
       </DialogContent>
     </Dialog>
