@@ -3,13 +3,13 @@
 import { FormEvent, useMemo, useState } from "react";
 import {
   ArrowRight,
+  AtSign,
   BadgeCheck,
   CalendarDays,
   Check,
   CheckCircle2,
   ChevronDown,
   CircleUserRound,
-  Clock3,
   Compass,
   FileCheck2,
   GitCompareArrows,
@@ -17,12 +17,13 @@ import {
   History,
   KeyRound,
   LockKeyhole,
+  Mail,
   MapPin,
   Menu,
   Mountain,
+  Phone,
   Search,
   ShieldCheck,
-  Ship,
   Sparkles,
   TicketCheck,
   TreePalm,
@@ -41,82 +42,148 @@ import {
 } from "@/components/ui/dialog";
 
 type SearchMode = "trips" | "operator" | "compare" | "pass";
-type Trip = {
+type OpenTour = { name: string; operator: string; price: string; rating: number; date: string };
+type Destination = {
   id: number;
-  title: string;
-  operator: string;
-  image: string;
-  location: string;
-  duration: string;
-  date: string;
+  name: string;
+  place: string;
   price: string;
+  category: string;
+  rating: number;
+  openTours: number;
   description: string;
-  score: number;
-  verified: number;
-  changed: number;
-  unresolved: number;
-  tags: string[];
-  promises: string[];
+  image: string;
+  tours: OpenTour[];
 };
 
 const searchModes: { id: SearchMode; label: string; helper: string; icon: typeof Search }[] = [
   { id: "trips", label: "Cari Open Trip", helper: "Jelajahi trip dengan bukti", icon: Compass },
   { id: "operator", label: "Cek Operator", helper: "Lihat rekam jejak operator", icon: ShieldCheck },
-  { id: "compare", label: "Bandingkan", helper: "Bandingkan bukti trip", icon: GitCompareArrows },
+  { id: "compare", label: "Bandingkan", helper: "Bandingkan bukti destinasi", icon: GitCompareArrows },
   { id: "pass", label: "Trip Pass Saya", helper: "Akses trip yang kamu ikuti", icon: TicketCheck },
 ];
 
-const trips: Trip[] = [
+const destinations: Destination[] = [
   {
     id: 1,
-    title: "Bromo Sunrise Weekend",
-    operator: "Jelajah Aruna",
+    name: "Gunung Bromo",
+    place: "Jawa Timur",
+    price: "Rp475.000",
+    category: "Gunung",
+    rating: 92,
+    openTours: 12,
+    description: "Sunrise vulkanik, Lautan Pasir, dan jalur jeep dalam satu perjalanan singkat.",
     image: "/bromo.webp",
-    location: "Bromo, Jawa Timur",
-    duration: "2H1M",
-    date: "12–13 Sep 2026",
-    price: "Rp649.000",
-    description: "Sunrise, Lautan Pasir, dan Bukit Teletubbies dari meeting point Malang.",
-    score: 92,
-    verified: 17,
-    changed: 1,
-    unresolved: 0,
-    tags: ["Gunung", "Weekend"],
-    promises: ["Maksimal 15 peserta", "Minibus AC", "2–3 orang per kamar", "Tanpa biaya wajib tambahan"],
+    tours: [
+      { name: "Bromo Sunrise Weekend", operator: "Jelajah Aruna", price: "Rp649.000", rating: 94, date: "12–13 Sep 2026" },
+      { name: "Bromo Midnight Escape", operator: "Langkah Pagi", price: "Rp475.000", rating: 90, date: "19 Sep 2026" },
+      { name: "Bromo + Tumpak Sewu", operator: "Ruang Jelajah", price: "Rp1.250.000", rating: 91, date: "25–27 Sep 2026" },
+    ],
   },
   {
     id: 2,
-    title: "Labuan Bajo Sailing 3D2N",
-    operator: "Nusa Sail",
+    name: "Labuan Bajo",
+    place: "Nusa Tenggara Timur",
+    price: "Rp2.350.000",
+    category: "Laut & Pulau",
+    rating: 96,
+    openTours: 9,
+    description: "Berlayar ke Pulau Padar, Pink Beach, dan Manta Point dengan kapal liveaboard.",
     image: "/labuan-bajo.webp",
-    location: "Labuan Bajo, NTT",
-    duration: "3H2M",
-    date: "18–20 Sep 2026",
-    price: "Rp2.850.000",
-    description: "Liveaboard bersama ke Pulau Padar, Pink Beach, dan Manta Point.",
-    score: 96,
-    verified: 24,
-    changed: 0,
-    unresolved: 0,
-    tags: ["Laut & Pulau", "Petualangan"],
-    promises: ["Kapal kabin AC", "Maksimal 12 peserta", "Makan 7 kali", "Dokumentasi drone termasuk"],
+    tours: [
+      { name: "Sailing Komodo 3D2N", operator: "Nusa Sail", price: "Rp2.850.000", rating: 97, date: "18–20 Sep 2026" },
+      { name: "Komodo Weekend Cruise", operator: "Flores Journey", price: "Rp2.350.000", rating: 94, date: "26–28 Sep 2026" },
+    ],
   },
   {
     id: 3,
-    title: "Dieng Golden Sunrise",
-    operator: "Langkah Pagi",
+    name: "Dieng Plateau",
+    place: "Jawa Tengah",
+    price: "Rp395.000",
+    category: "Alam",
+    rating: 88,
+    openTours: 8,
+    description: "Dataran tinggi sejuk dengan sunrise Sikunir, telaga vulkanik, dan candi kuno.",
     image: "/dieng.webp",
-    location: "Dieng, Jawa Tengah",
-    duration: "2H1M",
-    date: "26–27 Sep 2026",
-    price: "Rp475.000",
-    description: "Sikunir, Telaga Warna, dan kompleks candi dengan keberangkatan dari Yogyakarta.",
-    score: 88,
-    verified: 13,
-    changed: 1,
-    unresolved: 1,
-    tags: ["Alam", "Budaya"],
-    promises: ["Bus pariwisata AC", "Homestay 3 orang per kamar", "Tiket wisata termasuk", "Pemandu lokal"],
+    tours: [
+      { name: "Dieng Golden Sunrise", operator: "Langkah Pagi", price: "Rp475.000", rating: 88, date: "26–27 Sep 2026" },
+      { name: "Dieng Culture Escape", operator: "Jelajah Tengah", price: "Rp395.000", rating: 91, date: "3–4 Okt 2026" },
+    ],
+  },
+  {
+    id: 4,
+    name: "Nusa Penida",
+    place: "Bali",
+    price: "Rp650.000",
+    category: "Laut & Pulau",
+    rating: 91,
+    openTours: 14,
+    description: "Tebing dramatis, pantai tersembunyi, dan laut biru dalam perjalanan pulau sehari.",
+    image: "https://cdn.bookaway.com/media/files/5d82152021264e34310ccdfe.jpeg?quality=50&width=2000",
+    tours: [
+      { name: "West Penida Day Trip", operator: "Bali Beyond", price: "Rp650.000", rating: 93, date: "Setiap Sabtu" },
+      { name: "Penida East + West", operator: "Island Steps", price: "Rp925.000", rating: 90, date: "20–21 Sep 2026" },
+    ],
+  },
+  {
+    id: 5,
+    name: "Raja Ampat",
+    place: "Papua Barat Daya",
+    price: "Rp5.750.000",
+    category: "Petualangan",
+    rating: 95,
+    openTours: 5,
+    description: "Gugusan karst, laguna jernih, dan kehidupan laut untuk petualangan jarak jauh.",
+    image: "https://get.wallhere.com/photo/landscape-sea-bay-lake-water-nature-reflection-coast-lagoon-Terrain-ocean-archipelago-islet-tropics-habitat-natural-environment-computer-wallpaper-landform-geographical-feature-ecosystem-body-of-water-93000.jpg",
+    tours: [
+      { name: "Wayag Explorer 5D4N", operator: "Papua Blue", price: "Rp7.250.000", rating: 97, date: "1–5 Okt 2026" },
+      { name: "Piaynemo Essential", operator: "Raja Journey", price: "Rp5.750.000", rating: 93, date: "8–11 Okt 2026" },
+    ],
+  },
+  {
+    id: 6,
+    name: "Gunung Rinjani",
+    place: "Nusa Tenggara Barat",
+    price: "Rp1.850.000",
+    category: "Gunung",
+    rating: 93,
+    openTours: 7,
+    description: "Pendakian menantang menuju punggungan gunung dan panorama Danau Segara Anak.",
+    image: "https://images.ctfassets.net/rc3dlxapnu6k/7nXzcuNvuwVoGMXbOFwuHM/0d842621bafca9baa5fde978e931d43c/Indonesien__Lombok__Senaru.jpg?fm=webp&q=50&w=2048",
+    tours: [
+      { name: "Rinjani Summit 3D2N", operator: "Rinjani Trek", price: "Rp2.350.000", rating: 94, date: "22–24 Sep 2026" },
+      { name: "Senaru Crater Rim", operator: "Lombok Steps", price: "Rp1.850.000", rating: 92, date: "29–30 Sep 2026" },
+    ],
+  },
+  {
+    id: 7,
+    name: "Belitung",
+    place: "Kepulauan Bangka Belitung",
+    price: "Rp1.250.000",
+    category: "Laut & Pulau",
+    rating: 90,
+    openTours: 6,
+    description: "Pantai putih, batu granit raksasa, dan island hopping di perairan yang tenang.",
+    image: "https://belitongekspres.disway.id/upload/e45f844460cad1327cd6c447afd9f650.jpg",
+    tours: [
+      { name: "Belitung Island Hopping", operator: "Laskar Trip", price: "Rp1.250.000", rating: 91, date: "17–19 Sep 2026" },
+      { name: "Belitung Slow Escape", operator: "Pesisir Kita", price: "Rp1.450.000", rating: 89, date: "1–3 Okt 2026" },
+    ],
+  },
+  {
+    id: 8,
+    name: "Borobudur",
+    place: "Magelang, Jawa Tengah",
+    price: "Rp325.000",
+    category: "Budaya",
+    rating: 89,
+    openTours: 10,
+    description: "Warisan budaya, desa sekitar candi, dan lanskap perbukitan dalam satu rute.",
+    image: "https://upload.wikimedia.org/wikipedia/commons/f/f2/Wisatawan_Domestic_di_Borobudur.jpg",
+    tours: [
+      { name: "Borobudur Village Trail", operator: "Jelajah Tengah", price: "Rp325.000", rating: 91, date: "Setiap Minggu" },
+      { name: "Temple & Village Weekend", operator: "Ruang Budaya", price: "Rp575.000", rating: 87, date: "24–25 Sep 2026" },
+    ],
   },
 ];
 
@@ -126,54 +193,112 @@ const categories = [
   { label: "Laut & Pulau", icon: Waves },
   { label: "Alam", icon: TreePalm },
   { label: "Petualangan", icon: Compass },
+  { label: "Budaya", icon: BadgeCheck },
 ];
 
 export default function Home() {
   const [mode, setMode] = useState<SearchMode>("trips");
   const [category, setCategory] = useState("Semua");
-  const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
-  const [savedTrips, setSavedTrips] = useState<number[]>([]);
+  const [query, setQuery] = useState("");
+  const [from, setFrom] = useState("Yogyakarta");
+  const [date, setDate] = useState("September 2026");
+  const [travellers, setTravellers] = useState("2 orang");
+  const [operatorQuery, setOperatorQuery] = useState("");
+  const [compareOne, setCompareOne] = useState("Gunung Bromo");
+  const [compareTwo, setCompareTwo] = useState("Dieng Plateau");
+  const [passCode, setPassCode] = useState("");
+  const [submittedQuery, setSubmittedQuery] = useState("");
+  const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null);
+  const [comparison, setComparison] = useState<Destination[] | null>(null);
+  const [savedDestinations, setSavedDestinations] = useState<number[]>([]);
+  const [showSaved, setShowSaved] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [resultMessage, setResultMessage] = useState("");
 
-  const filteredTrips = useMemo(() => {
-    if (category === "Semua") return trips;
-    return trips.filter((trip) => trip.tags.includes(category));
-  }, [category]);
+  const filteredDestinations = useMemo(() => {
+    const normalized = submittedQuery.trim().toLowerCase();
+    return destinations.filter((destination) => {
+      const categoryMatch = category === "Semua" || destination.category === category;
+      const searchMatch = !normalized || `${destination.name} ${destination.place} ${destination.category}`.toLowerCase().includes(normalized);
+      const savedMatch = !showSaved || savedDestinations.includes(destination.id);
+      return categoryMatch && searchMatch && savedMatch;
+    });
+  }, [category, submittedQuery, savedDestinations, showSaved]);
+
+  const scrollToResults = () => document.getElementById("destinations")?.scrollIntoView({ behavior: "smooth", block: "start" });
 
   const handleSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const messages: Record<SearchMode, string> = {
-      trips: "3 open trip dengan Promise Snapshot ditemukan.",
-      operator: "Integrity Profile operator siap diperiksa.",
-      compare: "Perbandingan bukti kedua trip berhasil dibuat.",
-      pass: "Trip Pass ditemukan. Kamu dapat melihat Promise Snapshot trip ini.",
-    };
-    setResultMessage(messages[mode]);
-    document.getElementById("recommended")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    setShowSaved(false);
+
+    if (mode === "trips") {
+      setSubmittedQuery(query);
+      setCategory("Semua");
+      const count = destinations.filter((destination) => !query.trim() || `${destination.name} ${destination.place} ${destination.category}`.toLowerCase().includes(query.toLowerCase())).length;
+      setResultMessage(`${count} destinasi ditemukan dari ${from} untuk ${travellers} pada ${date}.`);
+      scrollToResults();
+      return;
+    }
+
+    if (mode === "operator") {
+      const matchedTours = destinations.flatMap((destination) => destination.tours.map((tour) => ({ destination, tour }))).filter(({ tour }) => tour.operator.toLowerCase().includes(operatorQuery.toLowerCase()));
+      if (matchedTours.length) {
+        setSubmittedQuery(matchedTours[0].destination.name);
+        setResultMessage(`${matchedTours[0].tour.operator} ditemukan dengan ${matchedTours[0].tour.rating}% janji dipenuhi pada ${matchedTours[0].tour.name}.`);
+      } else {
+        setSubmittedQuery("");
+        setResultMessage("Operator belum ditemukan. Coba “Jelajah Aruna”, “Nusa Sail”, atau “Langkah Pagi”.");
+      }
+      scrollToResults();
+      return;
+    }
+
+    if (mode === "compare") {
+      const first = destinations.find((destination) => destination.name.toLowerCase().includes(compareOne.toLowerCase()));
+      const second = destinations.find((destination) => destination.name.toLowerCase().includes(compareTwo.toLowerCase()));
+      if (first && second) {
+        setComparison([first, second]);
+        setResultMessage("");
+      } else {
+        setResultMessage("Salah satu destinasi tidak ditemukan. Gunakan nama destinasi yang tampil di halaman.");
+        scrollToResults();
+      }
+      return;
+    }
+
+    if (passCode.trim().toUpperCase() === "BRM-2409-017") {
+      setSelectedDestination(destinations[0]);
+      setResultMessage("");
+    } else {
+      setResultMessage("Trip Pass tidak ditemukan. Coba kode demo BRM-2409-017.");
+      scrollToResults();
+    }
   };
 
-  const toggleSaved = (tripId: number) => {
-    setSavedTrips((current) => current.includes(tripId) ? current.filter((id) => id !== tripId) : [...current, tripId]);
+  const toggleSaved = (destinationId: number) => {
+    setSavedDestinations((current) => current.includes(destinationId) ? current.filter((id) => id !== destinationId) : [...current, destinationId]);
+  };
+
+  const openSaved = () => {
+    setShowSaved(true);
+    setSubmittedQuery("");
+    setCategory("Semua");
+    setResultMessage(savedDestinations.length ? `${savedDestinations.length} destinasi tersimpan.` : "Belum ada destinasi tersimpan. Tekan ikon hati pada kartu destinasi.");
+    scrollToResults();
   };
 
   return (
     <main>
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="KEPT home">
-          <span className="brand-mark"><Check aria-hidden="true" /></span>
-          <span>KEPT</span>
-        </a>
-
+        <a className="brand" href="#top" aria-label="KEPT home"><span className="brand-mark"><Check /></span><span>KEPT</span></a>
         <nav className={mobileOpen ? "main-nav open" : "main-nav"} aria-label="Navigasi utama">
-          <a href="#recommended" onClick={() => setMobileOpen(false)}>Explore Trips</a>
-          <a href="#operators" onClick={() => setMobileOpen(false)}>Operators</a>
+          <a href="#destinations" onClick={() => setMobileOpen(false)}>Destinasi</a>
+          <a href="#why-kept" onClick={() => setMobileOpen(false)}>Kenapa KEPT</a>
           <a href="#how-it-works" onClick={() => setMobileOpen(false)}>Cara Kerja</a>
           <a href="#for-operators" onClick={() => setMobileOpen(false)}>Untuk Operator</a>
         </nav>
-
         <div className="header-actions">
-          <button className="saved-button" aria-label="Trip tersimpan"><Heart /> <span>Tersimpan</span>{savedTrips.length > 0 && <b>{savedTrips.length}</b>}</button>
+          <button className="saved-button" onClick={openSaved} aria-label="Lihat destinasi tersimpan"><Heart /><span>Tersimpan</span>{savedDestinations.length > 0 && <b>{savedDestinations.length}</b>}</button>
           <Button variant="ghost" className="login-button">Masuk</Button>
           <Button className="signup-button">Daftar</Button>
           <button className="menu-button" onClick={() => setMobileOpen((value) => !value)} aria-label="Buka menu">{mobileOpen ? <X /> : <Menu />}</button>
@@ -192,103 +317,84 @@ export default function Home() {
           <div className="mode-tabs" role="tablist" aria-label="Pilihan layanan KEPT">
             {searchModes.map(({ id, label, helper, icon: Icon }) => (
               <button key={id} className={mode === id ? "mode-tab active" : "mode-tab"} onClick={() => { setMode(id); setResultMessage(""); }} role="tab" aria-selected={mode === id}>
-                <span className="mode-icon"><Icon /></span>
-                <span><strong>{label}</strong><small>{helper}</small></span>
+                <span className="mode-icon"><Icon /></span><span><strong>{label}</strong><small>{helper}</small></span>
               </button>
             ))}
           </div>
+
           <form className="search-form" onSubmit={handleSearch}>
-            {mode === "trips" && (
-              <>
-                <SearchField label="Mau ke mana?" value="Bromo, Jawa Timur" icon={MapPin} />
-                <SearchField label="Berangkat dari" value="Malang" icon={Compass} />
-                <SearchField label="Tanggal trip" value="12–13 Sep 2026" icon={CalendarDays} />
-                <SearchField label="Peserta" value="2 orang" icon={Users} />
-                <Button className="search-button" type="submit"><Search /> Cari Trip</Button>
-              </>
-            )}
-            {mode === "operator" && (
-              <>
-                <SearchField label="Nama operator" value="Jelajah Aruna" icon={ShieldCheck} wide />
-                <SearchField label="Akun atau tautan sosial" value="@jelajaharuna" icon={CircleUserRound} wide />
-                <Button className="search-button" type="submit"><Search /> Cek Operator</Button>
-              </>
-            )}
-            {mode === "compare" && (
-              <>
-                <SearchField label="Trip pertama" value="Bromo Sunrise" icon={Mountain} wide />
-                <SearchField label="Trip kedua" value="Dieng Golden Sunrise" icon={Mountain} wide />
-                <Button className="search-button" type="submit"><GitCompareArrows /> Bandingkan</Button>
-              </>
-            )}
-            {mode === "pass" && (
-              <>
-                <SearchField label="Kode Trip Pass" value="BRM-2409-017" icon={KeyRound} wide />
-                <div className="pass-note"><LockKeyhole /><span>Trip Pass hanya dapat digunakan oleh peserta yang terdaftar.</span></div>
-                <Button className="search-button" type="submit"><TicketCheck /> Buka Trip Pass</Button>
-              </>
-            )}
+            {mode === "trips" && <>
+              <SearchField label="Mau ke mana?" value={query} placeholder="Bromo, Bali, gunung..." onChange={setQuery} icon={MapPin} />
+              <SearchField label="Berangkat dari" value={from} onChange={setFrom} icon={Compass} />
+              <SearchField label="Bulan trip" value={date} onChange={setDate} icon={CalendarDays} />
+              <SearchField label="Peserta" value={travellers} onChange={setTravellers} icon={Users} />
+              <Button className="search-button" type="submit"><Search /> Cari Trip</Button>
+            </>}
+            {mode === "operator" && <>
+              <SearchField label="Nama operator" value={operatorQuery} placeholder="Contoh: Jelajah Aruna" onChange={setOperatorQuery} icon={ShieldCheck} wide />
+              <div className="pass-note"><CircleUserRound /><span>Cek skor pemenuhan janji operator dari perjalanan yang sudah selesai.</span></div>
+              <Button className="search-button" type="submit"><Search /> Cek Operator</Button>
+            </>}
+            {mode === "compare" && <>
+              <SearchField label="Destinasi pertama" value={compareOne} onChange={setCompareOne} icon={Mountain} wide />
+              <SearchField label="Destinasi kedua" value={compareTwo} onChange={setCompareTwo} icon={Mountain} wide />
+              <Button className="search-button" type="submit"><GitCompareArrows /> Bandingkan</Button>
+            </>}
+            {mode === "pass" && <>
+              <SearchField label="Kode Trip Pass" value={passCode} placeholder="Coba BRM-2409-017" onChange={setPassCode} icon={KeyRound} wide />
+              <div className="pass-note"><LockKeyhole /><span>Trip Pass hanya dapat digunakan oleh peserta yang terdaftar.</span></div>
+              <Button className="search-button" type="submit"><TicketCheck /> Buka Trip Pass</Button>
+            </>}
           </form>
         </div>
       </section>
 
-      <section className="category-section" aria-label="Kategori trip">
+      <section className="category-section" aria-label="Kategori destinasi">
         <div className="category-row">
-          {categories.map(({ label, icon: Icon }) => (
-            <button key={label} className={category === label ? "category-chip active" : "category-chip"} onClick={() => setCategory(label)}><Icon />{label}</button>
-          ))}
+          {categories.map(({ label, icon: Icon }) => <button key={label} className={category === label ? "category-chip active" : "category-chip"} onClick={() => { setCategory(label); setSubmittedQuery(""); setShowSaved(false); }}><Icon />{label}</button>)}
         </div>
-        <div className="trust-prompt"><BadgeCheck /><span><strong>Semua trip di halaman ini punya Promise Snapshot.</strong> Kamu melihat janji sebelum melihat rating.</span></div>
+        <div className="trust-prompt"><BadgeCheck /><span><strong>Rating KEPT bukan rating kepuasan.</strong> Persentase menunjukkan janji yang dipenuhi.</span></div>
       </section>
 
-      <section className="recommended section-wrap" id="recommended">
+      <section className="recommended section-wrap" id="destinations">
         <div className="section-heading">
-          <div><span className="section-kicker">PILIHAN TERVERIFIKASI</span><h2>Open trip yang bisa kamu periksa</h2><p>Bukan sekadar foto bagus—setiap pilihan punya janji, perubahan, dan bukti yang bisa dilihat.</p></div>
-          <button className="view-all">Lihat semua trip <ArrowRight /></button>
+          <div><span className="section-kicker">JELAJAHI INDONESIA</span><h2>Destinasi open trip pilihan</h2><p>Pilih tempatnya dahulu, lalu bandingkan operator dan bukti perjalanan yang tersedia.</p></div>
+          {(submittedQuery || showSaved) && <button className="view-all" onClick={() => { setSubmittedQuery(""); setShowSaved(false); setResultMessage(""); }}>Tampilkan semua <X /></button>}
         </div>
 
         {resultMessage && <div className="result-message"><CheckCircle2 />{resultMessage}</div>}
 
-        <div className="trip-grid">
-          {filteredTrips.length > 0 ? filteredTrips.map((trip) => (
-            <article className="trip-card" key={trip.id}>
-              <div className="trip-image-wrap">
-                <img src={trip.image} alt={`Pemandangan ${trip.location}`} />
-                <span className="trip-duration"><Clock3 />{trip.duration}</span>
-                <button className={savedTrips.includes(trip.id) ? "heart-button saved" : "heart-button"} onClick={() => toggleSaved(trip.id)} aria-label={savedTrips.includes(trip.id) ? "Hapus dari tersimpan" : "Simpan trip"}><Heart /></button>
-              </div>
-              <div className="trip-body">
-                <div className="operator-row"><span>{trip.operator}</span><BadgeCheck aria-label="Integrity Profile aktif" /></div>
-                <h3>{trip.title}</h3>
-                <div className="trip-meta"><span><MapPin />{trip.location}</span><span><CalendarDays />{trip.date}</span></div>
-                <p>{trip.description}</p>
-                <div className="evidence-bar">
-                  <div><strong>{trip.score}%</strong><span>janji dipenuhi</span></div>
-                  <div><strong>{trip.verified}</strong><span>peserta terverifikasi</span></div>
-                  <span className={trip.unresolved ? "evidence-status warning" : "evidence-status"}>{trip.unresolved ? `${trip.unresolved} belum terselesaikan` : "0 pelanggaran"}</span>
+        <div className="destination-grid">
+          {filteredDestinations.length ? filteredDestinations.map((destination) => (
+            <article className="destination-card" key={destination.id}>
+              <button className="destination-image" onClick={() => setSelectedDestination(destination)} aria-label={`Lihat open tour ${destination.name}`}>
+                <img src={destination.image} alt={`Pemandangan ${destination.name}`} />
+                <span className="category-label">{destination.category}</span>
+              </button>
+              <button className={savedDestinations.includes(destination.id) ? "heart-button saved" : "heart-button"} onClick={() => toggleSaved(destination.id)} aria-label={savedDestinations.includes(destination.id) ? "Hapus dari tersimpan" : "Simpan destinasi"}><Heart /></button>
+              <div className="destination-body">
+                <div className="destination-place"><MapPin />{destination.place}</div>
+                <h3>{destination.name}</h3>
+                <p>{destination.description}</p>
+                <div className="destination-facts">
+                  <div><small>Estimasi mulai</small><strong>{destination.price}</strong></div>
+                  <div><small>Rating KEPT</small><strong className="rating-value"><ShieldCheck />{destination.rating}%</strong></div>
                 </div>
-                <div className="trip-footer">
-                  <div><small>Harga dari operator</small><strong>{trip.price}</strong></div>
-                  <Button onClick={() => setSelectedTrip(trip)} className="evidence-button">Lihat Bukti <ArrowRight /></Button>
-                </div>
+                <button className="tour-count" onClick={() => setSelectedDestination(destination)}><span><strong>{destination.openTours}</strong> open tour tersedia</span><ArrowRight /></button>
               </div>
             </article>
-          )) : <div className="empty-state">Belum ada trip dalam kategori ini. Pilih kategori lain.</div>}
+          )) : <div className="empty-state">Tidak ada destinasi yang cocok. Coba kata kunci atau kategori lain.</div>}
         </div>
       </section>
 
-      <section className="operator-showcase" id="operators">
-        <div className="section-wrap operator-inner">
-          <div className="operator-copy">
-            <span className="section-kicker light">OPERATOR YANG TERBUKA</span>
-            <h2>Rekam jejak yang lebih jelas dari sekadar testimoni.</h2>
-            <p>Integrity Profile merangkum pola pemenuhan janji dari setiap trip yang telah selesai.</p>
-            <Button variant="secondary">Jelajahi Operator <ArrowRight /></Button>
-          </div>
-          <div className="profile-card">
-            <div className="profile-top"><div className="operator-avatar">JA</div><div><span>Integrity Profile</span><h3>Jelajah Aruna</h3><p>Malang, Jawa Timur</p></div><BadgeCheck /></div>
-            <div className="profile-stats"><div><strong>92%</strong><span>Janji dipenuhi</span></div><div><strong>14</strong><span>Trip tercatat</span></div><div><strong>186</strong><span>Peserta terverifikasi</span></div></div>
-            <div className="profile-note"><History /><span>Transparan pada <strong>6 dari 6 perubahan</strong> yang tercatat.</span></div>
+      <section className="why-kept" id="why-kept">
+        <div className="section-wrap">
+          <div className="section-heading centered"><div><span className="section-kicker light">KENAPA MEMILIH KEPT?</span><h2>Kepercayaan yang bisa diperiksa.</h2><p>KEPT membantu kamu melihat lebih dari foto promosi dan testimoni.</p></div></div>
+          <div className="benefit-grid">
+            <article><FileCheck2 /><h3>Janji Tercatat</h3><p>Detail trip dapat diperiksa sebelum peserta membayar.</p></article>
+            <article><TicketCheck /><h3>Peserta Terverifikasi</h3><p>Hanya peserta asli yang dapat mengonfirmasi kenyataan.</p></article>
+            <article><History /><h3>Perubahan Transparan</h3><p>Setiap perubahan tampil bersama alasan dan penggantinya.</p></article>
+            <article><ShieldCheck /><h3>Rating Berbasis Bukti</h3><p>Persentase dihitung dari janji yang benar-benar dipenuhi.</p></article>
           </div>
         </div>
       </section>
@@ -307,46 +413,38 @@ export default function Home() {
         <Button className="light-button">Buat Profil Operator <ArrowRight /></Button>
       </section>
 
-      <footer className="site-footer">
+      <footer className="site-footer expanded-footer">
         <div className="footer-brand"><span className="brand-mark"><Check /></span><span><strong>KEPT</strong><small>Did they keep their promise?</small></span></div>
-        <div className="footer-links"><a href="#recommended">Explore Trips</a><a href="#operators">Operators</a><a href="#how-it-works">Cara Kerja</a></div>
-        <p>Prototype concept · Semua data ditampilkan untuk demonstrasi.</p>
+        <div className="footer-column"><strong>Jelajahi</strong><a href="#destinations">Destinasi</a><a href="#why-kept">Kenapa KEPT</a><a href="#how-it-works">Cara Kerja</a></div>
+        <div className="footer-column"><strong>Untuk Operator</strong><a href="#for-operators">Buat Profil</a><a href="#top">Masuk Operator</a><a href="#top">Pusat Bantuan</a></div>
+        <div className="footer-column contact-column"><strong>Hubungi Kami</strong><a href="mailto:hello@kept.id"><Mail />hello@kept.id</a><a href="tel:+6281234567890"><Phone />+62 812-3456-7890</a><a href="#top"><AtSign />@kept.id</a><span><MapPin />Yogyakarta, Indonesia</span></div>
       </footer>
 
-      <Dialog open={Boolean(selectedTrip)} onOpenChange={(open) => !open && setSelectedTrip(null)}>
-        {selectedTrip && (
-          <DialogContent className="evidence-dialog">
-            <DialogHeader>
-              <span className="dialog-kicker"><ShieldCheck /> TRIP INTEGRITY PREVIEW</span>
-              <DialogTitle>{selectedTrip.title}</DialogTitle>
-              <DialogDescription>{selectedTrip.operator} · {selectedTrip.date}</DialogDescription>
-            </DialogHeader>
-            <div className="dialog-score">
-              <div><strong>{selectedTrip.score}%</strong><span>janji dipenuhi</span></div>
-              <div><strong>{selectedTrip.verified}</strong><span>peserta terverifikasi</span></div>
-              <div><strong>{selectedTrip.changed}</strong><span>perubahan transparan</span></div>
-            </div>
-            <div className="promise-preview">
-              <div className="promise-preview-title"><LockKeyhole /><span><strong>Promise Snapshot · v1.0</strong><small>Dicatat sebelum peserta membayar</small></span></div>
-              {selectedTrip.promises.map((promise) => <div className="promise-line" key={promise}><CheckCircle2 />{promise}</div>)}
-            </div>
-            <DialogFooter>
-              <Button variant="outline" onClick={() => setSelectedTrip(null)}>Tutup</Button>
-              <Button className="dialog-cta">Buka Integrity Report <ArrowRight /></Button>
-            </DialogFooter>
-          </DialogContent>
-        )}
+      <Dialog open={Boolean(selectedDestination)} onOpenChange={(open) => !open && setSelectedDestination(null)}>
+        {selectedDestination && <DialogContent className="destination-dialog">
+          <div className="dialog-destination-image"><img src={selectedDestination.image} alt={selectedDestination.name} /><span>{selectedDestination.category}</span></div>
+          <DialogHeader>
+            <span className="dialog-kicker"><MapPin />{selectedDestination.place}</span>
+            <DialogTitle>{selectedDestination.name}</DialogTitle>
+            <DialogDescription>{selectedDestination.description}</DialogDescription>
+          </DialogHeader>
+          <div className="dialog-destination-stats"><div><small>Estimasi mulai</small><strong>{selectedDestination.price}</strong></div><div><small>Rating KEPT</small><strong>{selectedDestination.rating}%</strong></div><div><small>Open tour</small><strong>{selectedDestination.openTours}</strong></div></div>
+          <div className="available-tours"><div className="available-heading"><strong>Open tour tersedia</strong><span>Pilih untuk melihat bukti operator</span></div>{selectedDestination.tours.map((tour) => <article key={tour.name}><div><strong>{tour.name}</strong><span>{tour.operator} · {tour.date}</span></div><div><b>{tour.rating}%</b><span>janji dipenuhi</span></div><div><strong>{tour.price}</strong><button>Lihat bukti <ArrowRight /></button></div></article>)}</div>
+          <DialogFooter><Button variant="outline" onClick={() => setSelectedDestination(null)}>Tutup</Button></DialogFooter>
+        </DialogContent>}
+      </Dialog>
+
+      <Dialog open={Boolean(comparison)} onOpenChange={(open) => !open && setComparison(null)}>
+        {comparison && <DialogContent className="compare-dialog">
+          <DialogHeader><span className="dialog-kicker"><GitCompareArrows /> PERBANDINGAN DESTINASI</span><DialogTitle>Bandingkan sebelum memilih.</DialogTitle><DialogDescription>Gunakan rating berbasis janji dan pilihan tour yang tersedia.</DialogDescription></DialogHeader>
+          <div className="comparison-grid">{comparison.map((destination) => <article key={destination.id}><img src={destination.image} alt={destination.name} /><h3>{destination.name}</h3><span>{destination.place}</span><dl><div><dt>Estimasi</dt><dd>{destination.price}</dd></div><div><dt>Rating KEPT</dt><dd>{destination.rating}%</dd></div><div><dt>Open tour</dt><dd>{destination.openTours}</dd></div></dl><Button onClick={() => { setComparison(null); setSelectedDestination(destination); }}>Lihat Tour</Button></article>)}</div>
+          <DialogFooter><Button variant="outline" onClick={() => setComparison(null)}>Tutup</Button></DialogFooter>
+        </DialogContent>}
       </Dialog>
     </main>
   );
 }
 
-function SearchField({ label, value, icon: Icon, wide = false }: { label: string; value: string; icon: typeof Search; wide?: boolean }) {
-  return (
-    <label className={wide ? "search-field wide" : "search-field"}>
-      <Icon aria-hidden="true" />
-      <span><small>{label}</small><input defaultValue={value} aria-label={label} /></span>
-      <ChevronDown aria-hidden="true" className="field-chevron" />
-    </label>
-  );
+function SearchField({ label, value, placeholder, onChange, icon: Icon, wide = false }: { label: string; value: string; placeholder?: string; onChange: (value: string) => void; icon: typeof Search; wide?: boolean }) {
+  return <label className={wide ? "search-field wide" : "search-field"}><Icon /><span><small>{label}</small><input value={value} placeholder={placeholder} onChange={(event) => onChange(event.target.value)} aria-label={label} /></span><ChevronDown className="field-chevron" /></label>;
 }
