@@ -208,7 +208,6 @@ export default function Home() {
   const [compareTwo, setCompareTwo] = useState("Dieng Plateau");
   const [passCode, setPassCode] = useState("");
   const [submittedQuery, setSubmittedQuery] = useState("");
-  const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null);
   const [comparison, setComparison] = useState<Destination[] | null>(null);
   const [savedDestinations, setSavedDestinations] = useState<number[]>([]);
   const [showSaved, setShowSaved] = useState(false);
@@ -267,8 +266,7 @@ export default function Home() {
     }
 
     if (passCode.trim().toUpperCase() === "BRM-2409-017") {
-      setSelectedDestination(destinations[0]);
-      setResultMessage("");
+      window.location.href = "/tour?slug=bromo-sunrise-weekend&pass=1";
     } else {
       setResultMessage("Trip Pass tidak ditemukan. Coba kode demo BRM-2409-017.");
       scrollToResults();
@@ -367,10 +365,10 @@ export default function Home() {
         <div className="destination-grid">
           {filteredDestinations.length ? filteredDestinations.map((destination) => (
             <article className="destination-card" key={destination.id}>
-              <button className="destination-image" onClick={() => setSelectedDestination(destination)} aria-label={`Lihat open tour ${destination.name}`}>
+              <a className="destination-image" href={`/destination?slug=${toSlug(destination.name)}`} aria-label={`Buka halaman ${destination.name}`}>
                 <img src={destination.image} alt={`Pemandangan ${destination.name}`} />
                 <span className="category-label">{destination.category}</span>
-              </button>
+              </a>
               <button className={savedDestinations.includes(destination.id) ? "heart-button saved" : "heart-button"} onClick={() => toggleSaved(destination.id)} aria-label={savedDestinations.includes(destination.id) ? "Hapus dari tersimpan" : "Simpan destinasi"}><Heart /></button>
               <div className="destination-body">
                 <div className="destination-place"><MapPin />{destination.place}</div>
@@ -380,7 +378,7 @@ export default function Home() {
                   <div><small>Estimasi mulai</small><strong>{destination.price}</strong></div>
                   <div><small>Rating KEPT</small><strong className="rating-value"><ShieldCheck />{destination.rating}%</strong></div>
                 </div>
-                <button className="tour-count" onClick={() => setSelectedDestination(destination)}><span><strong>{destination.openTours}</strong> open tour tersedia</span><ArrowRight /></button>
+                <a className="tour-count" href={`/destination?slug=${toSlug(destination.name)}`}><span><strong>{destination.openTours}</strong> open tour tersedia</span><ArrowRight /></a>
               </div>
             </article>
           )) : <div className="empty-state">Tidak ada destinasi yang cocok. Coba kata kunci atau kategori lain.</div>}
@@ -420,24 +418,10 @@ export default function Home() {
         <div className="footer-column contact-column"><strong>Hubungi Kami</strong><a href="mailto:hello@kept.id"><Mail />hello@kept.id</a><a href="tel:+6281234567890"><Phone />+62 812-3456-7890</a><a href="#top"><AtSign />@kept.id</a><span><MapPin />Yogyakarta, Indonesia</span></div>
       </footer>
 
-      <Dialog open={Boolean(selectedDestination)} onOpenChange={(open) => !open && setSelectedDestination(null)}>
-        {selectedDestination && <DialogContent className="destination-dialog">
-          <div className="dialog-destination-image"><img src={selectedDestination.image} alt={selectedDestination.name} /><span>{selectedDestination.category}</span></div>
-          <DialogHeader>
-            <span className="dialog-kicker"><MapPin />{selectedDestination.place}</span>
-            <DialogTitle>{selectedDestination.name}</DialogTitle>
-            <DialogDescription>{selectedDestination.description}</DialogDescription>
-          </DialogHeader>
-          <div className="dialog-destination-stats"><div><small>Estimasi mulai</small><strong>{selectedDestination.price}</strong></div><div><small>Rating KEPT</small><strong>{selectedDestination.rating}%</strong></div><div><small>Open tour</small><strong>{selectedDestination.openTours}</strong></div></div>
-          <div className="available-tours"><div className="available-heading"><strong>Open tour tersedia</strong><span>Pilih untuk melihat bukti operator</span></div>{selectedDestination.tours.map((tour) => <article key={tour.name}><div><strong>{tour.name}</strong><span>{tour.operator} · {tour.date}</span></div><div><b>{tour.rating}%</b><span>janji dipenuhi</span></div><div><strong>{tour.price}</strong><button>Lihat bukti <ArrowRight /></button></div></article>)}</div>
-          <DialogFooter><Button variant="outline" onClick={() => setSelectedDestination(null)}>Tutup</Button></DialogFooter>
-        </DialogContent>}
-      </Dialog>
-
       <Dialog open={Boolean(comparison)} onOpenChange={(open) => !open && setComparison(null)}>
         {comparison && <DialogContent className="compare-dialog">
           <DialogHeader><span className="dialog-kicker"><GitCompareArrows /> PERBANDINGAN DESTINASI</span><DialogTitle>Bandingkan sebelum memilih.</DialogTitle><DialogDescription>Gunakan rating berbasis janji dan pilihan tour yang tersedia.</DialogDescription></DialogHeader>
-          <div className="comparison-grid">{comparison.map((destination) => <article key={destination.id}><img src={destination.image} alt={destination.name} /><h3>{destination.name}</h3><span>{destination.place}</span><dl><div><dt>Estimasi</dt><dd>{destination.price}</dd></div><div><dt>Rating KEPT</dt><dd>{destination.rating}%</dd></div><div><dt>Open tour</dt><dd>{destination.openTours}</dd></div></dl><Button onClick={() => { setComparison(null); setSelectedDestination(destination); }}>Lihat Tour</Button></article>)}</div>
+          <div className="comparison-grid">{comparison.map((destination) => <article key={destination.id}><img src={destination.image} alt={destination.name} /><h3>{destination.name}</h3><span>{destination.place}</span><dl><div><dt>Estimasi</dt><dd>{destination.price}</dd></div><div><dt>Rating KEPT</dt><dd>{destination.rating}%</dd></div><div><dt>Open tour</dt><dd>{destination.openTours}</dd></div></dl><Button onClick={() => { window.location.href = `/destination?slug=${toSlug(destination.name)}`; }}>Lihat Tour</Button></article>)}</div>
           <DialogFooter><Button variant="outline" onClick={() => setComparison(null)}>Tutup</Button></DialogFooter>
         </DialogContent>}
       </Dialog>
@@ -447,4 +431,8 @@ export default function Home() {
 
 function SearchField({ label, value, placeholder, onChange, icon: Icon, wide = false }: { label: string; value: string; placeholder?: string; onChange: (value: string) => void; icon: typeof Search; wide?: boolean }) {
   return <label className={wide ? "search-field wide" : "search-field"}><Icon /><span><small>{label}</small><input value={value} placeholder={placeholder} onChange={(event) => onChange(event.target.value)} aria-label={label} /></span><ChevronDown className="field-chevron" /></label>;
+}
+
+function toSlug(value: string) {
+  return value.toLowerCase().replace(/&/g, "dan").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
