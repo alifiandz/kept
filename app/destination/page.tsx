@@ -19,6 +19,7 @@ import {
   Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 type Tour = {
   slug: string;
@@ -48,9 +49,33 @@ type Destination = {
 
 const bromoImages = [
   "/bromo.webp",
-  "https://anekatempatwisata.com/wp-content/uploads/2015/07/Gunung-Bromo-Jawa-Timur.jpg",
-  "https://newint.org/sites/default/files/2025-10/pg46a-1_0.jpg",
+  "https://cdn.medcom.id/dynamic/content/2023/08/28/1607236/59pjBTMe4y.JPG?w=1024",
+  "https://i0.wp.com/michellefranclee.com/wp-content/uploads/2019/02/Bromo-Travel-Blog-Michelle-FrancLee-11.jpg?resize=940%2C627&ssl=1",
+  "https://wisato.id/wp-content/uploads/2020/03/89695916_523884001649193_4021152322953757929_n.jpg",
+  "https://asset.kompas.com/crops/NdmO1H_qBoRmSAoMd38ASw8x_0g%3D/0x625%3A1200x1425/750x500/data/photo/2021/10/29/617b83965f569.png",
+  "https://www.indonesia.travel/contentassets/9a3a6fa005ba4003b5155f5f33effe73/bromo3-1.jpg",
+  "https://image.jimcdn.com/app/cms/image/transf/dimension%3D1920x400%3Aformat%3Djpg/path/s45f8c3db950408ef/image/i2610cfbadf7ea9f6/version/1693556107/image.jpg",
+  "https://indonesiajuara.asia/en/wp-content/uploads/2025/07/Berkuda-di-Pasir-Berbisik-Gunung-Bromo-IndonesiaJuara-Trip_11zon_11zon-900x900.webp",
+  "https://cdn.getyourguide.com/image/format%3Dauto%2Cfit%3Dcrop%2Cgravity%3Dauto%2Cquality%3D60%2Cwidth%3D400%2Cheight%3D265%2Cdpr%3D2/tour_img/9b918c9a9d1dd2c2024c99c119a2783b34d796e48bebcb14d25cad8eae70fea5.png",
 ];
+
+const destinationFacts: Record<string, { label: string; value: string }[]> = {
+  "gunung-bromo": [
+    { label: "Daya tarik", value: "Sunrise Penanjakan, Lautan Pasir, kawah, dan savana." },
+    { label: "Cocok untuk", value: "Weekend trip, first-time traveller, dan pencinta fotografi." },
+    { label: "Waktu terbaik", value: "April–Oktober saat cuaca cenderung lebih cerah." },
+  ],
+  "labuan-bajo": [
+    { label: "Daya tarik", value: "Pulau Padar, Pink Beach, Manta Point, dan liveaboard." },
+    { label: "Cocok untuk", value: "Island hopping, snorkeling, dan perjalanan grup." },
+    { label: "Waktu terbaik", value: "April–November untuk kondisi laut yang lebih bersahabat." },
+  ],
+  "dieng-plateau": [
+    { label: "Daya tarik", value: "Sunrise Sikunir, Telaga Warna, dan Candi Arjuna." },
+    { label: "Cocok untuk", value: "Perjalanan singkat, wisata budaya, dan udara sejuk." },
+    { label: "Waktu terbaik", value: "April–September untuk peluang langit cerah lebih besar." },
+  ],
+};
 
 const destinationData: Record<string, Destination> = {
   "gunung-bromo": { slug: "gunung-bromo", name: "Gunung Bromo", place: "Jawa Timur", category: "Gunung", rating: 92, startingPrice: "Rp475.000", description: "Sunrise vulkanik, Lautan Pasir, dan jalur jeep dalam satu perjalanan singkat.", longDescription: "Gunung Bromo adalah salah satu destinasi open trip paling populer di Jawa Timur. Wisatawan dapat menikmati matahari terbit dari kawasan Penanjakan, melintasi Lautan Pasir dengan jeep, lalu mengunjungi kawah dan Bukit Teletubbies. KEPT membantu kamu membandingkan operator berdasarkan janji yang benar-benar mereka penuhi.", images: bromoImages },
@@ -67,11 +92,11 @@ const bromoTours: Tour[] = [
   { slug: "bromo-sunrise-weekend", name: "Bromo Sunrise Weekend", operator: "Jelajah Aruna", departure: "Malang", date: "12–13 Sep 2026", duration: "2H1M", price: 649000, rating: 94, participants: 15, summary: "Penanjakan, Lautan Pasir, kawah, dan Bukit Teletubbies.", image: bromoImages[0] },
   { slug: "bromo-midnight-escape", name: "Bromo Midnight Escape", operator: "Langkah Pagi", departure: "Surabaya", date: "19 Sep 2026", duration: "1 hari", price: 475000, rating: 90, participants: 12, summary: "Perjalanan tengah malam dengan jeep dan sarapan setelah sunrise.", image: bromoImages[1] },
   { slug: "bromo-tumpak-sewu", name: "Bromo + Tumpak Sewu", operator: "Ruang Jelajah", departure: "Malang", date: "25–27 Sep 2026", duration: "3H2M", price: 1250000, rating: 91, participants: 18, summary: "Dua ikon Jawa Timur dalam satu perjalanan akhir pekan.", image: bromoImages[2] },
-  { slug: "bromo-photography-trip", name: "Bromo Photography Trip", operator: "Lensa Nusantara", departure: "Malang", date: "2–3 Okt 2026", duration: "2H1M", price: 825000, rating: 96, participants: 10, summary: "Rute sunrise khusus dengan mentor fotografi dan grup kecil.", image: bromoImages[0] },
-  { slug: "bromo-family-trip", name: "Bromo Family Trip", operator: "Keluarga Jalan", departure: "Surabaya", date: "9–10 Okt 2026", duration: "2H1M", price: 725000, rating: 89, participants: 16, summary: "Tempo santai, penginapan keluarga, dan itinerary ramah anak.", image: bromoImages[1] },
-  { slug: "bromo-budget-trip", name: "Bromo Budget Trip", operator: "Trip Hemat", departure: "Yogyakarta", date: "15–16 Okt 2026", duration: "2H1M", price: 525000, rating: 86, participants: 20, summary: "Pilihan ekonomis dengan transportasi bus dan homestay bersama.", image: bromoImages[2] },
-  { slug: "bromo-premium-escape", name: "Bromo Premium Escape", operator: "Arunika Travel", departure: "Surabaya", date: "22–23 Okt 2026", duration: "2H1M", price: 1450000, rating: 97, participants: 8, summary: "Hotel nyaman, jeep privat, dan itinerary fleksibel untuk grup kecil.", image: bromoImages[0] },
-  { slug: "bromo-camping-night", name: "Bromo Camping Night", operator: "Basecamp Kita", departure: "Malang", date: "29–30 Okt 2026", duration: "2H1M", price: 785000, rating: 92, participants: 14, summary: "Camping, api unggun, dan sunrise dengan perlengkapan termasuk.", image: bromoImages[1] },
+  { slug: "bromo-photography-trip", name: "Bromo Photography Trip", operator: "Lensa Nusantara", departure: "Malang", date: "2–3 Okt 2026", duration: "2H1M", price: 825000, rating: 96, participants: 10, summary: "Rute sunrise khusus dengan mentor fotografi dan grup kecil.", image: bromoImages[3] },
+  { slug: "bromo-family-trip", name: "Bromo Family Trip", operator: "Keluarga Jalan", departure: "Surabaya", date: "9–10 Okt 2026", duration: "2H1M", price: 725000, rating: 89, participants: 16, summary: "Tempo santai, penginapan keluarga, dan itinerary ramah anak.", image: bromoImages[4] },
+  { slug: "bromo-budget-trip", name: "Bromo Budget Trip", operator: "Trip Hemat", departure: "Yogyakarta", date: "15–16 Okt 2026", duration: "2H1M", price: 525000, rating: 86, participants: 20, summary: "Pilihan ekonomis dengan transportasi bus dan homestay bersama.", image: bromoImages[5] },
+  { slug: "bromo-premium-escape", name: "Bromo Premium Escape", operator: "Arunika Travel", departure: "Surabaya", date: "22–23 Okt 2026", duration: "2H1M", price: 1450000, rating: 97, participants: 8, summary: "Hotel nyaman, jeep privat, dan itinerary fleksibel untuk grup kecil.", image: bromoImages[6] },
+  { slug: "bromo-camping-night", name: "Bromo Camping Night", operator: "Basecamp Kita", departure: "Malang", date: "29–30 Okt 2026", duration: "2H1M", price: 785000, rating: 92, participants: 14, summary: "Camping, api unggun, dan sunrise dengan perlengkapan termasuk.", image: bromoImages[7] },
 ];
 
 function toursFor(destination: Destination): Tour[] {
@@ -97,6 +122,7 @@ export default function DestinationPage() {
   const [maxPrice, setMaxPrice] = useState("3000000");
   const [minRating, setMinRating] = useState("0");
   const [search, setSearch] = useState("");
+  const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null);
 
   useEffect(() => {
     const requested = new URLSearchParams(window.location.search).get("slug");
@@ -104,6 +130,15 @@ export default function DestinationPage() {
   }, []);
 
   const destination = destinationData[slug] ?? destinationData["gunung-bromo"];
+  const facts = destinationFacts[destination.slug] ?? [
+    { label: "Daya tarik", value: destination.description },
+    { label: "Cocok untuk", value: "Open trip, perjalanan grup, dan eksplorasi akhir pekan." },
+    { label: "Sebelum berangkat", value: "Bandingkan itinerary, fasilitas, kapasitas, dan biaya tambahan." },
+  ];
+  const galleryImages = Array.from({ length: 6 }, (_, index) => ({
+    src: destination.images[(index + 1) % destination.images.length],
+    originalIndex: (index + 1) % destination.images.length,
+  }));
   const tours = useMemo(() => toursFor(destination), [destination]);
   const filteredTours = useMemo(() => tours.filter((tour) => {
     const departureMatch = departure === "Semua" || tour.departure === departure;
@@ -118,8 +153,28 @@ export default function DestinationPage() {
 
     <section className="destination-hero section-wrap" id="about-place">
       <div className="breadcrumb"><a href="/">Beranda</a><span>/</span><a href="/#destinations">Destinasi</a><span>/</span><strong>{destination.name}</strong></div>
-      <div className="destination-title-row"><div><span className="detail-kicker">{destination.category} · {destination.place}</span><h1>{destination.name}</h1><p>{destination.longDescription}</p></div><div className="destination-summary-card"><div><small>Estimasi mulai</small><strong>{destination.startingPrice}</strong></div><div><small>Rating KEPT</small><strong><ShieldCheck />{destination.rating}%</strong></div><div><small>Open tour</small><strong>{tours.length}</strong></div></div></div>
-      <div className="destination-gallery"><img src={destination.images[0]} alt={`${destination.name} utama`} /><img src={destination.images[1]} alt={`${destination.name} pemandangan`} /><img src={destination.images[2]} alt={`${destination.name} perjalanan`} /><button><BadgeCheck /> Semua Foto</button></div>
+      <div className="place-hero">
+        <img src={destination.images[0]} alt={`Pemandangan utama ${destination.name}`} />
+        <div className="place-hero-overlay">
+          <span className="place-eyebrow">{destination.category} · {destination.place}</span>
+          <h1>{destination.name}</h1>
+          <div className="place-hero-stats"><span><ShieldCheck /> {destination.rating}% janji dipenuhi</span><span>{tours.length} open tour</span><span>Mulai {destination.startingPrice}</span></div>
+        </div>
+      </div>
+
+      <div className="place-intro-grid">
+        <article className="place-description-card">
+          <span className="detail-kicker">TENTANG DESTINASI</span>
+          <h2>Kenali {destination.name}</h2>
+          <p>{destination.longDescription}</p>
+          <div className="place-facts">{facts.map((fact) => <div key={fact.label}><small>{fact.label}</small><strong>{fact.value}</strong></div>)}</div>
+        </article>
+        <aside className="place-gallery-card">
+          <div className="place-gallery-heading"><div><span className="detail-kicker">GALERI</span><h2>Lihat lebih dekat</h2></div><small>Foto asli destinasi</small></div>
+          <div className="place-thumbnail-grid">{galleryImages.map((image, index) => <button key={`${image.src}-${index}`} onClick={() => setSelectedPhoto(image.originalIndex)} aria-label={`Buka foto ${index + 1} ${destination.name}`}><img src={image.src} alt={`${destination.name}, foto ${index + 1}`} /></button>)}</div>
+          <button className="show-all-photos" onClick={() => setSelectedPhoto(0)}><BadgeCheck /> Lihat semua foto <ArrowRight /></button>
+        </aside>
+      </div>
     </section>
 
     <section className="tour-market section-wrap" id="available">
@@ -140,6 +195,21 @@ export default function DestinationPage() {
     </section>
 
     <footer className="site-footer expanded-footer detail-footer"><div className="footer-brand"><span className="brand-mark"><Check /></span><span><strong>KEPT</strong><small>Did they keep their promise?</small></span></div><div className="footer-column"><strong>Jelajahi</strong><a href="/">Beranda</a><a href="/#destinations">Destinasi</a><a href="/#how-it-works">Cara Kerja</a></div><div className="footer-column"><strong>Hubungi Kami</strong><a href="mailto:hello@kept.id"><Mail />hello@kept.id</a><a href="tel:+6281234567890"><Phone />+62 812-3456-7890</a><a href="/"><AtSign />@kept.id</a></div></footer>
+
+    <Dialog open={selectedPhoto !== null} onOpenChange={(open) => { if (!open) setSelectedPhoto(null); }}>
+      <DialogContent className="photo-lightbox">
+        <DialogTitle className="sr-only">Galeri foto {destination.name}</DialogTitle>
+        {selectedPhoto !== null && <>
+          <div className="lightbox-stage">
+            <img src={destination.images[selectedPhoto]} alt={`${destination.name}, foto besar ${selectedPhoto + 1}`} />
+            <button className="lightbox-nav previous" onClick={() => setSelectedPhoto((selectedPhoto - 1 + destination.images.length) % destination.images.length)} aria-label="Foto sebelumnya"><ArrowLeft /></button>
+            <button className="lightbox-nav next" onClick={() => setSelectedPhoto((selectedPhoto + 1) % destination.images.length)} aria-label="Foto berikutnya"><ArrowRight /></button>
+            <span className="lightbox-count">{selectedPhoto + 1} / {destination.images.length}</span>
+          </div>
+          <div className="lightbox-thumbs">{destination.images.map((image, index) => <button key={`${image}-lightbox`} className={index === selectedPhoto ? "active" : ""} onClick={() => setSelectedPhoto(index)}><img src={image} alt={`Thumbnail ${index + 1}`} /></button>)}</div>
+        </>}
+      </DialogContent>
+    </Dialog>
   </main>;
 }
 
