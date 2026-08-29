@@ -29,17 +29,30 @@ export default function AccountPage() {
   const [requestPlace, setRequestPlace] = useState(false);
 
   useEffect(() => {
+    const initialUser = readKeptUser();
+    const requestedTab = new URLSearchParams(window.location.search).get("tab");
+    const allowedTabs = initialUser?.mode === "organizer" && initialUser.organizerStatus === "verified" ? organizerTabs : travellerTabs;
+    const requestedIsAllowed = requestedTab && allowedTabs.some((item) => item.value === requestedTab);
+
+    setUser(initialUser);
+    setTab(requestedIsAllowed ? requestedTab : initialUser?.mode === "organizer" && initialUser.organizerStatus === "verified" ? "organizer" : "overview");
+
     const sync = () => {
       const next = readKeptUser();
       setUser(next);
-      if (next?.mode === "organizer" && tab === "overview") setTab("organizer");
+      setTab((current) => {
+        const nextTabs = next?.mode === "organizer" && next.organizerStatus === "verified" ? organizerTabs : travellerTabs;
+        return nextTabs.some((item) => item.value === current) ? current : next?.mode === "organizer" && next.organizerStatus === "verified" ? "organizer" : "overview";
+      });
     };
-    sync();
-    const requestedTab = new URLSearchParams(window.location.search).get("tab");
-    if (requestedTab) setTab(requestedTab);
+
     window.addEventListener("kept-user-change", sync);
-    return () => window.removeEventListener("kept-user-change", sync);
-  }, [tab]);
+    window.addEventListener("storage", sync);
+    return () => {
+      window.removeEventListener("kept-user-change", sync);
+      window.removeEventListener("storage", sync);
+    };
+  }, []);
 
   const submitEligibility = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
