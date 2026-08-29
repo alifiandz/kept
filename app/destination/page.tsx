@@ -19,6 +19,7 @@ import {
   Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { AccountControls } from "@/components/account-controls";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 type Tour = {
@@ -155,7 +156,7 @@ export default function DestinationPage() {
   }), [tours, departure, maxPrice, minRating, search]);
 
   return <main className="detail-page">
-    <header className="site-header detail-header"><a className="brand" href="/"><span className="brand-mark"><Check /></span><span>KEPT</span></a><nav className="main-nav"><a href="/">Beranda</a><a href="#available">Open Tour</a><a href="#about-place">Tentang Destinasi</a></nav><Button variant="outline" onClick={() => history.back()}><ArrowLeft /> Kembali</Button></header>
+    <header className="site-header detail-header"><a className="brand" href="/"><span className="brand-mark"><Check /></span><span>KEPT</span></a><nav className="main-nav"><a href="/">Beranda</a><a href="#available">Open Tour</a><a href="#about-place">Tentang Destinasi</a></nav><div className="detail-account-actions"><AccountControls /><Button variant="outline" onClick={() => history.back()}><ArrowLeft /> Kembali</Button></div></header>
 
     <section className="destination-hero section-wrap" id="about-place">
       <div className="breadcrumb"><a href="/">Beranda</a><span>/</span><a href="/#destinations">Destinasi</a><span>/</span><strong>{destination.name}</strong></div>

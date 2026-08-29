@@ -24,6 +24,7 @@ import {
   WalletCards,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { AccountControls } from "@/components/account-controls";
 
 const tourNames: Record<string, { name: string; operator: string; price: string; date: string; rating: number; image: string; description: string }> = {
   "bromo-sunrise-weekend": { name: "Bromo Sunrise Weekend", operator: "Jelajah Aruna", price: "Rp649.000", date: "12–13 September 2026", rating: 94, image: "/bromo.webp", description: "Open trip dua hari dari Malang menuju sunrise Penanjakan, Lautan Pasir, kawah Bromo, dan Bukit Teletubbies." },
@@ -69,7 +70,7 @@ export default function TourPage() {
   }, [slug]);
 
   return <main className="detail-page tour-detail-page">
-    <header className="site-header detail-header"><a className="brand" href="/"><span className="brand-mark"><Check /></span><span>KEPT</span></a><nav className="main-nav"><a href="#overview">Ringkasan</a><a href="#promise">Promise</a><a href="#changes">Perubahan</a><a href="#reality">Hasil</a></nav><Button variant="outline" onClick={() => history.back()}><ArrowLeft /> Kembali</Button></header>
+    <header className="site-header detail-header"><a className="brand" href="/"><span className="brand-mark"><Check /></span><span>KEPT</span></a><nav className="main-nav"><a href="#overview">Ringkasan</a><a href="#promise">Promise</a><a href="#changes">Perubahan</a><a href="#reality">Hasil</a></nav><div className="detail-account-actions"><AccountControls /><Button variant="outline" onClick={() => history.back()}><ArrowLeft /> Kembali</Button></div></header>
 
     {passMode && <div className="trip-pass-banner"><TicketCheck /><span><strong>Trip Pass #BRM-2409-017 terverifikasi</strong>Kamu dapat melihat janji trip dan mengisi Reality Check setelah perjalanan.</span></div>}
 

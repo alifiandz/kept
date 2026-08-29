@@ -32,6 +32,7 @@ import {
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { AccountControls } from "@/components/account-controls";
 import {
   Dialog,
   DialogContent,
@@ -297,8 +298,7 @@ export default function Home() {
         </nav>
         <div className="header-actions">
           <button className="saved-button" onClick={openSaved} aria-label="Lihat destinasi tersimpan"><Heart /><span>Tersimpan</span>{savedDestinations.length > 0 && <b>{savedDestinations.length}</b>}</button>
-          <Button variant="ghost" className="login-button">Masuk</Button>
-          <Button className="signup-button">Daftar</Button>
+          <AccountControls showWelcome />
           <button className="menu-button" onClick={() => setMobileOpen((value) => !value)} aria-label="Buka menu">{mobileOpen ? <X /> : <Menu />}</button>
         </div>
       </header>
@@ -408,7 +408,7 @@ export default function Home() {
 
       <section className="operator-cta section-wrap" id="for-operators">
         <div><span className="section-kicker light">UNTUK OPERATOR OPEN TRIP</span><h2>Biarkan bukti yang membangun kepercayaan.</h2><p>Buat Promise Snapshot dan tunjukkan rekam jejakmu kepada calon peserta.</p></div>
-        <Button className="light-button">Buat Profil Operator <ArrowRight /></Button>
+        <Button className="light-button" onClick={() => { window.location.href = "/account?tab=eligibility"; }}>Buat Profil Operator <ArrowRight /></Button>
       </section>
 
       <footer className="site-footer expanded-footer">
