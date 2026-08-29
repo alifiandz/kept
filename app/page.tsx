@@ -143,7 +143,7 @@ const destinations: Destination[] = [
     rating: 95,
     openTours: 5,
     description: "Gugusan karst, laguna jernih, dan kehidupan laut untuk petualangan jarak jauh.",
-    image: "https://get.wallhere.com/photo/landscape-sea-bay-lake-water-nature-reflection-coast-lagoon-Terrain-ocean-archipelago-islet-tropics-habitat-natural-environment-computer-wallpaper-landform-geographical-feature-ecosystem-body-of-water-93000.jpg",
+    image: "https://images.unsplash.com/photo-1703769605314-18648cfc3428?auto=format&fit=crop&w=1600&q=85",
     tours: [
       { name: "Wayag Explorer 5D4N", operator: "Papua Blue", price: "Rp7.250.000", rating: 97, date: "1–5 Okt 2026" },
       { name: "Piaynemo Essential", operator: "Raja Journey", price: "Rp5.750.000", rating: 93, date: "8–11 Okt 2026" },
