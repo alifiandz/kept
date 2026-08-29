@@ -1,15 +1,18 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import {
+  AlertCircle,
   ArrowRight,
   AtSign,
   BadgeCheck,
+  BriefcaseBusiness,
   CalendarDays,
   Check,
   CheckCircle2,
   ChevronDown,
   CircleUserRound,
+  Clock3,
   Compass,
   FileCheck2,
   GitCompareArrows,
@@ -20,19 +23,23 @@ import {
   Mail,
   MapPin,
   Menu,
+  MessageSquareText,
   Mountain,
   Phone,
   Search,
   ShieldCheck,
+  Send,
   Sparkles,
   TicketCheck,
   TreePalm,
+  TrendingUp,
   Users,
   Waves,
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AccountControls } from "@/components/account-controls";
+import { readKeptUser } from "@/lib/kept-account";
 import {
   Dialog,
   DialogContent,
@@ -214,6 +221,18 @@ export default function Home() {
   const [showSaved, setShowSaved] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [resultMessage, setResultMessage] = useState("");
+  const [organizerName, setOrganizerName] = useState<string | null>(null);
+
+  useEffect(() => {
+    const syncMode = () => {
+      const user = readKeptUser();
+      setOrganizerName(user?.mode === "organizer" && user.organizerStatus === "verified" ? user.name : null);
+    };
+    syncMode();
+    window.addEventListener("kept-user-change", syncMode);
+    window.addEventListener("storage", syncMode);
+    return () => { window.removeEventListener("kept-user-change", syncMode); window.removeEventListener("storage", syncMode); };
+  }, []);
 
   const filteredDestinations = useMemo(() => {
     const normalized = submittedQuery.trim().toLowerCase();
@@ -291,17 +310,26 @@ export default function Home() {
       <header className="site-header">
         <a className="brand" href="#top" aria-label="KEPT home"><span className="brand-mark"><Check /></span><span>KEPT</span></a>
         <nav className={mobileOpen ? "main-nav open" : "main-nav"} aria-label="Navigasi utama">
-          <a href="#destinations" onClick={() => setMobileOpen(false)}>Destinasi</a>
-          <a href="#why-kept" onClick={() => setMobileOpen(false)}>Kenapa KEPT</a>
-          <a href="#how-it-works" onClick={() => setMobileOpen(false)}>Cara Kerja</a>
-          <a href="#for-operators" onClick={() => setMobileOpen(false)}>Untuk Operator</a>
+          {organizerName ? <>
+            <a href="#operator-home" onClick={() => setMobileOpen(false)}>Dashboard</a>
+            <a href="/account?tab=open-tours">Open Tour Saya</a>
+            <a href="/account?tab=promises">Promise Snapshot</a>
+            <a href="/account?tab=create-tour">Buat Open Tour</a>
+          </> : <>
+            <a href="#destinations" onClick={() => setMobileOpen(false)}>Destinasi</a>
+            <a href="#why-kept" onClick={() => setMobileOpen(false)}>Kenapa KEPT</a>
+            <a href="#how-it-works" onClick={() => setMobileOpen(false)}>Cara Kerja</a>
+            <a href="#for-operators" onClick={() => setMobileOpen(false)}>Untuk Operator</a>
+          </>}
         </nav>
         <div className="header-actions">
-          <button className="saved-button" onClick={openSaved} aria-label="Lihat destinasi tersimpan"><Heart /><span>Tersimpan</span>{savedDestinations.length > 0 && <b>{savedDestinations.length}</b>}</button>
+          {!organizerName && <button className="saved-button" onClick={openSaved} aria-label="Lihat destinasi tersimpan"><Heart /><span>Tersimpan</span>{savedDestinations.length > 0 && <b>{savedDestinations.length}</b>}</button>}
           <AccountControls showWelcome />
           <button className="menu-button" onClick={() => setMobileOpen((value) => !value)} aria-label="Buka menu">{mobileOpen ? <X /> : <Menu />}</button>
         </div>
       </header>
+
+      {organizerName ? <OrganizerHome name={organizerName} /> : <>
 
       <section className="hero" id="top">
         <div className="hero-shade" />
@@ -425,6 +453,7 @@ export default function Home() {
           <DialogFooter><Button variant="outline" onClick={() => setComparison(null)}>Tutup</Button></DialogFooter>
         </DialogContent>}
       </Dialog>
+      </>}
     </main>
   );
 }
@@ -436,3 +465,46 @@ function SearchField({ label, value, placeholder, onChange, icon: Icon, wide = f
 function toSlug(value: string) {
   return value.toLowerCase().replace(/&/g, "dan").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
+
+function OrganizerHome({ name }: { name: string }) {
+  const firstName = name.split(" ")[0];
+  return <section className="operator-home" id="operator-home">
+    <div className="operator-home-wrap">
+      <div className="operator-home-top">
+        <div><span>ORGANIZER CONTROL CENTER</span><h1>Selamat datang kembali, {firstName}.</h1><p>Pantau kualitas trip dan bangun kepercayaan dari bukti yang nyata.</p></div>
+        <div className="operator-home-actions"><Button variant="outline" onClick={() => { window.location.href = "/account?tab=open-tours"; }}>Lihat Trip Aktif</Button><Button onClick={() => { window.location.href = "/account?tab=create-tour"; }}><Plus /> Buat Open Tour</Button></div>
+      </div>
+
+      <div className="operator-home-metrics">
+        <HomeMetric icon={BriefcaseBusiness} label="Trip aktif" value="4" note="2 segera berangkat" tone="blue" />
+        <HomeMetric icon={ShieldCheck} label="Janji dipenuhi" value="92%" note="+4% dari bulan lalu" tone="green" />
+        <HomeMetric icon={Users} label="Peserta terverifikasi" value="128" note="Dari 11 perjalanan" tone="navy" />
+        <HomeMetric icon={MessageSquareText} label="Respons Reality Check" value="84%" note="107 konfirmasi masuk" tone="amber" />
+      </div>
+
+      <div className="operator-home-grid">
+        <article className="operator-integrity-card">
+          <div className="operator-card-heading"><div><small>INTEGRITY OVERVIEW</small><h2>Skor Integritas Operator</h2></div><span><TrendingUp /> +4%</span></div>
+          <div className="operator-integrity-main"><div className="operator-integrity-ring"><strong>92%</strong><span>terpercaya</span></div><div className="operator-integrity-legend"><div><i /><span>Janji dipenuhi</span><b>92%</b></div><div><i className="transparent" /><span>Berubah transparan</span><b>6%</b></div><div><i className="unresolved" /><span>Belum terselesaikan</span><b>2%</b></div></div></div>
+          <div className="operator-bars"><i style={{height:"48%"}} /><i style={{height:"61%"}} /><i style={{height:"58%"}} /><i style={{height:"76%"}} /><i style={{height:"84%"}} /><i className="latest" style={{height:"92%"}} /></div><div className="operator-bar-labels"><span>Trip 1</span><span>Trip 2</span><span>Trip 3</span><span>Trip 4</span><span>Trip 5</span><span>Terbaru</span></div>
+        </article>
+        <article className="operator-attention-card">
+          <div className="operator-card-heading"><div><small>PERLU TINDAKAN</small><h2>Selesaikan berikutnya</h2></div><b className="attention-count">2</b></div>
+          <HomeTask icon={AlertCircle} title="Bromo Sunrise Weekend" detail="Promise Snapshot belum lengkap" meta="Berangkat 12 September" action="Lengkapi" href="/account?tab=promises" urgent />
+          <HomeTask icon={MessageSquareText} title="Dieng Golden Sunrise" detail="16 dari 20 Reality Check masuk" meta="4 respons belum masuk" action="Tinjau" href="/account?tab=open-tours" />
+          <a className="operator-link" href="/account?tab=open-tours">Lihat semua perjalanan <ArrowRight /></a>
+        </article>
+      </div>
+
+      <article className="operator-performance-card"><div className="operator-card-heading"><div><small>PERFORMA JANJI</small><h2>Apa yang sudah kuat—dan perlu diperbaiki</h2></div><a className="operator-link" href="/account?tab=promises">Lihat snapshot <ArrowRight /></a></div><div className="operator-performance-grid"><HomePerformance label="Transportasi sesuai" value={98} status="Sangat konsisten" /><HomePerformance label="Tanpa biaya tambahan" value={96} status="Sangat konsisten" /><HomePerformance label="Itinerary dipenuhi" value={91} status="Konsisten" /><HomePerformance label="Kapasitas kamar sesuai" value={78} status="Perlu perhatian" warning /><HomePerformance label="Keberangkatan tepat waktu" value={74} status="Prioritas perbaikan" warning /></div></article>
+
+      <div className="operator-bottom-grid"><article className="operator-activity-card"><div className="operator-card-heading"><div><small>AKTIVITAS TERBARU</small><h2>Update dari perjalananmu</h2></div></div><HomeActivity icon={MessageSquareText} title="8 Reality Check baru diterima" detail="Bromo Sunrise Weekend · 12 menit lalu" /><HomeActivity icon={FileCheck2} title="Perubahan itinerary berhasil dicatat" detail="Dieng Golden Sunrise · Kemarin" /><HomeActivity icon={ShieldCheck} title="Promise Snapshot dipublikasikan" detail="Labuan Bajo 3D2N · 2 hari lalu" /></article><article className="operator-quick-card"><div className="operator-card-heading"><div><small>AKSI CEPAT</small><h2>Mulai dari sini</h2></div></div><div className="operator-quick-grid"><HomeQuickAction icon={Plus} label="Buat Open Tour" href="/account?tab=create-tour" /><HomeQuickAction icon={FileCheck2} label="Buat Snapshot" href="/account?tab=promises" /><HomeQuickAction icon={Send} label="Kirim Trip Pass" href="/account?tab=open-tours" /><HomeQuickAction icon={Clock3} label="Catat Perubahan" href="/account?tab=promises" /></div></article></div>
+    </div>
+  </section>;
+}
+
+function HomeMetric({ icon: Icon, label, value, note, tone }: { icon: typeof Heart; label: string; value: string; note: string; tone: string }) { return <article className={`operator-metric ${tone}`}><span><Icon /></span><div><small>{label}</small><strong>{value}</strong><p>{note}</p></div></article>; }
+function HomeTask({ icon: Icon, title, detail, meta, action, href, urgent }: { icon: typeof Heart; title: string; detail: string; meta: string; action: string; href: string; urgent?: boolean }) { return <div className={`operator-task ${urgent ? "urgent" : ""}`}><span><Icon /></span><div><strong>{title}</strong><p>{detail}</p><small>{meta}</small></div><a href={href}>{action}</a></div>; }
+function HomePerformance({ label, value, status, warning }: { label: string; value: number; status: string; warning?: boolean }) { return <div className={`operator-performance ${warning ? "warning" : ""}`}><div><strong>{label}</strong><span>{status}</span></div><b>{value}%</b><i><em style={{width:`${value}%`}} /></i></div>; }
+function HomeActivity({ icon: Icon, title, detail }: { icon: typeof Heart; title: string; detail: string }) { return <div className="operator-activity"><span><Icon /></span><div><strong>{title}</strong><small>{detail}</small></div><ChevronDown /></div>; }
+function HomeQuickAction({ icon: Icon, label, href }: { icon: typeof Heart; label: string; href: string }) { return <a className="operator-quick-action" href={href}><span><Icon /></span><strong>{label}</strong><ArrowRight /></a>; }
