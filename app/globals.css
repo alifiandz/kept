@@ -786,6 +786,11 @@ svg { stroke-width: 1.9; }
 .account-tab-list [data-slot="tabs-trigger"] svg { width: 15px; }
 .account-tab-list [data-slot="tabs-trigger"] svg:last-child { width: 12px; margin-left: auto; opacity: .5; }
 .account-tab-list [data-slot="tabs-trigger"][data-state="active"] { color: var(--blue); background: var(--sky); box-shadow: none; }
+.account-nav-button { width: 100%; min-height: 42px; padding: 0 10px; display: flex; align-items: center; justify-content: flex-start; gap: 7px; color: #5a6f7f; border: 0; border-radius: 9px; background: transparent; font-size: 9px; font-weight: 800; text-align: left; transition: background .18s ease,color .18s ease,transform .18s ease; }
+.account-nav-button:hover { color: var(--blue); background: #f3f8fc; transform: translateX(2px); }
+.account-nav-button > svg { width: 15px; }
+.account-nav-button > svg:last-child { width: 12px; margin-left: auto; opacity: .5; }
+.account-nav-button.active { color: var(--blue); background: var(--sky); }
 .logout-button { width: 100%; margin-top: 15px; padding: 13px 10px 2px; display: flex; align-items: center; gap: 8px; color: #8a5b56; border: 0; border-top: 1px solid var(--line); background: transparent; font-size: 9px; font-weight: 700; }
 .logout-button svg { width: 15px; }
 .account-content { min-width: 0; min-height: 670px; padding: 34px; background: white; border: 1px solid var(--line); border-radius: 19px; box-shadow: 0 12px 30px rgba(9,42,67,.06); }
@@ -857,6 +862,13 @@ svg { stroke-width: 1.9; }
 .eligibility-status.verified { border-color: #b7dfd0; background: #f2fbf7; }
 .eligibility-status.verified > span { color: var(--green); background: var(--mint); }
 .eligibility-status > button { margin-top: 20px; }
+.eligibility-status .future-verification-note { width: min(100%,500px); margin-top: 20px; padding: 13px 17px; border: 1px solid #f0d59d; background: white; }
+.future-verification-note small { color: #9a6a16; font-weight: 900; letter-spacing: .1em; }
+.future-verification-note strong { font-size: 10px; line-height: 1.45; }
+.eligibility-status .demo-fast-track { width: min(100%,500px); margin-top: 11px; padding: 17px; border: 1px solid #b8ddf7; background: var(--sky); }
+.demo-fast-track > small { color: var(--blue); font-weight: 900; letter-spacing: .11em; }
+.eligibility-status .demo-fast-track p { margin: 3px 0 10px; color: #49677d; font-size: 9px; }
+.demo-fast-track button { width: 100%; min-height: 42px; font-size: 10px; font-weight: 800; }
 .account-form { display: grid; gap: 18px; }
 .account-form fieldset { margin: 0; padding: 22px; border: 1px solid var(--line); border-radius: 15px; }
 .account-form legend { padding: 0 9px; display: flex; align-items: center; gap: 8px; color: var(--navy); font-size: 13px; font-weight: 900; }
@@ -929,6 +941,7 @@ svg { stroke-width: 1.9; }
   .account-sidebar { position: static; }
   .account-tab-list { grid-template-columns: repeat(2,1fr); }
   .account-tab-list [data-slot="tabs-trigger"] { min-height: 38px; }
+  .account-nav-button { min-height: 38px; }
   .logout-button { justify-content: center; }
   .account-two-column { grid-template-columns: 1fr; }
   .promise-manager { grid-template-columns: 1fr; }
