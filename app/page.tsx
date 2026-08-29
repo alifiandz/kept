@@ -26,6 +26,7 @@ import {
   MessageSquareText,
   Mountain,
   Phone,
+  Plus,
   Search,
   ShieldCheck,
   Send,
@@ -471,7 +472,7 @@ function OrganizerHome({ name }: { name: string }) {
   return <section className="operator-home" id="operator-home">
     <div className="operator-home-wrap">
       <div className="operator-home-top">
-        <div><span>ORGANIZER CONTROL CENTER</span><h1>Selamat datang kembali, {firstName}.</h1><p>Pantau kualitas trip dan bangun kepercayaan dari bukti yang nyata.</p></div>
+        <div><span>ORGANIZER CONTROL CENTER</span><h1>Selamat datang kembali, {firstName}.</h1><p>Ada <strong>2 trip aktif</strong> dan <strong>1 Reality Check</strong> yang perlu ditinjau.</p></div>
         <div className="operator-home-actions"><Button variant="outline" onClick={() => { window.location.href = "/account?tab=open-tours"; }}>Lihat Trip Aktif</Button><Button onClick={() => { window.location.href = "/account?tab=create-tour"; }}><Plus /> Buat Open Tour</Button></div>
       </div>
 
@@ -479,7 +480,7 @@ function OrganizerHome({ name }: { name: string }) {
         <HomeMetric icon={BriefcaseBusiness} label="Trip aktif" value="4" note="2 segera berangkat" tone="blue" />
         <HomeMetric icon={ShieldCheck} label="Janji dipenuhi" value="92%" note="+4% dari bulan lalu" tone="green" />
         <HomeMetric icon={Users} label="Peserta terverifikasi" value="128" note="Dari 11 perjalanan" tone="navy" />
-        <HomeMetric icon={MessageSquareText} label="Respons Reality Check" value="84%" note="107 konfirmasi masuk" tone="amber" />
+        <HomeMetric icon={MessageSquareText} label="Reality Check Masuk" value="84%" note="107 konfirmasi masuk" tone="amber" />
       </div>
 
       <div className="operator-home-grid">
@@ -490,21 +491,21 @@ function OrganizerHome({ name }: { name: string }) {
         </article>
         <article className="operator-attention-card">
           <div className="operator-card-heading"><div><small>PERLU TINDAKAN</small><h2>Selesaikan berikutnya</h2></div><b className="attention-count">2</b></div>
-          <HomeTask icon={AlertCircle} title="Bromo Sunrise Weekend" detail="Promise Snapshot belum lengkap" meta="Berangkat 12 September" action="Lengkapi" href="/account?tab=promises" urgent />
-          <HomeTask icon={MessageSquareText} title="Dieng Golden Sunrise" detail="16 dari 20 Reality Check masuk" meta="4 respons belum masuk" action="Tinjau" href="/account?tab=open-tours" />
+          <HomeTask icon={AlertCircle} title="Bromo Sunrise — 14 September" stats={[["Promise Snapshot","Belum lengkap"],["Peserta terdaftar","12/15"],["Trip Pass terkirim","8/12"]]} status="Perlu tindakan" action="Lengkapi Snapshot" href="/account?tab=promises" urgent />
+          <HomeTask icon={MessageSquareText} title="Dieng Weekend — Selesai" stats={[["Reality Check masuk","16/20"],["Janji dipenuhi","88%"],["Masalah dilaporkan","1"]]} status="Perlu ditinjau" action="Lihat Hasil" href="/account?tab=open-tours" />
           <a className="operator-link" href="/account?tab=open-tours">Lihat semua perjalanan <ArrowRight /></a>
         </article>
       </div>
 
       <article className="operator-performance-card"><div className="operator-card-heading"><div><small>PERFORMA JANJI</small><h2>Apa yang sudah kuat—dan perlu diperbaiki</h2></div><a className="operator-link" href="/account?tab=promises">Lihat snapshot <ArrowRight /></a></div><div className="operator-performance-grid"><HomePerformance label="Transportasi sesuai" value={98} status="Sangat konsisten" /><HomePerformance label="Tanpa biaya tambahan" value={96} status="Sangat konsisten" /><HomePerformance label="Itinerary dipenuhi" value={91} status="Konsisten" /><HomePerformance label="Kapasitas kamar sesuai" value={78} status="Perlu perhatian" warning /><HomePerformance label="Keberangkatan tepat waktu" value={74} status="Prioritas perbaikan" warning /></div></article>
 
-      <div className="operator-bottom-grid"><article className="operator-activity-card"><div className="operator-card-heading"><div><small>AKTIVITAS TERBARU</small><h2>Update dari perjalananmu</h2></div></div><HomeActivity icon={MessageSquareText} title="8 Reality Check baru diterima" detail="Bromo Sunrise Weekend · 12 menit lalu" /><HomeActivity icon={FileCheck2} title="Perubahan itinerary berhasil dicatat" detail="Dieng Golden Sunrise · Kemarin" /><HomeActivity icon={ShieldCheck} title="Promise Snapshot dipublikasikan" detail="Labuan Bajo 3D2N · 2 hari lalu" /></article><article className="operator-quick-card"><div className="operator-card-heading"><div><small>AKSI CEPAT</small><h2>Mulai dari sini</h2></div></div><div className="operator-quick-grid"><HomeQuickAction icon={Plus} label="Buat Open Tour" href="/account?tab=create-tour" /><HomeQuickAction icon={FileCheck2} label="Buat Snapshot" href="/account?tab=promises" /><HomeQuickAction icon={Send} label="Kirim Trip Pass" href="/account?tab=open-tours" /><HomeQuickAction icon={Clock3} label="Catat Perubahan" href="/account?tab=promises" /></div></article></div>
+      <div className="operator-bottom-grid"><article className="operator-activity-card"><div className="operator-card-heading"><div><small>AKTIVITAS TERBARU</small><h2>Update dari perjalananmu</h2></div></div><HomeActivity icon={MessageSquareText} title="8 peserta mengisi Reality Check" detail="Bromo Sunrise · 12 menit lalu" /><HomeActivity icon={FileCheck2} title="Perubahan itinerary berhasil dicatat" detail="Dieng Weekend · Kemarin" /><HomeActivity icon={ShieldCheck} title="Promise Snapshot dipublikasikan" detail="Labuan Bajo 3D2N · 2 hari lalu" /><HomeActivity icon={AlertCircle} title="Satu peserta melaporkan biaya tambahan" detail="Bromo Sunrise · 3 hari lalu" /></article><article className="operator-quick-card"><div className="operator-card-heading"><div><small>AKSI CEPAT</small><h2>Mulai dari sini</h2></div></div><div className="operator-quick-grid"><HomeQuickAction icon={Plus} label="Buat Open Tour" href="/account?tab=create-tour" /><HomeQuickAction icon={FileCheck2} label="Buat Promise Snapshot" href="/account?tab=promises" /><HomeQuickAction icon={Send} label="Kirim Trip Pass" href="/account?tab=open-tours" /><HomeQuickAction icon={Clock3} label="Catat Perubahan" href="/account?tab=promises" /></div></article></div>
     </div>
   </section>;
 }
 
 function HomeMetric({ icon: Icon, label, value, note, tone }: { icon: typeof Heart; label: string; value: string; note: string; tone: string }) { return <article className={`operator-metric ${tone}`}><span><Icon /></span><div><small>{label}</small><strong>{value}</strong><p>{note}</p></div></article>; }
-function HomeTask({ icon: Icon, title, detail, meta, action, href, urgent }: { icon: typeof Heart; title: string; detail: string; meta: string; action: string; href: string; urgent?: boolean }) { return <div className={`operator-task ${urgent ? "urgent" : ""}`}><span><Icon /></span><div><strong>{title}</strong><p>{detail}</p><small>{meta}</small></div><a href={href}>{action}</a></div>; }
+function HomeTask({ icon: Icon, title, stats, status, action, href, urgent }: { icon: typeof Heart; title: string; stats: [string,string][]; status: string; action: string; href: string; urgent?: boolean }) { return <div className={`operator-task ${urgent ? "urgent" : ""}`}><span><Icon /></span><div><strong>{title}</strong><dl>{stats.map(([label,value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl><small>{status}</small></div><a href={href}>{action}</a></div>; }
 function HomePerformance({ label, value, status, warning }: { label: string; value: number; status: string; warning?: boolean }) { return <div className={`operator-performance ${warning ? "warning" : ""}`}><div><strong>{label}</strong><span>{status}</span></div><b>{value}%</b><i><em style={{width:`${value}%`}} /></i></div>; }
 function HomeActivity({ icon: Icon, title, detail }: { icon: typeof Heart; title: string; detail: string }) { return <div className="operator-activity"><span><Icon /></span><div><strong>{title}</strong><small>{detail}</small></div><ChevronDown /></div>; }
 function HomeQuickAction({ icon: Icon, label, href }: { icon: typeof Heart; label: string; href: string }) { return <a className="operator-quick-action" href={href}><span><Icon /></span><strong>{label}</strong><ArrowRight /></a>; }

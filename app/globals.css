@@ -935,6 +935,7 @@ svg { stroke-width: 1.9; }
 .operator-home-top > div:first-child > span { color: #8ed0fa; font-size: 9px; font-weight: 900; letter-spacing: .15em; }
 .operator-home-top h1 { margin: 8px 0; font-size: clamp(30px,4vw,46px); line-height: 1; letter-spacing: -.045em; }
 .operator-home-top p { margin: 0; color: #bdd6e6; font-size: 12px; }
+.operator-home-top p strong { color: white; }
 .operator-home-actions { display: flex; gap: 9px; flex: 0 0 auto; }
 .operator-home-actions button { min-height: 42px; font-size: 10px; font-weight: 800; }
 .operator-home-actions button:first-child { color: white; border-color: rgba(255,255,255,.35); background: rgba(255,255,255,.08); }
@@ -974,15 +975,18 @@ svg { stroke-width: 1.9; }
 .operator-bars i { min-height: 6px; flex: 1; background: #b8d9ef; border-radius: 5px 5px 0 0; }
 .operator-bars i.latest { background: var(--blue); }
 .operator-bar-labels { padding: 7px 5px 0; display: flex; justify-content: space-between; color: #8c9ba5; font-size: 7px; }
-.operator-task { padding: 14px 0; display: grid; grid-template-columns: 35px 1fr auto; gap: 10px; align-items: center; border-bottom: 1px solid #edf2f5; }
+.operator-task { padding: 14px 0; display: grid; grid-template-columns: 35px 1fr auto; gap: 10px; align-items: start; border-bottom: 1px solid #edf2f5; }
 .operator-task > span { width: 34px; height: 34px; display: grid; place-items: center; color: var(--blue); background: var(--sky); border-radius: 9px; }
 .operator-task.urgent > span { color: #9f6709; background: #fff0cf; }
 .operator-task svg { width: 16px; }
 .operator-task > div { display: grid; gap: 3px; }
 .operator-task strong { color: var(--navy); font-size: 10px; }
-.operator-task p { margin: 0; color: var(--copy); font-size: 8px; }
-.operator-task small { color: #8c9ba6; font-size: 7px; }
-.operator-task a { padding: 7px 8px; color: var(--blue); border: 1px solid #b7dcf5; border-radius: 7px; background: var(--sky); font-size: 7px; font-weight: 900; }
+.operator-task dl { margin: 6px 0; display: grid; gap: 4px; }
+.operator-task dl > div { display: flex; justify-content: space-between; gap: 12px; }
+.operator-task dt { color: var(--copy); font-size: 7px; }
+.operator-task dd { margin: 0; color: var(--navy); font-size: 7px; font-weight: 900; }
+.operator-task small { width: fit-content; padding: 3px 6px; color: #8b5a0b; background: #fff0cf; border-radius: 99px; font-size: 6px; font-weight: 900; }
+.operator-task a { align-self: center; padding: 7px 8px; color: var(--blue); border: 1px solid #b7dcf5; border-radius: 7px; background: var(--sky); font-size: 7px; font-weight: 900; white-space: nowrap; }
 .operator-link { display: flex; align-items: center; gap: 5px; width: fit-content; color: var(--blue); font-size: 8px; font-weight: 800; }
 .operator-link svg { width: 12px; }
 .operator-attention-card > .operator-link { margin-top: 14px; }
