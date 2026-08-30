@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useState, type ReactNode } from "react";
 import { ArrowRight, BadgeCheck, Bell, BriefcaseBusiness, CalendarDays, Check, CheckCircle2, ChevronRight, CircleUserRound, FileCheck2, Heart, History, LayoutDashboard, LogOut, MapPin, Plus, Settings, ShieldCheck, TicketCheck, Users } from "lucide-react";
 import { AccountControls } from "@/components/account-controls";
+import { KeptLogo } from "@/components/kept-logo";
 import { Button } from "@/components/ui/button";
 import { demoUser, readKeptUser, saveKeptUser, type KeptUser } from "@/lib/kept-account";
 
@@ -89,12 +90,12 @@ export default function AccountPage() {
     setNotice("Perubahan profil berhasil disimpan.");
   };
 
-  if (!user) return <main className="account-page"><header className="site-header"><a className="brand" href="/"><span className="brand-mark"><Check /></span><span>KEPT</span></a><AccountControls /></header><section className="account-empty"><span><CircleUserRound /></span><h1>Masuk untuk membuka Account Center</h1><p>Kelola perjalanan, Trip Pass, dan profil organizermu dari satu tempat.</p><Button onClick={() => { saveKeptUser(demoUser); setUser(demoUser); }}>Gunakan akun demo <ArrowRight /></Button><a href="/">Kembali menjelajah</a></section></main>;
+  if (!user) return <main className="account-page"><header className="site-header"><a className="brand" href="/"><span className="brand-mark"><KeptLogo /></span><span>Kept</span></a><AccountControls /></header><section className="account-empty"><span><CircleUserRound /></span><h1>Masuk untuk membuka Account Center</h1><p>Kelola perjalanan, Trip Pass, dan profil organizermu dari satu tempat.</p><Button onClick={() => { saveKeptUser(demoUser); setUser(demoUser); }}>Gunakan akun demo <ArrowRight /></Button><a href="/">Kembali menjelajah</a></section></main>;
 
   const tabs = user.mode === "organizer" && user.organizerStatus === "verified" ? organizerTabs : travellerTabs;
 
   return <main className="account-page">
-    <header className="site-header account-header"><a className="brand" href="/"><span className="brand-mark"><Check /></span><span>KEPT</span></a><a className="account-back" href="/">Jelajahi Destinasi</a><AccountControls /></header>
+    <header className="site-header account-header"><a className="brand" href="/"><span className="brand-mark"><KeptLogo /></span><span>Kept</span></a><a className="account-back" href="/">Jelajahi Destinasi</a><AccountControls /></header>
     <section className="account-shell">
       <aside className="account-sidebar">
         <div className="account-profile-card"><span>{user.initials}</span><div><strong>{user.name}</strong><small>{user.email}</small></div>{user.organizerStatus === "verified" && <BadgeCheck />}</div>

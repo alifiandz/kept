@@ -40,6 +40,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AccountControls } from "@/components/account-controls";
+import { KeptLogo } from "@/components/kept-logo";
 import { readKeptUser } from "@/lib/kept-account";
 import {
   Dialog,
@@ -309,7 +310,7 @@ export default function Home() {
   return (
     <main>
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="KEPT home"><span className="brand-mark"><Check /></span><span>KEPT</span></a>
+        <a className="brand" href="#top" aria-label="Kept home"><span className="brand-mark"><KeptLogo /></span><span>Kept</span></a>
         <nav className={mobileOpen ? "main-nav open" : "main-nav"} aria-label="Navigasi utama">
           {organizerName ? <>
             <a href="#operator-home" onClick={() => setMobileOpen(false)}>Dashboard</a>
@@ -441,7 +442,7 @@ export default function Home() {
       </section>
 
       <footer className="site-footer expanded-footer">
-        <div className="footer-brand"><span className="brand-mark"><Check /></span><span><strong>KEPT</strong><small>Did they keep their promise?</small></span></div>
+        <div className="footer-brand"><span className="brand-mark"><KeptLogo /></span><span><strong>Kept</strong><small>Did they keep their promise?</small></span></div>
         <div className="footer-column"><strong>Jelajahi</strong><a href="#destinations">Destinasi</a><a href="#why-kept">Kenapa KEPT</a><a href="#how-it-works">Cara Kerja</a></div>
         <div className="footer-column"><strong>Untuk Operator</strong><a href="#for-operators">Buat Profil</a><a href="#top">Masuk Operator</a><a href="#top">Pusat Bantuan</a></div>
         <div className="footer-column contact-column"><strong>Hubungi Kami</strong><a href="mailto:hello@kept.id"><Mail />hello@kept.id</a><a href="tel:+6281234567890"><Phone />+62 812-3456-7890</a><a href="#top"><AtSign />@kept.id</a><span><MapPin />Yogyakarta, Indonesia</span></div>

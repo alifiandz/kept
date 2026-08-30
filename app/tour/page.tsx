@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AccountControls } from "@/components/account-controls";
+import { KeptLogo } from "@/components/kept-logo";
 
 const tourNames: Record<string, { name: string; operator: string; price: string; date: string; rating: number; image: string; description: string }> = {
   "bromo-sunrise-weekend": { name: "Bromo Sunrise Weekend", operator: "Jelajah Aruna", price: "Rp649.000", date: "12–13 September 2026", rating: 94, image: "/bromo.webp", description: "Open trip dua hari dari Malang menuju sunrise Penanjakan, Lautan Pasir, kawah Bromo, dan Bukit Teletubbies." },
@@ -70,7 +71,7 @@ export default function TourPage() {
   }, [slug]);
 
   return <main className="detail-page tour-detail-page">
-    <header className="site-header detail-header"><a className="brand" href="/"><span className="brand-mark"><Check /></span><span>KEPT</span></a><nav className="main-nav"><a href="#overview">Ringkasan</a><a href="#promise">Promise</a><a href="#changes">Perubahan</a><a href="#reality">Hasil</a></nav><div className="detail-account-actions"><AccountControls /><Button variant="outline" onClick={() => history.back()}><ArrowLeft /> Kembali</Button></div></header>
+    <header className="site-header detail-header"><a className="brand" href="/"><span className="brand-mark"><KeptLogo /></span><span>Kept</span></a><nav className="main-nav"><a href="#overview">Ringkasan</a><a href="#promise">Promise</a><a href="#changes">Perubahan</a><a href="#reality">Hasil</a></nav><div className="detail-account-actions"><AccountControls /><Button variant="outline" onClick={() => history.back()}><ArrowLeft /> Kembali</Button></div></header>
 
     {passMode && <div className="trip-pass-banner"><TicketCheck /><span><strong>Trip Pass #BRM-2409-017 terverifikasi</strong>Kamu dapat melihat janji trip dan mengisi Reality Check setelah perjalanan.</span></div>}
 
@@ -97,6 +98,6 @@ export default function TourPage() {
 
     <section className="tour-bottom-cta section-wrap"><div><ShieldCheck /><span><strong>Ingin mengikuti trip ini?</strong><small>KEPT tidak memproses booking. Lanjutkan ke operator setelah memeriksa semua bukti.</small></span></div><Button>Hubungi Operator</Button></section>
 
-    <footer className="site-footer expanded-footer detail-footer"><div className="footer-brand"><span className="brand-mark"><Check /></span><span><strong>KEPT</strong><small>Did they keep their promise?</small></span></div><div className="footer-column"><strong>Jelajahi</strong><a href="/">Beranda</a><a href="/destination?slug=gunung-bromo">Gunung Bromo</a><a href="#promise">Promise Snapshot</a></div><div className="footer-column"><strong>Hubungi Kami</strong><a href="mailto:hello@kept.id"><Mail />hello@kept.id</a><a href="tel:+6281234567890"><Phone />+62 812-3456-7890</a><a href="/"><AtSign />@kept.id</a></div></footer>
+    <footer className="site-footer expanded-footer detail-footer"><div className="footer-brand"><span className="brand-mark"><KeptLogo /></span><span><strong>Kept</strong><small>Did they keep their promise?</small></span></div><div className="footer-column"><strong>Jelajahi</strong><a href="/">Beranda</a><a href="/destination?slug=gunung-bromo">Gunung Bromo</a><a href="#promise">Promise Snapshot</a></div><div className="footer-column"><strong>Hubungi Kami</strong><a href="mailto:hello@kept.id"><Mail />hello@kept.id</a><a href="tel:+6281234567890"><Phone />+62 812-3456-7890</a><a href="/"><AtSign />@kept.id</a></div></footer>
   </main>;
 }

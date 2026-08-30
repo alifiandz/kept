@@ -1,7 +1,8 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { ArrowRight, BadgeCheck, BriefcaseBusiness, Check, Compass, LogIn, ShieldCheck, UserRound } from "lucide-react";
+import { ArrowRight, BadgeCheck, BriefcaseBusiness, Compass, LogIn, ShieldCheck, UserRound } from "lucide-react";
+import { KeptLogo } from "@/components/kept-logo";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/switch";
@@ -68,7 +69,7 @@ export function AccountControls({ showWelcome = false }: { showWelcome?: boolean
 
     <Dialog open={welcomeOpen} onOpenChange={(open) => { setWelcomeOpen(open); if (!open) finishWelcome(); }}>
       <DialogContent className="welcome-dialog">
-        <DialogHeader className="welcome-heading"><span className="welcome-logo"><Check /></span><DialogTitle>Selamat datang di KEPT</DialogTitle><DialogDescription>Pilih cara kamu ingin menggunakan KEPT hari ini.</DialogDescription></DialogHeader>
+        <DialogHeader className="welcome-heading"><span className="welcome-logo"><KeptLogo /></span><DialogTitle>Selamat datang di KEPT</DialogTitle><DialogDescription>Pilih cara kamu ingin menggunakan KEPT hari ini.</DialogDescription></DialogHeader>
         <div className="welcome-choice-grid">
           <button onClick={finishWelcome}><span className="welcome-choice-icon traveller"><Compass /></span><strong>Jelajahi sebagai Traveller</strong><small>Temukan destinasi dan bandingkan open tour berdasarkan bukti.</small><b>Mulai menjelajah <ArrowRight /></b></button>
           <button onClick={() => { finishWelcome(); openAuth("login"); }}><span className="welcome-choice-icon organizer"><BriefcaseBusiness /></span><strong>Kelola Open Tour</strong><small>Buat Promise Snapshot dan bangun rekam jejak operator.</small><b>Masuk sebagai organizer <ArrowRight /></b></button>

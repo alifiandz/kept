@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AccountControls } from "@/components/account-controls";
+import { KeptLogo } from "@/components/kept-logo";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 type Tour = {
@@ -52,7 +53,7 @@ const bromoImages = [
   "/bromo.webp",
   "https://static-cms.routard.com/web-routard/uploads/xlarge_jeep_-_caldeira_0224f2164a.jpg",
   "https://ourglobaltrek.com/images/indonesia-bromo-29.jpg",
-  "https://hellomedia.id/wp-content/uploads/2023/08/mountainous-landscape-with-fog-scaled.jpg",
+  "/bromo.webp",
   "https://radartegal.disway.id/upload/29407a32a2d7114c5dff836acdcedaa8.png",
   "https://astraotoshop.com/_next/image?q=75&url=https%3A%2F%2Fastraotoshop.com%2Fasset%2Farticle-aop%2Fwisata+bromo_20250715.webp&w=828",
   "https://i0.wp.com/michellefranclee.com/wp-content/uploads/2019/02/Bromo-Travel-Blog-Michelle-FrancLee-11.jpg?resize=940%2C627&ssl=1",
@@ -156,7 +157,7 @@ export default function DestinationPage() {
   }), [tours, departure, maxPrice, minRating, search]);
 
   return <main className="detail-page">
-    <header className="site-header detail-header"><a className="brand" href="/"><span className="brand-mark"><Check /></span><span>KEPT</span></a><nav className="main-nav"><a href="/">Beranda</a><a href="#available">Open Tour</a><a href="#about-place">Tentang Destinasi</a></nav><div className="detail-account-actions"><AccountControls /><Button variant="outline" onClick={() => history.back()}><ArrowLeft /> Kembali</Button></div></header>
+    <header className="site-header detail-header"><a className="brand" href="/"><span className="brand-mark"><KeptLogo /></span><span>Kept</span></a><nav className="main-nav"><a href="/">Beranda</a><a href="#available">Open Tour</a><a href="#about-place">Tentang Destinasi</a></nav><div className="detail-account-actions"><AccountControls /><Button variant="outline" onClick={() => history.back()}><ArrowLeft /> Kembali</Button></div></header>
 
     <section className="destination-hero section-wrap" id="about-place">
       <div className="breadcrumb"><a href="/">Beranda</a><span>/</span><a href="/#destinations">Destinasi</a><span>/</span><strong>{destination.name}</strong></div>
@@ -201,7 +202,7 @@ export default function DestinationPage() {
       </div>
     </section>
 
-    <footer className="site-footer expanded-footer detail-footer"><div className="footer-brand"><span className="brand-mark"><Check /></span><span><strong>KEPT</strong><small>Did they keep their promise?</small></span></div><div className="footer-column"><strong>Jelajahi</strong><a href="/">Beranda</a><a href="/#destinations">Destinasi</a><a href="/#how-it-works">Cara Kerja</a></div><div className="footer-column"><strong>Hubungi Kami</strong><a href="mailto:hello@kept.id"><Mail />hello@kept.id</a><a href="tel:+6281234567890"><Phone />+62 812-3456-7890</a><a href="/"><AtSign />@kept.id</a></div></footer>
+    <footer className="site-footer expanded-footer detail-footer"><div className="footer-brand"><span className="brand-mark"><KeptLogo /></span><span><strong>Kept</strong><small>Did they keep their promise?</small></span></div><div className="footer-column"><strong>Jelajahi</strong><a href="/">Beranda</a><a href="/#destinations">Destinasi</a><a href="/#how-it-works">Cara Kerja</a></div><div className="footer-column"><strong>Hubungi Kami</strong><a href="mailto:hello@kept.id"><Mail />hello@kept.id</a><a href="tel:+6281234567890"><Phone />+62 812-3456-7890</a><a href="/"><AtSign />@kept.id</a></div></footer>
 
     <Dialog open={selectedPhoto !== null} onOpenChange={(open) => { if (!open) setSelectedPhoto(null); }}>
       <DialogContent className="photo-lightbox">
