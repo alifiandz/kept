@@ -21,7 +21,7 @@ export function AccountControls({ showWelcome = false }: { showWelcome?: boolean
     sync();
     window.addEventListener("kept-user-change", sync);
     window.addEventListener("storage", sync);
-    if (showWelcome && !window.localStorage.getItem("kept-welcome-seen")) setWelcomeOpen(true);
+    if (showWelcome && !readKeptUser()) setWelcomeOpen(true);
     return () => { window.removeEventListener("kept-user-change", sync); window.removeEventListener("storage", sync); };
   }, [showWelcome]);
 
@@ -71,8 +71,8 @@ export function AccountControls({ showWelcome = false }: { showWelcome?: boolean
       <DialogContent className="welcome-dialog">
         <DialogHeader className="welcome-heading"><span className="welcome-logo"><KeptLogo /></span><DialogTitle>Selamat datang di KEPT</DialogTitle><DialogDescription>Pilih cara kamu ingin menggunakan KEPT hari ini.</DialogDescription></DialogHeader>
         <div className="welcome-choice-grid">
-          <button onClick={finishWelcome}><span className="welcome-choice-icon traveller"><Compass /></span><strong>Jelajahi sebagai Traveller</strong><small>Temukan destinasi dan bandingkan open tour berdasarkan bukti.</small><b>Mulai menjelajah <ArrowRight /></b></button>
-          <button onClick={() => { finishWelcome(); openAuth("login"); }}><span className="welcome-choice-icon organizer"><BriefcaseBusiness /></span><strong>Kelola Open Tour</strong><small>Buat Promise Snapshot dan bangun rekam jejak operator.</small><b>Masuk sebagai organizer <ArrowRight /></b></button>
+          <button onClick={() => { finishWelcome(); openAuth("register"); }}><span className="welcome-choice-icon traveller"><Compass /></span><strong>Jelajahi sebagai Traveller</strong><small>Temukan destinasi dan bandingkan open tour berdasarkan bukti.</small><b>Buat akun Traveller <ArrowRight /></b></button>
+          <button onClick={() => { finishWelcome(); openAuth("register"); }}><span className="welcome-choice-icon organizer"><BriefcaseBusiness /></span><strong>Kelola Open Tour</strong><small>Buat Promise Snapshot dan bangun rekam jejak operator.</small><b>Buat akun lalu daftar organizer <ArrowRight /></b></button>
         </div>
         <button className="guest-entry" onClick={finishWelcome}>Hanya ingin melihat-lihat? Lanjut tanpa akun</button>
       </DialogContent>
