@@ -15,6 +15,7 @@ import {
   History,
   Mail,
   MapPin,
+  MessageCircle,
   Phone,
   ReceiptText,
   ShieldCheck,
@@ -26,6 +27,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { AccountControls } from "@/components/account-controls";
 import { KeptLogo } from "@/components/kept-logo";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 const tourNames: Record<string, { name: string; operator: string; price: string; date: string; rating: number; image: string; description: string }> = {
   "bromo-sunrise-weekend": { name: "Bromo Sunrise Weekend", operator: "Jelajah Aruna", price: "Rp649.000", date: "12–13 September 2026", rating: 94, image: "/bromo.webp", description: "Open trip dua hari dari Malang menuju sunrise Penanjakan, Lautan Pasir, kawah Bromo, dan Bukit Teletubbies." },
@@ -53,6 +55,7 @@ const reality = [
 export default function TourPage() {
   const [slug, setSlug] = useState("bromo-sunrise-weekend");
   const [passMode, setPassMode] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -96,8 +99,27 @@ export default function TourPage() {
       <div className="reality-table">{reality.map((item) => <article key={item.promise}><div><strong>{item.promise}</strong><span>{item.reality}</span></div><span className={`status-tag ${item.kind}`}>{item.kind === "kept" ? <CheckCircle2 /> : item.kind === "changed" ? <History /> : <TriangleAlert />}{item.status}</span></article>)}</div>
     </section>
 
-    <section className="tour-bottom-cta section-wrap"><div><ShieldCheck /><span><strong>Ingin mengikuti trip ini?</strong><small>KEPT tidak memproses booking. Lanjutkan ke operator setelah memeriksa semua bukti.</small></span></div><Button>Hubungi Operator</Button></section>
+    <section className="tour-bottom-cta section-wrap"><div><ShieldCheck /><span><strong>Ingin mengikuti trip ini?</strong><small>KEPT tidak memproses booking. Lanjutkan ke operator setelah memeriksa semua bukti.</small></span></div><Button onClick={() => setContactOpen(true)}>Hubungi Operator</Button></section>
 
     <footer className="site-footer expanded-footer detail-footer"><div className="footer-brand"><span className="brand-mark"><KeptLogo /></span><span><strong>Kept</strong><small>Did they keep their promise?</small></span></div><div className="footer-column"><strong>Jelajahi</strong><a href="/">Beranda</a><a href="/destination?slug=gunung-bromo">Gunung Bromo</a><a href="#promise">Promise Snapshot</a></div><div className="footer-column"><strong>Hubungi Kami</strong><a href="mailto:hello@kept.id"><Mail />hello@kept.id</a><a href="tel:+6281234567890"><Phone />+62 812-3456-7890</a><a href="/"><AtSign />@kept.id</a></div></footer>
+
+    <Dialog open={contactOpen} onOpenChange={setContactOpen}>
+      <DialogContent className="contact-operator-dialog">
+        <DialogHeader>
+          <span className="dialog-kicker"><MessageCircle /> HUBUNGI OPERATOR</span>
+          <DialogTitle>Hubungi {tour.operator}</DialogTitle>
+          <DialogDescription>Kept sudah membantu kamu memeriksa bukti trip. Lanjutkan pertanyaan atau pendaftaran langsung kepada operator.</DialogDescription>
+        </DialogHeader>
+        <div className="operator-contact-card">
+          <div className="operator-avatar">JA</div>
+          <div><strong>{tour.operator}</strong><span><BadgeCheck /> Integrity Profile aktif</span></div>
+        </div>
+        <div className="contact-message-preview"><small>PESAN YANG DISIAPKAN</small><p>Halo {tour.operator}, saya tertarik mengikuti {tour.name} pada {tour.date}. Saya menemukan trip ini melalui Kept dan ingin menanyakan ketersediaan peserta.</p></div>
+        <DialogFooter>
+          <Button variant="outline" asChild><a href={`tel:+6281234567890`}><Phone /> Telepon operator</a></Button>
+          <Button asChild><a href={`mailto:operator@jelajaharuna.id?subject=${encodeURIComponent(`Minat ${tour.name}`)}&body=${encodeURIComponent(`Halo ${tour.operator}, saya tertarik mengikuti ${tour.name} pada ${tour.date}. Saya menemukan trip ini melalui Kept dan ingin menanyakan ketersediaan peserta.`)}`}><Mail /> Kirim email</a></Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   </main>;
 }
