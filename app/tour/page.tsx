@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import {
   ArrowLeft,
   AtSign,
@@ -27,6 +27,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { AccountControls } from "@/components/account-controls";
 import { KeptLogo } from "@/components/kept-logo";
+import { readKeptUser } from "@/lib/kept-account";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 const tourNames: Record<string, { name: string; operator: string; price: string; date: string; rating: number; image: string; description: string }> = {
@@ -47,7 +48,7 @@ const promises = [
 const reality = [
   { promise: "Maksimal 15 peserta", reality: "Trip berjalan dengan 14 peserta", status: "Dipenuhi", kind: "kept" },
   { promise: "Minibus ber-AC", reality: "Kendaraan sesuai Promise Snapshot", status: "Dipenuhi", kind: "kept" },
-  { promise: "2–3 orang per kamar", reality: "Satu kamar diisi empat peserta", status: "Tidak dipenuhi", kind: "missed" },
+  { promise: "2–3 orang per kamar", reality: "Tiga peserta per kamar sesuai Snapshot", status: "Dipenuhi", kind: "kept" },
   { promise: "Tanpa biaya wajib tambahan", reality: "Tidak ada pungutan tambahan", status: "Dipenuhi", kind: "kept" },
   { promise: "Sunrise Point Penanjakan", reality: "Dialihkan ke Bukit Cinta karena akses ditutup", status: "Berubah transparan", kind: "changed" },
 ];
@@ -56,11 +57,19 @@ export default function TourPage() {
   const [slug, setSlug] = useState("bromo-sunrise-weekend");
   const [passMode, setPassMode] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
+  const [realityOpen, setRealityOpen] = useState(false);
+  const [realitySubmitted, setRealitySubmitted] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     setSlug(params.get("slug") || "bromo-sunrise-weekend");
-    setPassMode(params.get("pass") === "1");
+    const requestedPass = params.get("pass") === "1";
+    if (requestedPass && !readKeptUser()) {
+      setPassMode(false);
+      window.setTimeout(() => window.dispatchEvent(new CustomEvent("kept-auth-required", { detail: { tab: "login", redirect: window.location.pathname + window.location.search } })), 0);
+    } else {
+      setPassMode(requestedPass);
+    }
   }, []);
 
   const tour = useMemo(() => tourNames[slug] ?? {
@@ -73,15 +82,23 @@ export default function TourPage() {
     description: "Open trip terpilih dengan Promise Snapshot dan hasil perjalanan yang dapat diperiksa.",
   }, [slug]);
 
+  const contactMessage = `Halo ${tour.operator}, saya melihat rekam bukti ${tour.name} di Kept dan ingin menanyakan jadwal keberangkatan berikutnya.`;
+
+  const submitReality = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setRealitySubmitted(true);
+    setRealityOpen(false);
+  };
+
   return <main className="detail-page tour-detail-page">
     <header className="site-header detail-header"><a className="brand" href="/"><span className="brand-mark"><KeptLogo /></span><span>Kept</span></a><nav className="main-nav"><a href="#overview">Ringkasan</a><a href="#promise">Promise</a><a href="#changes">Perubahan</a><a href="#reality">Hasil</a></nav><div className="detail-account-actions"><AccountControls /><Button variant="outline" onClick={() => history.back()}><ArrowLeft /> Kembali</Button></div></header>
 
-    {passMode && <div className="trip-pass-banner"><TicketCheck /><span><strong>Trip Pass #BRM-2409-017 terverifikasi</strong>Kamu dapat melihat janji trip dan mengisi Reality Check setelah perjalanan.</span></div>}
+    {passMode && <div className="trip-pass-banner"><TicketCheck /><span><strong>{realitySubmitted ? "Reality Check berhasil dikirim" : "Trip Pass #BRM-2409-017 terverifikasi"}</strong>{realitySubmitted ? "Konfirmasimu sudah tercatat dalam prototype Kept." : "Kamu dapat melihat janji trip dan mengisi Reality Check setelah perjalanan."}</span>{!realitySubmitted && <Button onClick={() => setRealityOpen(true)}>Isi Reality Check</Button>}</div>}
 
     <section className="tour-detail-hero section-wrap" id="overview">
       <div className="breadcrumb"><a href="/">Beranda</a><span>/</span><a href="/destination?slug=gunung-bromo">Gunung Bromo</a><span>/</span><strong>{tour.name}</strong></div>
       <div className="tour-detail-grid">
-        <div className="tour-detail-copy"><span className="detail-kicker">OPEN TRIP · 2H1M</span><h1>{tour.name}</h1><p>{tour.description}</p><div className="tour-detail-meta"><span><CalendarDays />{tour.date}</span><span><MapPin />Meeting point Malang</span><span><Users />Maksimal 15 peserta</span><span><Clock3 />Berangkat 23.30 WIB</span></div><div className="tour-price-row"><div><small>Harga per peserta</small><strong>{tour.price}</strong></div><div><small>Rating KEPT</small><strong className="kept-score"><ShieldCheck />{tour.rating}%</strong></div></div></div>
+        <div className="tour-detail-copy"><span className="detail-kicker">OPEN TRIP SELESAI · BUKTI TERSEDIA</span><h1>{tour.name}</h1><p>{tour.description}</p><div className="tour-detail-meta"><span><CalendarDays />{tour.date}</span><span><MapPin />Meeting point Malang</span><span><Users />Maksimal 15 peserta</span><span><Clock3 />Berangkat 23.30 WIB</span></div><div className="tour-price-row"><div><small>Harga per peserta</small><strong>{tour.price}</strong></div><div><small>Rating Kept</small><strong className="kept-score"><ShieldCheck />{tour.rating}%</strong></div></div></div>
         <div className="tour-visual-panel"><img src={tour.image} alt={tour.name} /><div className="operator-profile-inline"><div className="operator-avatar">JA</div><div><small>OPERATOR</small><strong>{tour.operator}</strong><span><BadgeCheck /> Integrity Profile aktif</span></div><a href="#reality">Lihat rekam jejak</a></div></div>
       </div>
     </section>
@@ -94,14 +111,14 @@ export default function TourPage() {
     <section className="change-detail-section" id="changes"><div className="section-wrap"><div className="section-heading"><div><span className="section-kicker light">SAAT RENCANA BERUBAH</span><h2>Change Log</h2><p>Alasan dan pengganti ditampilkan agar perubahan dapat dinilai secara adil.</p></div><span className="change-badge">1 perubahan tercatat</span></div><article className="change-detail-card"><div className="change-time"><strong>13 SEP</strong><span>03.18 WIB</span></div><div><span className="status-tag changed"><History />Berubah transparan</span><h3>Sunrise Point Penanjakan dialihkan ke Bukit Cinta</h3><p>Akses Penanjakan ditutup petugas karena longsor ringan. Operator memberi tahu peserta sebelum jeep berangkat dan menyediakan lokasi pengganti dengan waktu sunrise yang sama.</p></div><div className="change-evidence"><small>BUKTI OPERATOR</small><strong>Foto penutupan akses</strong><strong>Pesan pemberitahuan</strong><strong>Lokasi pengganti</strong></div></article></div></section>
 
     <section className="reality-report section-wrap" id="reality">
-      <div className="section-heading"><div><span className="section-kicker">SETELAH PERJALANAN</span><h2>Promise vs Reality</h2><p>Dikonfirmasi oleh peserta yang benar-benar mengikuti perjalanan ini.</p></div><div className="verified-participants"><Users /><span><strong>17 peserta</strong><small>terverifikasi</small></span></div></div>
+      <div className="section-heading"><div><span className="section-kicker">SETELAH PERJALANAN</span><h2>Promise vs Reality</h2><p>Dikonfirmasi oleh peserta yang benar-benar mengikuti perjalanan ini.</p></div><div className="verified-participants"><Users /><span><strong>14 peserta</strong><small>terverifikasi</small></span></div></div>
       <div className="integrity-summary"><div className="score-circle"><strong>{tour.rating}%</strong><span>JANJI<br />DIPENUHI</span></div><div><span>HASIL INTEGRITAS</span><h3>Mayoritas janji dipenuhi</h3><p>Tingkat keyakinan bukti: <strong>Tinggi</strong></p></div><div className="summary-breakdown"><span><i className="kept-dot" /><strong>80%</strong> Dipenuhi</span><span><i className="changed-dot" /><strong>20%</strong> Berubah transparan</span><span><i className="missed-dot" /><strong>0%</strong> Tanpa penjelasan</span></div></div>
       <div className="reality-table">{reality.map((item) => <article key={item.promise}><div><strong>{item.promise}</strong><span>{item.reality}</span></div><span className={`status-tag ${item.kind}`}>{item.kind === "kept" ? <CheckCircle2 /> : item.kind === "changed" ? <History /> : <TriangleAlert />}{item.status}</span></article>)}</div>
     </section>
 
-    <section className="tour-bottom-cta section-wrap"><div><ShieldCheck /><span><strong>Ingin mengikuti trip ini?</strong><small>KEPT tidak memproses booking. Lanjutkan ke operator setelah memeriksa semua bukti.</small></span></div><Button onClick={() => setContactOpen(true)}>Hubungi Operator</Button></section>
+    <section className="tour-bottom-cta section-wrap"><div><ShieldCheck /><span><strong>Tertarik dengan jadwal berikutnya?</strong><small>Kept tidak memproses booking. Hubungi operator setelah memeriksa rekam bukti trip ini.</small></span></div><Button onClick={() => setContactOpen(true)}>Hubungi Operator</Button></section>
 
-    <footer className="site-footer expanded-footer detail-footer"><div className="footer-brand"><span className="brand-mark"><KeptLogo /></span><span><strong>Kept</strong><small>Did they keep their promise?</small></span></div><div className="footer-column"><strong>Jelajahi</strong><a href="/">Beranda</a><a href="/destination?slug=gunung-bromo">Gunung Bromo</a><a href="#promise">Promise Snapshot</a></div><div className="footer-column"><strong>Hubungi Kami</strong><a href="mailto:hello@kept.id"><Mail />hello@kept.id</a><a href="tel:+6281234567890"><Phone />+62 812-3456-7890</a><a href="/"><AtSign />@kept.id</a></div></footer>
+    <footer className="site-footer expanded-footer detail-footer"><div className="footer-brand"><span className="brand-mark"><KeptLogo /></span><span><strong>Kept</strong><small>Did they keep their promise?</small></span></div><div className="footer-column"><strong>Jelajahi</strong><a href="/">Beranda</a><a href="/destination?slug=gunung-bromo">Gunung Bromo</a><a href="#promise">Promise Snapshot</a></div><div className="footer-column"><strong>Hubungi Kami</strong><a href="mailto:hello@kept.id"><Mail />hello@kept.id</a><a href="tel:+6281234567890"><Phone />+62 812-3456-7890</a><span><AtSign />kept.id</span></div></footer>
 
     <Dialog open={contactOpen} onOpenChange={setContactOpen}>
       <DialogContent className="contact-operator-dialog">
@@ -114,11 +131,28 @@ export default function TourPage() {
           <div className="operator-avatar">JA</div>
           <div><strong>{tour.operator}</strong><span><BadgeCheck /> Integrity Profile aktif</span></div>
         </div>
-        <div className="contact-message-preview"><small>PESAN YANG DISIAPKAN</small><p>Halo {tour.operator}, saya tertarik mengikuti {tour.name} pada {tour.date}. Saya menemukan trip ini melalui Kept dan ingin menanyakan ketersediaan peserta.</p></div>
+        <div className="contact-message-preview"><small>PESAN YANG DISIAPKAN</small><p>{contactMessage}</p></div>
         <DialogFooter>
           <Button variant="outline" asChild><a href={`tel:+6281234567890`}><Phone /> Telepon operator</a></Button>
-          <Button asChild><a href={`mailto:operator@jelajaharuna.id?subject=${encodeURIComponent(`Minat ${tour.name}`)}&body=${encodeURIComponent(`Halo ${tour.operator}, saya tertarik mengikuti ${tour.name} pada ${tour.date}. Saya menemukan trip ini melalui Kept dan ingin menanyakan ketersediaan peserta.`)}`}><Mail /> Kirim email</a></Button>
+          <Button asChild><a href={`mailto:operator@jelajaharuna.id?subject=${encodeURIComponent(`Jadwal berikutnya ${tour.name}`)}&body=${encodeURIComponent(contactMessage)}`}><Mail /> Kirim email</a></Button>
         </DialogFooter>
+      </DialogContent>
+    </Dialog>
+
+    <Dialog open={realityOpen} onOpenChange={setRealityOpen}>
+      <DialogContent className="reality-check-dialog">
+        <DialogHeader>
+          <span className="dialog-kicker"><TicketCheck /> REALITY CHECK</span>
+          <DialogTitle>Konfirmasi pengalaman perjalananmu</DialogTitle>
+          <DialogDescription>Jawaban peserta terverifikasi membantu Kept menghitung kesesuaian janji dan kenyataan.</DialogDescription>
+        </DialogHeader>
+        <form className="reality-check-form" onSubmit={submitReality}>
+          <label><input type="checkbox" required /> Jumlah peserta tidak melebihi 15 orang</label>
+          <label><input type="checkbox" required /> Transportasi sesuai Promise Snapshot</label>
+          <label><input type="checkbox" required /> Tidak ada biaya wajib tambahan</label>
+          <label>Catatan tambahan<textarea placeholder="Tuliskan perubahan atau hal yang perlu diperiksa (opsional)" /></label>
+          <DialogFooter><Button variant="outline" type="button" onClick={() => setRealityOpen(false)}>Batal</Button><Button type="submit"><Check /> Kirim Konfirmasi</Button></DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   </main>;

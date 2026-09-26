@@ -23,6 +23,18 @@ const eslintConfig = defineConfig([
       "react-hooks/set-state-in-effect": "off",
     },
   },
+  {
+    files: ["app/**/*.{ts,tsx}", "components/account-controls.tsx", "components/kept-logo.tsx"],
+    rules: {
+      // This prototype intentionally reads URL and localStorage state after
+      // hydration and uses plain anchors for portable static/VPS deployment.
+      "react-hooks/set-state-in-effect": "off",
+      "@next/next/no-html-link-for-pages": "off",
+      // The site intentionally uses standard image elements so its mix of
+      // local and real external travel photos remains portable to a VPS.
+      "@next/next/no-img-element": "off",
+    },
+  },
 ]);
 
 export default eslintConfig;

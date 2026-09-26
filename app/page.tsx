@@ -8,7 +8,6 @@ import {
   BadgeCheck,
   BriefcaseBusiness,
   CalendarDays,
-  Check,
   CheckCircle2,
   ChevronDown,
   CircleUserRound,
@@ -211,7 +210,7 @@ export default function Home() {
   const [category, setCategory] = useState("Semua");
   const [query, setQuery] = useState("");
   const [from, setFrom] = useState("Yogyakarta");
-  const [date, setDate] = useState("September 2026");
+  const [date, setDate] = useState("Oktober 2026");
   const [travellers, setTravellers] = useState("2 orang");
   const [operatorQuery, setOperatorQuery] = useState("");
   const [compareOne, setCompareOne] = useState("Gunung Bromo");
@@ -220,6 +219,7 @@ export default function Home() {
   const [submittedQuery, setSubmittedQuery] = useState("");
   const [comparison, setComparison] = useState<Destination[] | null>(null);
   const [savedDestinations, setSavedDestinations] = useState<number[]>([]);
+  const [savedLoaded, setSavedLoaded] = useState(false);
   const [showSaved, setShowSaved] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [resultMessage, setResultMessage] = useState("");
@@ -235,6 +235,20 @@ export default function Home() {
     window.addEventListener("storage", syncMode);
     return () => { window.removeEventListener("kept-user-change", syncMode); window.removeEventListener("storage", syncMode); };
   }, []);
+
+  useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem("kept-saved-destinations");
+      setSavedDestinations(stored ? JSON.parse(stored) : []);
+    } catch {
+      setSavedDestinations([]);
+    }
+    setSavedLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (savedLoaded) window.localStorage.setItem("kept-saved-destinations", JSON.stringify(savedDestinations));
+  }, [savedDestinations, savedLoaded]);
 
   const filteredDestinations = useMemo(() => {
     const normalized = submittedQuery.trim().toLowerCase();
@@ -288,6 +302,10 @@ export default function Home() {
     }
 
     if (passCode.trim().toUpperCase() === "BRM-2409-017") {
+      if (!readKeptUser()) {
+        window.dispatchEvent(new CustomEvent("kept-auth-required", { detail: { tab: "login", redirect: "/tour?slug=bromo-sunrise-weekend&pass=1" } }));
+        return;
+      }
       window.location.href = "/tour?slug=bromo-sunrise-weekend&pass=1";
     } else {
       setResultMessage("Trip Pass tidak ditemukan. Coba kode demo BRM-2409-017.");
@@ -296,10 +314,18 @@ export default function Home() {
   };
 
   const toggleSaved = (destinationId: number) => {
+    if (!readKeptUser()) {
+      window.dispatchEvent(new CustomEvent("kept-auth-required", { detail: { tab: "register" } }));
+      return;
+    }
     setSavedDestinations((current) => current.includes(destinationId) ? current.filter((id) => id !== destinationId) : [...current, destinationId]);
   };
 
   const openSaved = () => {
+    if (!readKeptUser()) {
+      window.dispatchEvent(new CustomEvent("kept-auth-required", { detail: { tab: "register" } }));
+      return;
+    }
     setShowSaved(true);
     setSubmittedQuery("");
     setCategory("Semua");
@@ -319,7 +345,7 @@ export default function Home() {
             <a href="/account?tab=create-tour">Buat Open Tour</a>
           </> : <>
             <a href="#destinations" onClick={() => setMobileOpen(false)}>Destinasi</a>
-            <a href="#why-kept" onClick={() => setMobileOpen(false)}>Kenapa KEPT</a>
+            <a href="#why-kept" onClick={() => setMobileOpen(false)}>Kenapa Kept</a>
             <a href="#how-it-works" onClick={() => setMobileOpen(false)}>Cara Kerja</a>
             <a href="#for-operators" onClick={() => setMobileOpen(false)}>Untuk Operator</a>
           </>}
@@ -342,7 +368,7 @@ export default function Home() {
         </div>
 
         <div className="search-shell">
-          <div className="mode-tabs" role="tablist" aria-label="Pilihan layanan KEPT">
+          <div className="mode-tabs" role="tablist" aria-label="Pilihan layanan Kept">
             {searchModes.map(({ id, label, helper, icon: Icon }) => (
               <button key={id} className={mode === id ? "mode-tab active" : "mode-tab"} onClick={() => { setMode(id); setResultMessage(""); }} role="tab" aria-selected={mode === id}>
                 <span className="mode-icon"><Icon /></span><span><strong>{label}</strong><small>{helper}</small></span>
@@ -381,7 +407,7 @@ export default function Home() {
         <div className="category-row">
           {categories.map(({ label, icon: Icon }) => <button key={label} className={category === label ? "category-chip active" : "category-chip"} onClick={() => { setCategory(label); setSubmittedQuery(""); setShowSaved(false); }}><Icon />{label}</button>)}
         </div>
-        <div className="trust-prompt"><BadgeCheck /><span><strong>Rating KEPT bukan rating kepuasan.</strong> Persentase menunjukkan janji yang dipenuhi.</span></div>
+        <div className="trust-prompt"><BadgeCheck /><span><strong>Rating Kept bukan rating kepuasan.</strong> Persentase menunjukkan janji yang dipenuhi.</span></div>
       </section>
 
       <section className="recommended section-wrap" id="destinations">
@@ -406,7 +432,7 @@ export default function Home() {
                 <p>{destination.description}</p>
                 <div className="destination-facts">
                   <div><small>Estimasi mulai</small><strong>{destination.price}</strong></div>
-                  <div><small>Rating KEPT</small><strong className="rating-value"><ShieldCheck />{destination.rating}%</strong></div>
+                  <div><small>Rating Kept</small><strong className="rating-value"><ShieldCheck />{destination.rating}%</strong></div>
                 </div>
                 <a className="tour-count" href={`/destination?slug=${toSlug(destination.name)}`}><span><strong>{destination.openTours}</strong> open tour tersedia</span><ArrowRight /></a>
               </div>
@@ -417,7 +443,7 @@ export default function Home() {
 
       <section className="why-kept" id="why-kept">
         <div className="section-wrap">
-          <div className="section-heading centered"><div><span className="section-kicker light">KENAPA MEMILIH KEPT?</span><h2>Kepercayaan yang bisa diperiksa.</h2><p>KEPT membantu kamu melihat lebih dari foto promosi dan testimoni.</p></div></div>
+          <div className="section-heading centered"><div><span className="section-kicker light">KENAPA MEMILIH Kept?</span><h2>Kepercayaan yang bisa diperiksa.</h2><p>Kept membantu kamu melihat lebih dari foto promosi dan testimoni.</p></div></div>
           <div className="benefit-grid">
             <article><FileCheck2 /><h3>Janji Tercatat</h3><p>Detail trip dapat diperiksa sebelum peserta membayar.</p></article>
             <article><TicketCheck /><h3>Peserta Terverifikasi</h3><p>Hanya peserta asli yang dapat mengonfirmasi kenyataan.</p></article>
@@ -428,7 +454,7 @@ export default function Home() {
       </section>
 
       <section className="how-section section-wrap" id="how-it-works">
-        <div className="section-heading centered"><div><span className="section-kicker">CARA KEPT BEKERJA</span><h2>Dari janji menjadi bukti.</h2><p>Tiga catatan sederhana membuat promosi open trip bisa diperiksa.</p></div></div>
+        <div className="section-heading centered"><div><span className="section-kicker">CARA Kept BEKERJA</span><h2>Dari janji menjadi bukti.</h2><p>Tiga catatan sederhana membuat promosi open trip bisa diperiksa.</p></div></div>
         <div className="how-grid">
           <article><span>01</span><FileCheck2 /><h3>Promise Snapshot</h3><p>Harga, itinerary, fasilitas, dan batas peserta dicatat sebelum trip.</p></article>
           <article><span>02</span><History /><h3>Change Log</h3><p>Setiap perubahan terlihat bersama alasan dan solusi penggantinya.</p></article>
@@ -438,20 +464,23 @@ export default function Home() {
 
       <section className="operator-cta section-wrap" id="for-operators">
         <div><span className="section-kicker light">UNTUK OPERATOR OPEN TRIP</span><h2>Biarkan bukti yang membangun kepercayaan.</h2><p>Buat Promise Snapshot dan tunjukkan rekam jejakmu kepada calon peserta.</p></div>
-        <Button className="light-button" onClick={() => { window.location.href = "/account?tab=eligibility"; }}>Buat Profil Operator <ArrowRight /></Button>
+        <Button className="light-button" onClick={() => {
+          if (readKeptUser()) window.location.href = "/account?tab=eligibility";
+          else window.dispatchEvent(new CustomEvent("kept-auth-required", { detail: { tab: "register", redirect: "/account?tab=eligibility" } }));
+        }}>Buat Profil Operator <ArrowRight /></Button>
       </section>
 
       <footer className="site-footer expanded-footer">
         <div className="footer-brand"><span className="brand-mark"><KeptLogo /></span><span><strong>Kept</strong><small>Did they keep their promise?</small></span></div>
-        <div className="footer-column"><strong>Jelajahi</strong><a href="#destinations">Destinasi</a><a href="#why-kept">Kenapa KEPT</a><a href="#how-it-works">Cara Kerja</a></div>
-        <div className="footer-column"><strong>Untuk Operator</strong><a href="#for-operators">Buat Profil</a><a href="#top">Masuk Operator</a><a href="#top">Pusat Bantuan</a></div>
-        <div className="footer-column contact-column"><strong>Hubungi Kami</strong><a href="mailto:hello@kept.id"><Mail />hello@kept.id</a><a href="tel:+6281234567890"><Phone />+62 812-3456-7890</a><a href="#top"><AtSign />@kept.id</a><span><MapPin />Yogyakarta, Indonesia</span></div>
+        <div className="footer-column"><strong>Jelajahi</strong><a href="#destinations">Destinasi</a><a href="#why-kept">Kenapa Kept</a><a href="#how-it-works">Cara Kerja</a></div>
+        <div className="footer-column"><strong>Untuk Operator</strong><a href="#for-operators">Buat Profil</a><a href="/account?tab=eligibility">Masuk Operator</a><a href="mailto:hello@kept.id?subject=Pusat%20Bantuan%20Kept">Pusat Bantuan</a></div>
+        <div className="footer-column contact-column"><strong>Hubungi Kami</strong><a href="mailto:hello@kept.id"><Mail />hello@kept.id</a><a href="tel:+6281234567890"><Phone />+62 812-3456-7890</a><span><AtSign />kept.id</span><span><MapPin />Yogyakarta, Indonesia</span></div>
       </footer>
 
       <Dialog open={Boolean(comparison)} onOpenChange={(open) => !open && setComparison(null)}>
         {comparison && <DialogContent className="compare-dialog">
           <DialogHeader><span className="dialog-kicker"><GitCompareArrows /> PERBANDINGAN DESTINASI</span><DialogTitle>Bandingkan sebelum memilih.</DialogTitle><DialogDescription>Gunakan rating berbasis janji dan pilihan tour yang tersedia.</DialogDescription></DialogHeader>
-          <div className="comparison-grid">{comparison.map((destination) => <article key={destination.id}><img src={destination.image} alt={destination.name} /><h3>{destination.name}</h3><span>{destination.place}</span><dl><div><dt>Estimasi</dt><dd>{destination.price}</dd></div><div><dt>Rating KEPT</dt><dd>{destination.rating}%</dd></div><div><dt>Open tour</dt><dd>{destination.openTours}</dd></div></dl><Button onClick={() => { window.location.href = `/destination?slug=${toSlug(destination.name)}`; }}>Lihat Tour</Button></article>)}</div>
+          <div className="comparison-grid">{comparison.map((destination) => <article key={destination.id}><img src={destination.image} alt={destination.name} /><h3>{destination.name}</h3><span>{destination.place}</span><dl><div><dt>Estimasi</dt><dd>{destination.price}</dd></div><div><dt>Rating Kept</dt><dd>{destination.rating}%</dd></div><div><dt>Open tour</dt><dd>{destination.openTours}</dd></div></dl><Button onClick={() => { window.location.href = `/destination?slug=${toSlug(destination.name)}`; }}>Lihat Tour</Button></article>)}</div>
           <DialogFooter><Button variant="outline" onClick={() => setComparison(null)}>Tutup</Button></DialogFooter>
         </DialogContent>}
       </Dialog>
@@ -478,7 +507,7 @@ function OrganizerHome({ name }: { name: string }) {
       </div>
 
       <div className="operator-home-metrics">
-        <HomeMetric icon={BriefcaseBusiness} label="Trip aktif" value="4" note="2 segera berangkat" tone="blue" />
+        <HomeMetric icon={BriefcaseBusiness} label="Trip aktif" value="2" note="2 segera berangkat" tone="blue" />
         <HomeMetric icon={ShieldCheck} label="Janji dipenuhi" value="92%" note="+4% dari bulan lalu" tone="green" />
         <HomeMetric icon={Users} label="Peserta terverifikasi" value="128" note="Dari 11 perjalanan" tone="navy" />
         <HomeMetric icon={MessageSquareText} label="Reality Check Masuk" value="84%" note="107 konfirmasi masuk" tone="amber" />
@@ -492,7 +521,7 @@ function OrganizerHome({ name }: { name: string }) {
         </article>
         <article className="operator-attention-card">
           <div className="operator-card-heading"><div><small>PERLU TINDAKAN</small><h2>Selesaikan berikutnya</h2></div><b className="attention-count">2</b></div>
-          <HomeTask icon={AlertCircle} title="Bromo Sunrise — 14 September" stats={[["Promise Snapshot","Belum lengkap"],["Peserta terdaftar","12/15"],["Trip Pass terkirim","8/12"]]} status="Perlu tindakan" action="Lengkapi Snapshot" href="/account?tab=promises" urgent />
+          <HomeTask icon={AlertCircle} title="Bromo Sunrise — Selesai" stats={[["Promise Snapshot","Terkunci"],["Peserta terverifikasi","14/14"],["Reality Check masuk","8/14"]]} status="Perlu ditinjau" action="Tinjau Hasil" href="/tour?slug=bromo-sunrise-weekend#reality" urgent />
           <HomeTask icon={MessageSquareText} title="Dieng Weekend — Selesai" stats={[["Reality Check masuk","16/20"],["Janji dipenuhi","88%"],["Masalah dilaporkan","1"]]} status="Perlu ditinjau" action="Lihat Hasil" href="/account?tab=open-tours" />
           <a className="operator-link" href="/account?tab=open-tours">Lihat semua perjalanan <ArrowRight /></a>
         </article>
