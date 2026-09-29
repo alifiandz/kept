@@ -97,7 +97,7 @@ svg { stroke-width: 1.9; }
 .menu-button { width: 38px; height: 38px; display: none; place-items: center; border: 0; background: transparent; color: var(--navy); }
 .menu-button svg { width: 21px; }
 
-.hero { min-height: 660px; padding: 88px max(22px, calc((100% - 1180px) / 2)) 62px; position: relative; display: flex; flex-direction: column; justify-content: center; color: white; background: url("/hero/bromo-sunrise.webp") center 48% / cover no-repeat; }
+.hero { min-height: 660px; padding: 88px max(22px, calc((100% - 1180px) / 2)) 62px; position: relative; display: flex; flex-direction: column; justify-content: center; color: white; background: url("/bromo.webp") center 48% / cover no-repeat; }
 .hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(4,27,45,.68) 0%, rgba(4,27,45,.38) 43%, rgba(4,27,45,.02) 80%), linear-gradient(0deg, rgba(3,22,36,.34), transparent 52%); }
 .hero-copy { width: min(680px,100%); position: relative; z-index: 1; margin-bottom: 40px; }
 .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: #d9edff; font-size: 11px; font-weight: 800; letter-spacing: .14em; }
