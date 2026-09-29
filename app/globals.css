@@ -72,7 +72,7 @@
 @keyframes tw-shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
 @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior: auto !important; } }
 html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--paper); color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
+body { margin: 0; background: linear-gradient(180deg,#ffffff 0%,#f5f8ff 46%,#ffffff 100%); color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
 a { color: inherit; text-decoration: none; }
 button, input { font: inherit; }
 button { cursor: pointer; }
@@ -98,7 +98,7 @@ svg { stroke-width: 1.9; }
 .menu-button svg { width: 21px; }
 
 .hero { min-height: 660px; padding: 88px max(22px, calc((100% - 1180px) / 2)) 62px; position: relative; display: flex; flex-direction: column; justify-content: center; color: white; background: url("/destinations/gunung-bromo/01.webp") center 48% / cover no-repeat; }
-.hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(4,27,45,.88) 0%, rgba(4,27,45,.62) 42%, rgba(4,27,45,.12) 78%), linear-gradient(0deg, rgba(3,22,36,.55), transparent 48%); }
+.hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(4,27,45,.78) 0%, rgba(4,27,45,.48) 43%, rgba(4,27,45,.04) 80%), linear-gradient(0deg, rgba(3,22,36,.44), transparent 52%); }
 .hero-copy { width: min(680px,100%); position: relative; z-index: 1; margin-bottom: 40px; }
 .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: #d9edff; font-size: 11px; font-weight: 800; letter-spacing: .14em; }
 .eyebrow svg { width: 17px; color: #82ceff; }
@@ -1200,4 +1200,125 @@ button, [role="button"], input, select, textarea { min-height: 42px; }
   .reality-review-list article button, .reality-review-list article a { width: 100%; }
   .session-records > div { grid-template-columns: 22px 1fr; }
   .session-records b { grid-column: 2; }
+}
+
+/* Bright travel editorial pass — vivid imagery with the verified Kept system intact. */
+.hero {
+  background-position: center 42%;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 150px;
+  pointer-events: none;
+  background: linear-gradient(180deg,transparent,rgba(5,31,50,.18));
+}
+.hero-copy,.search-shell { z-index: 2; }
+.search-shell {
+  border: 1px solid rgba(255,255,255,.72);
+  box-shadow: 0 28px 70px rgba(3,27,45,.24),0 0 0 1px rgba(73,106,241,.06);
+}
+.category-section {
+  padding-inline: 18px;
+  background: rgba(255,255,255,.82);
+  border-bottom: 1px solid rgba(73,106,241,.08);
+  border-radius: 0 0 24px 24px;
+}
+.recommended {
+  margin-block: 28px 70px;
+  padding: 50px 38px 58px;
+  position: relative;
+  background:
+    radial-gradient(circle at 92% 2%,rgba(52,201,255,.17),transparent 29%),
+    radial-gradient(circle at 4% 96%,rgba(73,106,241,.11),transparent 27%),
+    linear-gradient(145deg,#f4f9ff 0%,#ffffff 48%,#f4fbff 100%);
+  border: 1px solid rgba(73,106,241,.1);
+  border-radius: 34px;
+}
+.destination-grid { gap: 20px; }
+.destination-card {
+  border-color: rgba(73,106,241,.13);
+  border-radius: 22px;
+  background: linear-gradient(180deg,#ffffff 0%,#fbfdff 100%);
+  box-shadow: 0 16px 36px rgba(32,67,120,.10);
+}
+.destination-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(73,106,241,.28);
+  box-shadow: 0 24px 52px rgba(32,67,120,.17);
+}
+.destination-image { height: 205px; background: linear-gradient(145deg,#dff4ff,#e9edff); }
+.destination-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg,transparent 55%,rgba(5,31,50,.16));
+}
+.destination-image img,
+.trip-image-wrap img,
+.place-hero > img,
+.gallery-grid img,
+.tour-market-card > img,
+.dialog-destination-image img,
+.comparison-grid img,
+.credits-grid article > img {
+  filter: saturate(1.12) contrast(1.04) brightness(1.04);
+}
+.destination-card:hover .destination-image img { transform: scale(1.055); }
+.category-label {
+  z-index: 1;
+  color: #2443b8;
+  background: rgba(255,255,255,.94);
+  box-shadow: 0 7px 18px rgba(4,27,45,.12);
+}
+.destination-body { padding: 19px; }
+.destination-place { color: #496af1; font-weight: 900; }
+.destination-body h3 { margin-top: 9px; font-size: 21px; }
+.destination-body > p { color: #506678; line-height: 1.55; }
+.destination-facts {
+  padding: 14px 0;
+  border-color: rgba(73,106,241,.11);
+}
+.tour-count { color: #3f5de0; }
+.why-kept {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(65,191,255,.20),transparent 31%),
+    radial-gradient(circle at 92% 100%,rgba(73,106,241,.24),transparent 34%),
+    linear-gradient(135deg,#071f35 0%,#0b3559 100%);
+}
+.benefit-grid article {
+  border-color: rgba(145,211,255,.2);
+  background: linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,.045));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+}
+.benefit-grid article > svg { color: #9dddff; }
+.how-section {
+  margin-block: 72px;
+  padding: 66px 38px;
+  background: linear-gradient(135deg,#eef5ff,#ffffff 52%,#effbff);
+  border: 1px solid rgba(73,106,241,.10);
+  border-radius: 32px;
+}
+.how-grid article {
+  border-color: rgba(73,106,241,.12);
+  background: rgba(255,255,255,.88);
+  box-shadow: 0 14px 34px rgba(32,67,120,.08);
+}
+.how-grid article > span { color: #dfe8ff; }
+.operator-cta {
+  background:
+    radial-gradient(circle at 88% 20%,rgba(98,224,255,.26),transparent 26%),
+    linear-gradient(120deg,#2445d8,#496af1 55%,#318ddf);
+}
+.competition-partners { background: linear-gradient(180deg,#ffffff,#f5f8ff); }
+
+@media (max-width: 760px) {
+  .hero-shade { background: linear-gradient(90deg,rgba(4,27,45,.82),rgba(4,27,45,.24)),linear-gradient(0deg,rgba(4,27,45,.60),transparent); }
+  .recommended { width: min(100% - 24px,1180px); margin-block: 12px 46px; padding: 34px 16px 28px; border-radius: 24px; }
+  .destination-image { height: 220px; }
+  .how-section { width: min(100% - 24px,1180px); margin-block: 46px; padding: 44px 18px; border-radius: 24px; }
 }

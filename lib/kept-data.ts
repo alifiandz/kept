@@ -102,9 +102,9 @@ export const destinations: Destination[] = [
     id: 2, slug: "labuan-bajo", name: "Labuan Bajo", place: "Nusa Tenggara Timur", category: "Laut & Pulau", score: 96,
     description: "Berlayar ke Pulau Padar, Pink Beach, dan perairan Komodo dengan kapal liveaboard.",
     longDescription: "Labuan Bajo adalah gerbang menuju Taman Nasional Komodo. Kept membantu wisatawan memeriksa tipe kapal, kabin, rute, konsumsi, serta biaya konservasi sebelum menghubungi operator.",
-    heroImage: image("labuan-bajo", 1),
+    heroImage: image("labuan-bajo", 2),
     gallery: [
-      { src: image("labuan-bajo", 2), label: "Pelayaran antarpulau", alt: "Kapal berlayar di antara pulau kawasan Komodo" },
+      { src: image("labuan-bajo", 1), label: "Pelabuhan Labuan Bajo", alt: "Kapal wisata di pelabuhan Labuan Bajo" },
       { src: image("labuan-bajo", 3), label: "Pink Beach", alt: "Pantai berpasir merah muda di kawasan Komodo" },
       { src: image("labuan-bajo", 4), label: "Komodo", alt: "Komodo di kawasan Taman Nasional Komodo" },
       { src: image("labuan-bajo", 5), label: "Manta Point", alt: "Ikan pari manta di perairan Komodo" },

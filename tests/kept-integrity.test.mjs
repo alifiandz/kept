@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import test from "node:test";
 
@@ -15,7 +15,9 @@ test("ships eight unique local images for every destination", () => {
     const files = readdirSync(folder).filter((file) => file.endsWith(".webp")).sort();
     assert.deepEqual(files, ["01.webp", "02.webp", "03.webp", "04.webp", "05.webp", "06.webp", "07.webp", "08.webp"]);
     for (const file of files) {
-      const hash = createHash("sha256").update(readFileSync(join(folder, file))).digest("hex");
+      const imagePath = join(folder, file);
+      assert.ok(statSync(imagePath).size > 1_000, `empty or invalid image: ${slug}/${file}`);
+      const hash = createHash("sha256").update(readFileSync(imagePath)).digest("hex");
       assert.equal(hashes.has(hash), false, `duplicate image bytes: ${slug}/${file}`);
       hashes.add(hash);
     }

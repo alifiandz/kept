@@ -96,7 +96,7 @@ const destinations: Destination[] = [
     rating: 96,
     openTours: 3,
     description: "Berlayar ke Pulau Padar, Pink Beach, dan Manta Point dengan kapal liveaboard.",
-    image: "/destinations/labuan-bajo/01.webp",
+    image: "/destinations/labuan-bajo/02.webp",
     tours: [
       { name: "Komodo Weekend Cruise", operator: "Nusa Sail", price: "Rp2.850.000", rating: 96, date: "18–20 Sep 2026" },
       { name: "Padar & Pink Beach Sailing", operator: "Flores Journey", price: "Rp3.150.000", rating: 0, date: "16–18 Okt 2026" },
@@ -126,7 +126,7 @@ const destinations: Destination[] = [
     rating: 91,
     openTours: 3,
     description: "Tebing dramatis, pantai tersembunyi, dan laut biru dalam perjalanan pulau sehari.",
-    image: "/destinations/nusa-penida/01.webp",
+    image: "/destinations/nusa-penida/07.webp",
     tours: [
       { name: "West Penida Day Trip", operator: "Island Steps", price: "Rp650.000", rating: 93, date: "20 Sep 2026" },
       { name: "Penida East + West", operator: "Island Steps", price: "Rp925.000", rating: 0, date: "17–18 Okt 2026" },
@@ -141,7 +141,7 @@ const destinations: Destination[] = [
     rating: 95,
     openTours: 3,
     description: "Gugusan karst, laguna jernih, dan kehidupan laut untuk petualangan jarak jauh.",
-    image: "/destinations/raja-ampat/01.webp",
+    image: "/destinations/raja-ampat/07.webp",
     tours: [
       { name: "Piaynemo Essential", operator: "Papua Blue", price: "Rp5.750.000", rating: 95, date: "17–21 Sep 2026" },
       { name: "Wayag Explorer", operator: "Papua Blue", price: "Rp7.250.000", rating: 0, date: "16–21 Okt 2026" },
