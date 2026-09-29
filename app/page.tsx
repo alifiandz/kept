@@ -19,12 +19,10 @@ import {
   History,
   KeyRound,
   LockKeyhole,
-  Mail,
   MapPin,
   Menu,
   MessageSquareText,
   Mountain,
-  Phone,
   Plus,
   Search,
   ShieldCheck,
@@ -32,7 +30,6 @@ import {
   Sparkles,
   TicketCheck,
   TreePalm,
-  TrendingUp,
   Users,
   Waves,
   X,
@@ -41,6 +38,7 @@ import { Button } from "@/components/ui/button";
 import { AccountControls } from "@/components/account-controls";
 import { KeptLogo } from "@/components/kept-logo";
 import { readKeptUser } from "@/lib/kept-account";
+import { getDestination as getSharedDestination, tours as sharedTours } from "@/lib/kept-data";
 import {
   Dialog,
   DialogContent,
@@ -80,13 +78,13 @@ const destinations: Destination[] = [
     price: "Rp475.000",
     category: "Gunung",
     rating: 92,
-    openTours: 12,
+    openTours: 3,
     description: "Sunrise vulkanik, Lautan Pasir, dan jalur jeep dalam satu perjalanan singkat.",
-    image: "/bromo.webp",
+    image: "/destinations/gunung-bromo/01.webp",
     tours: [
-      { name: "Bromo Sunrise Weekend", operator: "Jelajah Aruna", price: "Rp649.000", rating: 94, date: "12–13 Sep 2026" },
-      { name: "Bromo Midnight Escape", operator: "Langkah Pagi", price: "Rp475.000", rating: 90, date: "19 Sep 2026" },
-      { name: "Bromo + Tumpak Sewu", operator: "Ruang Jelajah", price: "Rp1.250.000", rating: 91, date: "25–27 Sep 2026" },
+      { name: "Bromo Sunrise Weekend", operator: "Jelajah Aruna", price: "Rp649.000", rating: 94, date: "19–20 Sep 2026" },
+      { name: "Bromo Photography Trip", operator: "Langkah Pagi", price: "Rp825.000", rating: 0, date: "17–18 Okt 2026" },
+      { name: "Bromo Family Escape", operator: "Jelajah Aruna", price: "Rp725.000", rating: 0, date: "24–25 Okt 2026" },
     ],
   },
   {
@@ -96,12 +94,12 @@ const destinations: Destination[] = [
     price: "Rp2.350.000",
     category: "Laut & Pulau",
     rating: 96,
-    openTours: 9,
+    openTours: 3,
     description: "Berlayar ke Pulau Padar, Pink Beach, dan Manta Point dengan kapal liveaboard.",
-    image: "/labuan-bajo.webp",
+    image: "/destinations/labuan-bajo/01.webp",
     tours: [
-      { name: "Sailing Komodo 3D2N", operator: "Nusa Sail", price: "Rp2.850.000", rating: 97, date: "18–20 Sep 2026" },
-      { name: "Komodo Weekend Cruise", operator: "Flores Journey", price: "Rp2.350.000", rating: 94, date: "26–28 Sep 2026" },
+      { name: "Komodo Weekend Cruise", operator: "Nusa Sail", price: "Rp2.850.000", rating: 96, date: "18–20 Sep 2026" },
+      { name: "Padar & Pink Beach Sailing", operator: "Flores Journey", price: "Rp3.150.000", rating: 0, date: "16–18 Okt 2026" },
     ],
   },
   {
@@ -111,12 +109,12 @@ const destinations: Destination[] = [
     price: "Rp395.000",
     category: "Alam",
     rating: 88,
-    openTours: 8,
+    openTours: 3,
     description: "Dataran tinggi sejuk dengan sunrise Sikunir, telaga vulkanik, dan candi kuno.",
-    image: "/dieng.webp",
+    image: "/destinations/dieng-plateau/01.webp",
     tours: [
-      { name: "Dieng Golden Sunrise", operator: "Langkah Pagi", price: "Rp475.000", rating: 88, date: "26–27 Sep 2026" },
-      { name: "Dieng Culture Escape", operator: "Jelajah Tengah", price: "Rp395.000", rating: 91, date: "3–4 Okt 2026" },
+      { name: "Dieng Golden Sunrise", operator: "Langkah Pagi", price: "Rp475.000", rating: 88, date: "19–20 Sep 2026" },
+      { name: "Dieng Culture Escape", operator: "Jelajah Tengah", price: "Rp595.000", rating: 0, date: "17–18 Okt 2026" },
     ],
   },
   {
@@ -126,12 +124,12 @@ const destinations: Destination[] = [
     price: "Rp650.000",
     category: "Laut & Pulau",
     rating: 91,
-    openTours: 14,
+    openTours: 3,
     description: "Tebing dramatis, pantai tersembunyi, dan laut biru dalam perjalanan pulau sehari.",
-    image: "https://cdn.bookaway.com/media/files/5d82152021264e34310ccdfe.jpeg?quality=50&width=2000",
+    image: "/destinations/nusa-penida/01.webp",
     tours: [
-      { name: "West Penida Day Trip", operator: "Bali Beyond", price: "Rp650.000", rating: 93, date: "Setiap Sabtu" },
-      { name: "Penida East + West", operator: "Island Steps", price: "Rp925.000", rating: 90, date: "20–21 Sep 2026" },
+      { name: "West Penida Day Trip", operator: "Island Steps", price: "Rp650.000", rating: 93, date: "20 Sep 2026" },
+      { name: "Penida East + West", operator: "Island Steps", price: "Rp925.000", rating: 0, date: "17–18 Okt 2026" },
     ],
   },
   {
@@ -141,12 +139,12 @@ const destinations: Destination[] = [
     price: "Rp5.750.000",
     category: "Petualangan",
     rating: 95,
-    openTours: 5,
+    openTours: 3,
     description: "Gugusan karst, laguna jernih, dan kehidupan laut untuk petualangan jarak jauh.",
-    image: "https://images.unsplash.com/photo-1703769605314-18648cfc3428?auto=format&fit=crop&w=1600&q=85",
+    image: "/destinations/raja-ampat/01.webp",
     tours: [
-      { name: "Wayag Explorer 5D4N", operator: "Papua Blue", price: "Rp7.250.000", rating: 97, date: "1–5 Okt 2026" },
-      { name: "Piaynemo Essential", operator: "Raja Journey", price: "Rp5.750.000", rating: 93, date: "8–11 Okt 2026" },
+      { name: "Piaynemo Essential", operator: "Papua Blue", price: "Rp5.750.000", rating: 95, date: "17–21 Sep 2026" },
+      { name: "Wayag Explorer", operator: "Papua Blue", price: "Rp7.250.000", rating: 0, date: "16–21 Okt 2026" },
     ],
   },
   {
@@ -156,12 +154,12 @@ const destinations: Destination[] = [
     price: "Rp1.850.000",
     category: "Gunung",
     rating: 93,
-    openTours: 7,
+    openTours: 3,
     description: "Pendakian menantang menuju punggungan gunung dan panorama Danau Segara Anak.",
-    image: "https://images.ctfassets.net/rc3dlxapnu6k/7nXzcuNvuwVoGMXbOFwuHM/0d842621bafca9baa5fde978e931d43c/Indonesien__Lombok__Senaru.jpg?fm=webp&q=50&w=2048",
+    image: "/destinations/gunung-rinjani/01.webp",
     tours: [
-      { name: "Rinjani Summit 3D2N", operator: "Rinjani Trek", price: "Rp2.350.000", rating: 94, date: "22–24 Sep 2026" },
-      { name: "Senaru Crater Rim", operator: "Lombok Steps", price: "Rp1.850.000", rating: 92, date: "29–30 Sep 2026" },
+      { name: "Rinjani Crater Rim", operator: "Rinjani Trek", price: "Rp1.850.000", rating: 93, date: "18–20 Sep 2026" },
+      { name: "Rinjani Summit 3D2N", operator: "Rinjani Trek", price: "Rp2.350.000", rating: 0, date: "16–18 Okt 2026" },
     ],
   },
   {
@@ -171,12 +169,12 @@ const destinations: Destination[] = [
     price: "Rp1.250.000",
     category: "Laut & Pulau",
     rating: 90,
-    openTours: 6,
+    openTours: 3,
     description: "Pantai putih, batu granit raksasa, dan island hopping di perairan yang tenang.",
-    image: "https://belitongekspres.disway.id/upload/e45f844460cad1327cd6c447afd9f650.jpg",
+    image: "/destinations/belitung/01.webp",
     tours: [
-      { name: "Belitung Island Hopping", operator: "Laskar Trip", price: "Rp1.250.000", rating: 91, date: "17–19 Sep 2026" },
-      { name: "Belitung Slow Escape", operator: "Pesisir Kita", price: "Rp1.450.000", rating: 89, date: "1–3 Okt 2026" },
+      { name: "Belitung Island Hopping", operator: "Laskar Trip", price: "Rp1.250.000", rating: 91, date: "18–20 Sep 2026" },
+      { name: "Belitung Slow Escape", operator: "Laskar Trip", price: "Rp1.450.000", rating: 0, date: "16–18 Okt 2026" },
     ],
   },
   {
@@ -186,12 +184,12 @@ const destinations: Destination[] = [
     price: "Rp325.000",
     category: "Budaya",
     rating: 89,
-    openTours: 10,
+    openTours: 3,
     description: "Warisan budaya, desa sekitar candi, dan lanskap perbukitan dalam satu rute.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/f/f2/Wisatawan_Domestic_di_Borobudur.jpg",
+    image: "/destinations/borobudur/01.webp",
     tours: [
-      { name: "Borobudur Village Trail", operator: "Jelajah Tengah", price: "Rp325.000", rating: 91, date: "Setiap Minggu" },
-      { name: "Temple & Village Weekend", operator: "Ruang Budaya", price: "Rp575.000", rating: 87, date: "24–25 Sep 2026" },
+      { name: "Borobudur Village Trail", operator: "Jelajah Tengah", price: "Rp325.000", rating: 91, date: "20 Sep 2026" },
+      { name: "Temple & Village Weekend", operator: "Ruang Budaya", price: "Rp575.000", rating: 0, date: "17–18 Okt 2026" },
     ],
   },
 ];
@@ -276,10 +274,12 @@ export default function Home() {
     }
 
     if (mode === "operator") {
-      const matchedTours = destinations.flatMap((destination) => destination.tours.map((tour) => ({ destination, tour }))).filter(({ tour }) => tour.operator.toLowerCase().includes(operatorQuery.toLowerCase()));
+      const matchedTours = sharedTours.filter((tour) => tour.operator.name.toLowerCase().includes(operatorQuery.toLowerCase()));
       if (matchedTours.length) {
-        setSubmittedQuery(matchedTours[0].destination.name);
-        setResultMessage(`${matchedTours[0].tour.operator} ditemukan dengan ${matchedTours[0].tour.rating}% janji dipenuhi pada ${matchedTours[0].tour.name}.`);
+        const matchedTour = matchedTours[0];
+        const matchedDestination = getSharedDestination(matchedTour.destinationSlug);
+        setSubmittedQuery(matchedDestination?.name ?? "");
+        setResultMessage(matchedTour.score !== null ? `${matchedTour.operator.name} ditemukan dengan Truth Score ${matchedTour.score}% pada ${matchedTour.name}.` : `${matchedTour.operator.name} ditemukan. ${matchedTour.name} belum memiliki Truth Score karena belum selesai.`);
       } else {
         setSubmittedQuery("");
         setResultMessage("Operator belum ditemukan. Coba “Jelajah Aruna”, “Nusa Sail”, atau “Langkah Pagi”.");
@@ -340,9 +340,9 @@ export default function Home() {
         <nav className={mobileOpen ? "main-nav open" : "main-nav"} aria-label="Navigasi utama">
           {organizerName ? <>
             <a href="#operator-home" onClick={() => setMobileOpen(false)}>Dashboard</a>
-            <a href="/account?tab=open-tours">Open Tour Saya</a>
-            <a href="/account?tab=promises">Promise Snapshot</a>
-            <a href="/account?tab=create-tour">Buat Open Tour</a>
+            <a href="/account?tab=open-tours">Open Trip Saya</a>
+            <a href="/account?tab=promises">Promise Card</a>
+            <a href="/account?tab=create-tour">Buat Open Trip</a>
           </> : <>
             <a href="#destinations" onClick={() => setMobileOpen(false)}>Destinasi</a>
             <a href="#why-kept" onClick={() => setMobileOpen(false)}>Kenapa Kept</a>
@@ -407,7 +407,7 @@ export default function Home() {
         <div className="category-row">
           {categories.map(({ label, icon: Icon }) => <button key={label} className={category === label ? "category-chip active" : "category-chip"} onClick={() => { setCategory(label); setSubmittedQuery(""); setShowSaved(false); }}><Icon />{label}</button>)}
         </div>
-        <div className="trust-prompt"><BadgeCheck /><span><strong>Rating Kept bukan rating kepuasan.</strong> Persentase menunjukkan janji yang dipenuhi.</span></div>
+        <div className="trust-prompt"><BadgeCheck /><span><strong>Truth Score bukan rating kepuasan.</strong> Persentase menunjukkan janji yang dipenuhi.</span></div>
       </section>
 
       <section className="recommended section-wrap" id="destinations">
@@ -422,7 +422,7 @@ export default function Home() {
           {filteredDestinations.length ? filteredDestinations.map((destination) => (
             <article className="destination-card" key={destination.id}>
               <a className="destination-image" href={`/destination?slug=${toSlug(destination.name)}`} aria-label={`Buka halaman ${destination.name}`}>
-                <img src={destination.image} alt={`Pemandangan ${destination.name}`} />
+                <img src={destination.image} alt={`Pemandangan ${destination.name}`} loading="lazy" />
                 <span className="category-label">{destination.category}</span>
               </a>
               <button className={savedDestinations.includes(destination.id) ? "heart-button saved" : "heart-button"} onClick={() => toggleSaved(destination.id)} aria-label={savedDestinations.includes(destination.id) ? "Hapus dari tersimpan" : "Simpan destinasi"}><Heart /></button>
@@ -432,9 +432,9 @@ export default function Home() {
                 <p>{destination.description}</p>
                 <div className="destination-facts">
                   <div><small>Estimasi mulai</small><strong>{destination.price}</strong></div>
-                  <div><small>Rating Kept</small><strong className="rating-value"><ShieldCheck />{destination.rating}%</strong></div>
+                  <div><small>Truth Score destinasi</small><strong className="rating-value"><ShieldCheck />{destination.rating}%</strong></div>
                 </div>
-                <a className="tour-count" href={`/destination?slug=${toSlug(destination.name)}`}><span><strong>{destination.openTours}</strong> open tour tersedia</span><ArrowRight /></a>
+                <a className="tour-count" href={`/destination?slug=${toSlug(destination.name)}`}><span><strong>{destination.openTours}</strong> open trip terkurasi</span><ArrowRight /></a>
               </div>
             </article>
           )) : <div className="empty-state">Tidak ada destinasi yang cocok. Coba kata kunci atau kategori lain.</div>}
@@ -448,7 +448,7 @@ export default function Home() {
             <article><FileCheck2 /><h3>Janji Tercatat</h3><p>Detail trip dapat diperiksa sebelum peserta membayar.</p></article>
             <article><TicketCheck /><h3>Peserta Terverifikasi</h3><p>Hanya peserta asli yang dapat mengonfirmasi kenyataan.</p></article>
             <article><History /><h3>Perubahan Transparan</h3><p>Setiap perubahan tampil bersama alasan dan penggantinya.</p></article>
-            <article><ShieldCheck /><h3>Rating Berbasis Bukti</h3><p>Persentase dihitung dari janji yang benar-benar dipenuhi.</p></article>
+            <article><ShieldCheck /><h3>Truth Score Berbasis Bukti</h3><p>Persentase dihitung dari janji yang benar-benar dipenuhi.</p></article>
           </div>
         </div>
       </section>
@@ -456,14 +456,14 @@ export default function Home() {
       <section className="how-section section-wrap" id="how-it-works">
         <div className="section-heading centered"><div><span className="section-kicker">CARA Kept BEKERJA</span><h2>Dari janji menjadi bukti.</h2><p>Tiga catatan sederhana membuat promosi open trip bisa diperiksa.</p></div></div>
         <div className="how-grid">
-          <article><span>01</span><FileCheck2 /><h3>Promise Snapshot</h3><p>Harga, itinerary, fasilitas, dan batas peserta dicatat sebelum trip.</p></article>
+          <article><span>01</span><FileCheck2 /><h3>Promise Card</h3><p>Harga, itinerary, fasilitas, dan batas peserta dicatat sebelum trip.</p></article>
           <article><span>02</span><History /><h3>Change Log</h3><p>Setiap perubahan terlihat bersama alasan dan solusi penggantinya.</p></article>
           <article><span>03</span><TicketCheck /><h3>Reality Check</h3><p>Peserta terverifikasi mencocokkan janji dengan kenyataan.</p></article>
         </div>
       </section>
 
       <section className="operator-cta section-wrap" id="for-operators">
-        <div><span className="section-kicker light">UNTUK OPERATOR OPEN TRIP</span><h2>Biarkan bukti yang membangun kepercayaan.</h2><p>Buat Promise Snapshot dan tunjukkan rekam jejakmu kepada calon peserta.</p></div>
+        <div><span className="section-kicker light">UNTUK OPERATOR OPEN TRIP</span><h2>Biarkan bukti yang membangun kepercayaan.</h2><p>Buat Promise Card dan tunjukkan rekam jejakmu kepada calon peserta.</p></div>
         <Button className="light-button" onClick={() => {
           if (readKeptUser()) window.location.href = "/account?tab=eligibility";
           else window.dispatchEvent(new CustomEvent("kept-auth-required", { detail: { tab: "register", redirect: "/account?tab=eligibility" } }));
@@ -474,13 +474,13 @@ export default function Home() {
         <div className="footer-brand"><span className="brand-mark"><KeptLogo /></span><span><strong>Kept</strong><small>Did they keep their promise?</small></span></div>
         <div className="footer-column"><strong>Jelajahi</strong><a href="#destinations">Destinasi</a><a href="#why-kept">Kenapa Kept</a><a href="#how-it-works">Cara Kerja</a></div>
         <div className="footer-column"><strong>Untuk Operator</strong><a href="#for-operators">Buat Profil</a><a href="/account?tab=eligibility">Masuk Operator</a><a href="mailto:hello@kept.id?subject=Pusat%20Bantuan%20Kept">Pusat Bantuan</a></div>
-        <div className="footer-column contact-column"><strong>Hubungi Kami</strong><a href="mailto:hello@kept.id"><Mail />hello@kept.id</a><a href="tel:+6281234567890"><Phone />+62 812-3456-7890</a><span><AtSign />kept.id</span><span><MapPin />Yogyakarta, Indonesia</span></div>
+        <div className="footer-column contact-column"><strong>Prototype JHIC 2.0</strong><span><AtSign />kept.my.id</span><span><MapPin />Team Knot — SMA LHI</span><a href="/credits">Kredit foto & lisensi</a></div>
       </footer>
 
       <Dialog open={Boolean(comparison)} onOpenChange={(open) => !open && setComparison(null)}>
         {comparison && <DialogContent className="compare-dialog">
-          <DialogHeader><span className="dialog-kicker"><GitCompareArrows /> PERBANDINGAN DESTINASI</span><DialogTitle>Bandingkan sebelum memilih.</DialogTitle><DialogDescription>Gunakan rating berbasis janji dan pilihan tour yang tersedia.</DialogDescription></DialogHeader>
-          <div className="comparison-grid">{comparison.map((destination) => <article key={destination.id}><img src={destination.image} alt={destination.name} /><h3>{destination.name}</h3><span>{destination.place}</span><dl><div><dt>Estimasi</dt><dd>{destination.price}</dd></div><div><dt>Rating Kept</dt><dd>{destination.rating}%</dd></div><div><dt>Open tour</dt><dd>{destination.openTours}</dd></div></dl><Button onClick={() => { window.location.href = `/destination?slug=${toSlug(destination.name)}`; }}>Lihat Tour</Button></article>)}</div>
+          <DialogHeader><span className="dialog-kicker"><GitCompareArrows /> PERBANDINGAN DESTINASI</span><DialogTitle>Bandingkan sebelum memilih.</DialogTitle><DialogDescription>Gunakan Truth Score berbasis bukti dan pilihan trip yang tersedia.</DialogDescription></DialogHeader>
+          <div className="comparison-grid">{comparison.map((destination) => <article key={destination.id}><img src={destination.image} alt={destination.name} /><h3>{destination.name}</h3><span>{destination.place}</span><dl><div><dt>Estimasi</dt><dd>{destination.price}</dd></div><div><dt>Truth Score</dt><dd>{destination.rating}%</dd></div><div><dt>Open trip</dt><dd>{destination.openTours}</dd></div></dl><Button onClick={() => { window.location.href = `/destination?slug=${toSlug(destination.name)}`; }}>Lihat Trip</Button></article>)}</div>
           <DialogFooter><Button variant="outline" onClick={() => setComparison(null)}>Tutup</Button></DialogFooter>
         </DialogContent>}
       </Dialog>
@@ -502,34 +502,33 @@ function OrganizerHome({ name }: { name: string }) {
   return <section className="operator-home" id="operator-home">
     <div className="operator-home-wrap">
       <div className="operator-home-top">
-        <div><span>ORGANIZER CONTROL CENTER</span><h1>Selamat datang kembali, {firstName}.</h1><p>Ada <strong>2 trip aktif</strong> dan <strong>1 Reality Check</strong> yang perlu ditinjau.</p></div>
-        <div className="operator-home-actions"><Button variant="outline" onClick={() => { window.location.href = "/account?tab=open-tours"; }}>Lihat Trip Aktif</Button><Button onClick={() => { window.location.href = "/account?tab=create-tour"; }}><Plus /> Buat Open Tour</Button></div>
+        <div><span>ORGANIZER CONTROL CENTER · DATA DEMO</span><h1>Selamat datang kembali, {firstName}.</h1><p>Ada <strong>1 trip mendatang</strong> dan <strong>1 Reality Check</strong> yang perlu ditinjau.</p></div>
+        <div className="operator-home-actions"><Button variant="outline" onClick={() => { window.location.href = "/account?tab=open-tours"; }}>Lihat Open Trip</Button><Button onClick={() => { window.location.href = "/account?tab=create-tour"; }}><Plus /> Buat Open Trip</Button></div>
       </div>
 
       <div className="operator-home-metrics">
-        <HomeMetric icon={BriefcaseBusiness} label="Trip aktif" value="2" note="2 segera berangkat" tone="blue" />
-        <HomeMetric icon={ShieldCheck} label="Janji dipenuhi" value="92%" note="+4% dari bulan lalu" tone="green" />
-        <HomeMetric icon={Users} label="Peserta terverifikasi" value="128" note="Dari 11 perjalanan" tone="navy" />
-        <HomeMetric icon={MessageSquareText} label="Reality Check Masuk" value="84%" note="107 konfirmasi masuk" tone="amber" />
+        <HomeMetric icon={BriefcaseBusiness} label="Trip terbit" value="2" note="1 selesai · 1 mendatang" tone="blue" />
+        <HomeMetric icon={ShieldCheck} label="Truth Score" value="94%" note="Dari 1 trip selesai" tone="green" />
+        <HomeMetric icon={Users} label="Peserta terverifikasi" value="14" note="Bromo Sunrise Weekend" tone="navy" />
+        <HomeMetric icon={MessageSquareText} label="Reality Check masuk" value="8/14" note="6 peserta belum mengisi" tone="amber" />
       </div>
 
       <div className="operator-home-grid">
         <article className="operator-integrity-card">
-          <div className="operator-card-heading"><div><small>INTEGRITY OVERVIEW</small><h2>Skor Integritas Operator</h2></div><span><TrendingUp /> +4%</span></div>
-          <div className="operator-integrity-main"><div className="operator-integrity-ring"><strong>92%</strong><span>terpercaya</span></div><div className="operator-integrity-legend"><div><i /><span>Janji dipenuhi</span><b>92%</b></div><div><i className="transparent" /><span>Berubah transparan</span><b>6%</b></div><div><i className="unresolved" /><span>Belum terselesaikan</span><b>2%</b></div></div></div>
-          <div className="operator-bars"><i style={{height:"48%"}} /><i style={{height:"61%"}} /><i style={{height:"58%"}} /><i style={{height:"76%"}} /><i style={{height:"84%"}} /><i className="latest" style={{height:"92%"}} /></div><div className="operator-bar-labels"><span>Trip 1</span><span>Trip 2</span><span>Trip 3</span><span>Trip 4</span><span>Trip 5</span><span>Terbaru</span></div>
+          <div className="operator-card-heading"><div><small>TRUTH GUARD OVERVIEW</small><h2>Skor Bukti Operator</h2></div><span><ShieldCheck /> Bukti tinggi</span></div>
+          <div className="operator-integrity-main"><div className="operator-integrity-ring"><strong>94%</strong><span>truth score</span></div><div className="operator-integrity-legend"><div><i /><span>Janji dipenuhi</span><b>75%</b></div><div><i className="transparent" /><span>Berubah transparan</span><b>25%</b></div><div><i className="unresolved" /><span>Tidak dipenuhi</span><b>0%</b></div></div></div>
+          <p className="operator-score-note">Truth Score demo dihitung dari status janji, kelengkapan bukti, dan konfirmasi Trip Pass—bukan rating kepuasan.</p>
         </article>
         <article className="operator-attention-card">
-          <div className="operator-card-heading"><div><small>PERLU TINDAKAN</small><h2>Selesaikan berikutnya</h2></div><b className="attention-count">2</b></div>
-          <HomeTask icon={AlertCircle} title="Bromo Sunrise — Selesai" stats={[["Promise Snapshot","Terkunci"],["Peserta terverifikasi","14/14"],["Reality Check masuk","8/14"]]} status="Perlu ditinjau" action="Tinjau Hasil" href="/tour?slug=bromo-sunrise-weekend#reality" urgent />
-          <HomeTask icon={MessageSquareText} title="Dieng Weekend — Selesai" stats={[["Reality Check masuk","16/20"],["Janji dipenuhi","88%"],["Masalah dilaporkan","1"]]} status="Perlu ditinjau" action="Lihat Hasil" href="/account?tab=open-tours" />
+          <div className="operator-card-heading"><div><small>PERLU TINDAKAN</small><h2>Selesaikan berikutnya</h2></div><b className="attention-count">1</b></div>
+          <HomeTask icon={AlertCircle} title="Bromo Sunrise — Selesai" stats={[["Promise Card","Terkunci"],["Peserta terverifikasi","14/14"],["Reality Check masuk","8/14"]]} status="Perlu ditinjau" action="Tinjau Hasil" href="/tour?slug=bromo-sunrise-weekend#reality" urgent />
           <a className="operator-link" href="/account?tab=open-tours">Lihat semua perjalanan <ArrowRight /></a>
         </article>
       </div>
 
-      <article className="operator-performance-card"><div className="operator-card-heading"><div><small>PERFORMA JANJI</small><h2>Apa yang sudah kuat—dan perlu diperbaiki</h2></div><a className="operator-link" href="/account?tab=promises">Lihat snapshot <ArrowRight /></a></div><div className="operator-performance-grid"><HomePerformance label="Transportasi sesuai" value={98} status="Sangat konsisten" /><HomePerformance label="Tanpa biaya tambahan" value={96} status="Sangat konsisten" /><HomePerformance label="Itinerary dipenuhi" value={91} status="Konsisten" /><HomePerformance label="Kapasitas kamar sesuai" value={78} status="Perlu perhatian" warning /><HomePerformance label="Keberangkatan tepat waktu" value={74} status="Prioritas perbaikan" warning /></div></article>
+      <article className="operator-performance-card"><div className="operator-card-heading"><div><small>PERFORMA JANJI</small><h2>Hasil dari perjalanan yang sudah selesai</h2></div><a className="operator-link" href="/account?tab=promises">Lihat Promise Card <ArrowRight /></a></div><div className="operator-performance-grid"><HomePerformance label="Transportasi sesuai" value={100} status="Dipenuhi" /><HomePerformance label="Tanpa biaya tambahan" value={100} status="Dipenuhi" /><HomePerformance label="Batas peserta" value={100} status="Dipenuhi" /><HomePerformance label="Titik sunrise" value={75} status="Berubah transparan" warning /></div></article>
 
-      <div className="operator-bottom-grid"><article className="operator-activity-card"><div className="operator-card-heading"><div><small>AKTIVITAS TERBARU</small><h2>Update dari perjalananmu</h2></div></div><HomeActivity icon={MessageSquareText} title="8 peserta mengisi Reality Check" detail="Bromo Sunrise · 12 menit lalu" href="/tour?slug=bromo-sunrise-weekend#reality" /><HomeActivity icon={FileCheck2} title="Perubahan itinerary berhasil dicatat" detail="Dieng Weekend · Kemarin" href="/account?tab=promises" /><HomeActivity icon={ShieldCheck} title="Promise Snapshot dipublikasikan" detail="Labuan Bajo 3D2N · 2 hari lalu" href="/account?tab=promises" /><HomeActivity icon={AlertCircle} title="Satu peserta melaporkan biaya tambahan" detail="Bromo Sunrise · 3 hari lalu" href="/tour?slug=bromo-sunrise-weekend#reality" /></article><article className="operator-quick-card"><div className="operator-card-heading"><div><small>AKSI CEPAT</small><h2>Mulai dari sini</h2></div></div><div className="operator-quick-grid"><HomeQuickAction icon={Plus} label="Buat Open Tour" href="/account?tab=create-tour" /><HomeQuickAction icon={FileCheck2} label="Buat Promise Snapshot" href="/account?tab=promises" /><HomeQuickAction icon={Send} label="Kirim Trip Pass" href="/account?tab=open-tours" /><HomeQuickAction icon={Clock3} label="Catat Perubahan" href="/account?tab=promises" /></div></article></div>
+      <div className="operator-bottom-grid"><article className="operator-activity-card"><div className="operator-card-heading"><div><small>AKTIVITAS DEMO</small><h2>Update dari perjalananmu</h2></div></div><HomeActivity icon={MessageSquareText} title="8 peserta mengisi Reality Check" detail="Bromo Sunrise · data demonstrasi" href="/tour?slug=bromo-sunrise-weekend#reality" /><HomeActivity icon={FileCheck2} title="Perubahan itinerary tercatat" detail="Bromo Sunrise · data demonstrasi" href="/tour?slug=bromo-sunrise-weekend#changes" /><HomeActivity icon={ShieldCheck} title="Promise Card dikunci" detail="Bromo Photography · data demonstrasi" href="/tour?slug=bromo-photography-trip#promise" /></article><article className="operator-quick-card"><div className="operator-card-heading"><div><small>AKSI CEPAT</small><h2>Mulai dari sini</h2></div></div><div className="operator-quick-grid"><HomeQuickAction icon={Plus} label="Buat Open Trip" href="/account?tab=create-tour" /><HomeQuickAction icon={FileCheck2} label="Kelola Promise Card" href="/account?tab=promises" /><HomeQuickAction icon={Send} label="Kirim Trip Pass" href="/account?tab=participants" /><HomeQuickAction icon={Clock3} label="Catat Perubahan" href="/account?tab=changes" /></div></article></div>
     </div>
   </section>;
 }
