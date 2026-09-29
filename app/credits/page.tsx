@@ -18,8 +18,8 @@ export default function CreditsPage() {
   const [credits, setCredits] = useState<Credit[]>([]);
 
   useEffect(() => {
-    Promise.all(["/cover-credits.json", "/image-credits.json"].map((url) => fetch(url).then((response) => response.ok ? response.json() : [])))
-      .then(([covers, gallery]) => setCredits([...covers, ...gallery]))
+    Promise.all(["/hero-credits.json", "/cover-credits.json", "/image-credits.json"].map((url) => fetch(url).then((response) => response.ok ? response.json() : [])))
+      .then(([hero, covers, gallery]) => setCredits([...hero, ...covers, ...gallery]))
       .catch(() => setCredits([]));
   }, []);
 

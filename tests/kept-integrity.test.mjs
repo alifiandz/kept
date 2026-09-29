@@ -32,7 +32,12 @@ test("ships eight unique local images for every destination", () => {
     assert.equal(hashes.has(hash), false, `cover duplicates another image: ${file}`);
     hashes.add(hash);
   }
-  assert.equal(hashes.size, 72);
+  const heroPath = join(root, "public", "hero", "bromo-sunrise.webp");
+  assert.ok(statSync(heroPath).size > 1_000, "empty or invalid homepage hero");
+  const heroHash = createHash("sha256").update(readFileSync(heroPath)).digest("hex");
+  assert.equal(hashes.has(heroHash), false, "homepage hero duplicates another image");
+  hashes.add(heroHash);
+  assert.equal(hashes.size, 73);
 });
 
 test("records a credit for every destination image", () => {
@@ -54,6 +59,15 @@ test("records a transparent credit status for every destination cover", () => {
     assert.ok(credit.creator);
     assert.ok(credit.license);
   }
+});
+
+test("records the homepage hero source and license", () => {
+  const credits = JSON.parse(readFileSync(join(root, "public", "hero-credits.json"), "utf8"));
+  assert.equal(credits.length, 1);
+  assert.equal(credits[0].path, "/hero/bromo-sunrise.webp");
+  assert.equal(credits[0].creator, "indrabastari");
+  assert.equal(credits[0].license, "CC BY 2.0");
+  assert.ok(credits[0].source.startsWith("https://commons.wikimedia.org/"));
 });
 
 test("uses official competition logos and the locked Kept brand color", () => {
