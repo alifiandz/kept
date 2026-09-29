@@ -80,7 +80,7 @@ const destinations: Destination[] = [
     rating: 92,
     openTours: 3,
     description: "Sunrise vulkanik, Lautan Pasir, dan jalur jeep dalam satu perjalanan singkat.",
-    image: "/destinations/gunung-bromo/01.webp",
+    image: "/covers/gunung-bromo.webp",
     tours: [
       { name: "Bromo Sunrise Weekend", operator: "Jelajah Aruna", price: "Rp649.000", rating: 94, date: "19–20 Sep 2026" },
       { name: "Bromo Photography Trip", operator: "Langkah Pagi", price: "Rp825.000", rating: 0, date: "17–18 Okt 2026" },
@@ -96,7 +96,7 @@ const destinations: Destination[] = [
     rating: 96,
     openTours: 3,
     description: "Berlayar ke Pulau Padar, Pink Beach, dan Manta Point dengan kapal liveaboard.",
-    image: "/destinations/labuan-bajo/02.webp",
+    image: "/covers/labuan-bajo.webp",
     tours: [
       { name: "Komodo Weekend Cruise", operator: "Nusa Sail", price: "Rp2.850.000", rating: 96, date: "18–20 Sep 2026" },
       { name: "Padar & Pink Beach Sailing", operator: "Flores Journey", price: "Rp3.150.000", rating: 0, date: "16–18 Okt 2026" },
@@ -111,7 +111,7 @@ const destinations: Destination[] = [
     rating: 88,
     openTours: 3,
     description: "Dataran tinggi sejuk dengan sunrise Sikunir, telaga vulkanik, dan candi kuno.",
-    image: "/destinations/dieng-plateau/01.webp",
+    image: "/covers/dieng-plateau.webp",
     tours: [
       { name: "Dieng Golden Sunrise", operator: "Langkah Pagi", price: "Rp475.000", rating: 88, date: "19–20 Sep 2026" },
       { name: "Dieng Culture Escape", operator: "Jelajah Tengah", price: "Rp595.000", rating: 0, date: "17–18 Okt 2026" },
@@ -126,7 +126,7 @@ const destinations: Destination[] = [
     rating: 91,
     openTours: 3,
     description: "Tebing dramatis, pantai tersembunyi, dan laut biru dalam perjalanan pulau sehari.",
-    image: "/destinations/nusa-penida/07.webp",
+    image: "/covers/nusa-penida.webp",
     tours: [
       { name: "West Penida Day Trip", operator: "Island Steps", price: "Rp650.000", rating: 93, date: "20 Sep 2026" },
       { name: "Penida East + West", operator: "Island Steps", price: "Rp925.000", rating: 0, date: "17–18 Okt 2026" },
@@ -141,7 +141,7 @@ const destinations: Destination[] = [
     rating: 95,
     openTours: 3,
     description: "Gugusan karst, laguna jernih, dan kehidupan laut untuk petualangan jarak jauh.",
-    image: "/destinations/raja-ampat/07.webp",
+    image: "/covers/raja-ampat.webp",
     tours: [
       { name: "Piaynemo Essential", operator: "Papua Blue", price: "Rp5.750.000", rating: 95, date: "17–21 Sep 2026" },
       { name: "Wayag Explorer", operator: "Papua Blue", price: "Rp7.250.000", rating: 0, date: "16–21 Okt 2026" },
@@ -156,7 +156,7 @@ const destinations: Destination[] = [
     rating: 93,
     openTours: 3,
     description: "Pendakian menantang menuju punggungan gunung dan panorama Danau Segara Anak.",
-    image: "/destinations/gunung-rinjani/01.webp",
+    image: "/covers/gunung-rinjani.webp",
     tours: [
       { name: "Rinjani Crater Rim", operator: "Rinjani Trek", price: "Rp1.850.000", rating: 93, date: "18–20 Sep 2026" },
       { name: "Rinjani Summit 3D2N", operator: "Rinjani Trek", price: "Rp2.350.000", rating: 0, date: "16–18 Okt 2026" },
@@ -171,7 +171,7 @@ const destinations: Destination[] = [
     rating: 90,
     openTours: 3,
     description: "Pantai putih, batu granit raksasa, dan island hopping di perairan yang tenang.",
-    image: "/destinations/belitung/01.webp",
+    image: "/covers/belitung.webp",
     tours: [
       { name: "Belitung Island Hopping", operator: "Laskar Trip", price: "Rp1.250.000", rating: 91, date: "18–20 Sep 2026" },
       { name: "Belitung Slow Escape", operator: "Laskar Trip", price: "Rp1.450.000", rating: 0, date: "16–18 Okt 2026" },
@@ -186,7 +186,7 @@ const destinations: Destination[] = [
     rating: 89,
     openTours: 3,
     description: "Warisan budaya, desa sekitar candi, dan lanskap perbukitan dalam satu rute.",
-    image: "/destinations/borobudur/01.webp",
+    image: "/covers/borobudur.webp",
     tours: [
       { name: "Borobudur Village Trail", operator: "Jelajah Tengah", price: "Rp325.000", rating: 91, date: "20 Sep 2026" },
       { name: "Temple & Village Weekend", operator: "Ruang Budaya", price: "Rp575.000", rating: 0, date: "17–18 Okt 2026" },

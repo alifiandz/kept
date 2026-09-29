@@ -1,0 +1,66 @@
+[
+  {
+    "path": "/covers/gunung-bromo.webp",
+    "title": "Gunung Bromo — cover destinasi",
+    "creator": "Aset visual prototipe Kept",
+    "license": "Aset proyek yang sudah tersedia; sumber asal perlu diverifikasi sebelum VPS",
+    "licenseUrl": "",
+    "source": ""
+  },
+  {
+    "path": "/covers/labuan-bajo.webp",
+    "title": "Labuan Bajo — cover destinasi",
+    "creator": "Aset visual prototipe Kept",
+    "license": "Aset proyek yang sudah tersedia; sumber asal perlu diverifikasi sebelum VPS",
+    "licenseUrl": "",
+    "source": ""
+  },
+  {
+    "path": "/covers/dieng-plateau.webp",
+    "title": "Dieng Plateau — cover destinasi",
+    "creator": "Aset visual prototipe Kept",
+    "license": "Aset proyek yang sudah tersedia; sumber asal perlu diverifikasi sebelum VPS",
+    "licenseUrl": "",
+    "source": ""
+  },
+  {
+    "path": "/covers/nusa-penida.webp",
+    "title": "Nusa Penida — cover destinasi",
+    "creator": "Bookaway reference asset",
+    "license": "Referensi prototipe; hak penggunaan perlu diverifikasi sebelum VPS",
+    "licenseUrl": "",
+    "source": "https://cdn.bookaway.com/media/files/5d82152021264e34310ccdfe.jpeg"
+  },
+  {
+    "path": "/covers/raja-ampat.webp",
+    "title": "Raja Ampat — cover destinasi",
+    "creator": "Unsplash contributor",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "source": "https://images.unsplash.com/photo-1703769605314-18648cfc3428"
+  },
+  {
+    "path": "/covers/gunung-rinjani.webp",
+    "title": "Gunung Rinjani — cover destinasi",
+    "creator": "Original publisher reference asset",
+    "license": "Referensi prototipe; hak penggunaan perlu diverifikasi sebelum VPS",
+    "licenseUrl": "",
+    "source": "https://images.ctfassets.net/rc3dlxapnu6k/7nXzcuNvuwVoGMXbOFwuHM/0d842621bafca9baa5fde978e931d43c/Indonesien__Lombok__Senaru.jpg"
+  },
+  {
+    "path": "/covers/belitung.webp",
+    "title": "Aerial View Lengkuas 3.jpg",
+    "creator": "Ayufib",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Aerial_View_Lengkuas_3.jpg"
+  },
+  {
+    "path": "/covers/borobudur.webp",
+    "title": "Wisatawan Domestic di Borobudur.jpg",
+    "creator": "Herusutimbul",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Wisatawan_Domestic_di_Borobudur.jpg"
+  }
+]

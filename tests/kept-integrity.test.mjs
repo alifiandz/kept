@@ -22,7 +22,17 @@ test("ships eight unique local images for every destination", () => {
       hashes.add(hash);
     }
   }
-  assert.equal(hashes.size, 64);
+  const coverRoot = join(root, "public", "covers");
+  const covers = readdirSync(coverRoot).filter((file) => file.endsWith(".webp")).sort();
+  assert.deepEqual(covers, slugs.map((slug) => `${slug}.webp`).sort());
+  for (const file of covers) {
+    const coverPath = join(coverRoot, file);
+    assert.ok(statSync(coverPath).size > 1_000, `empty or invalid cover: ${file}`);
+    const hash = createHash("sha256").update(readFileSync(coverPath)).digest("hex");
+    assert.equal(hashes.has(hash), false, `cover duplicates another image: ${file}`);
+    hashes.add(hash);
+  }
+  assert.equal(hashes.size, 72);
 });
 
 test("records a credit for every destination image", () => {
@@ -33,6 +43,16 @@ test("records a credit for every destination image", () => {
     assert.ok(credit.creator);
     assert.ok(credit.license);
     assert.ok(credit.source?.startsWith("https://commons.wikimedia.org/"));
+  }
+});
+
+test("records a transparent credit status for every destination cover", () => {
+  const credits = JSON.parse(readFileSync(join(root, "public", "cover-credits.json"), "utf8"));
+  assert.equal(credits.length, 8);
+  assert.equal(new Set(credits.map((credit) => credit.path)).size, 8);
+  for (const credit of credits) {
+    assert.ok(credit.creator);
+    assert.ok(credit.license);
   }
 });
 
