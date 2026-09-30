@@ -1,456 +1,267 @@
 [
   {
-    "path": "/destinations/belitung/01.webp",
-    "title": "Tanjung Tinggi Beach, Bangka-Belitung Province, Indonesia.jpg",
-    "creator": "HeyFromINDO",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Tanjung_Tinggi_Beach,_Bangka-Belitung_Province,_Indonesia.jpg",
-    "query": "Belitung Indonesia beach"
-  },
-  {
-    "path": "/destinations/belitung/02.webp",
-    "title": "Pantai Tanjung Tinggi.jpg",
-    "creator": "Ayufib",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Pantai_Tanjung_Tinggi.jpg",
-    "query": "Tanjung Tinggi Belitung"
-  },
-  {
-    "path": "/destinations/belitung/03.webp",
-    "title": "Lengkuas Island.JPG",
-    "creator": "26Isabella",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Lengkuas_Island.JPG",
-    "query": "Lengkuas Island Belitung"
-  },
-  {
-    "path": "/destinations/belitung/04.webp",
-    "title": "Batu Pantai Tanjung Tinggi.jpg",
-    "creator": "Ayufib",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Batu_Pantai_Tanjung_Tinggi.jpg",
-    "query": "Pantai Tanjung Tinggi Indonesia"
-  },
-  {
-    "path": "/destinations/belitung/05.webp",
-    "title": "Kelayang beach Belitung March 2014 \" - panoramio.jpg",
-    "creator": "JS Barry",
-    "license": "CC BY 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Kelayang_beach_Belitung_March_2014_%22_-_panoramio.jpg",
-    "query": "Tanjung Kelayang Indonesia"
-  },
-  {
-    "path": "/destinations/belitung/06.webp",
-    "title": "Picture of Sunrise from Belitung Island, Indonesia.jpg",
-    "creator": "HeyFromINDO",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Picture_of_Sunrise_from_Belitung_Island,_Indonesia.jpg",
-    "query": "Belitung island Indonesia"
-  },
-  {
-    "path": "/destinations/belitung/07.webp",
-    "title": "Danau Kaolin Belitung.jpg",
-    "creator": "Ayufib",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Danau_Kaolin_Belitung.jpg",
-    "query": "Kaolin lake Belitung"
-  },
-  {
-    "path": "/destinations/belitung/08.webp",
-    "title": "Lighthouse @ Lengkuas Island, Belitung \" - panoramio.jpg",
-    "creator": "JS Barry",
-    "license": "CC BY 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Lighthouse_@_Lengkuas_Island,_Belitung_%22_-_panoramio.jpg",
-    "query": "Lengkuas lighthouse Indonesia"
-  },
-  {
-    "path": "/destinations/borobudur/01.webp",
-    "title": "Borobudur-Nothwest-view.jpg",
-    "creator": "Gunawan Kartapranata",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Borobudur-Nothwest-view.jpg",
-    "query": "Borobudur temple Indonesia"
-  },
-  {
-    "path": "/destinations/borobudur/02.webp",
-    "title": "Borobudur ship.JPG",
-    "creator": "MichaelJLowe",
-    "license": "CC BY-SA 2.5",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
-    "source": "https://commons.wikimedia.org/wiki/File:Borobudur_ship.JPG",
-    "query": "Borobudur relief"
-  },
-  {
-    "path": "/destinations/borobudur/03.webp",
-    "title": "Borobudur Stupa Merapi.jpg",
-    "creator": "ctsnow",
-    "license": "CC BY 2.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Borobudur_Stupa_Merapi.jpg",
-    "query": "Borobudur stupa"
-  },
-  {
-    "path": "/destinations/borobudur/04.webp",
-    "title": "Borobudur Blue Sunrise.jpg",
-    "creator": "Thrillseekr",
-    "license": "CC BY 2.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Borobudur_Blue_Sunrise.jpg",
-    "query": "Borobudur sunrise"
-  },
-  {
-    "path": "/destinations/borobudur/05.webp",
-    "title": "Activities in Candi Borobudur 03.jpg",
-    "creator": "M Yusril Mirza",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Activities_in_Candi_Borobudur_03.jpg",
-    "query": "Borobudur landscape"
-  },
-  {
-    "path": "/destinations/borobudur/06.webp",
-    "title": "Borobudur-Temple-Park Indonesia Stupas-of-Borobudur-01.jpg",
-    "creator": "CEphoto, Uwe Aranas",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Borobudur-Temple-Park_Indonesia_Stupas-of-Borobudur-01.jpg",
-    "query": "Borobudur village"
-  },
-  {
-    "path": "/destinations/borobudur/07.webp",
-    "title": "Borobudur in Indonesië trekpleister.jpg",
-    "creator": "Peter van der Sluijs",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Borobudur_in_Indonesi%C3%AB_trekpleister.jpg",
-    "query": "Borobudur temple stairs"
-  },
-  {
-    "path": "/destinations/borobudur/08.webp",
-    "title": "Panoramic views of Borobudur.jpg",
-    "creator": "Unknown authorUnknown author",
-    "license": "CC0",
-    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "source": "https://commons.wikimedia.org/wiki/File:Panoramic_views_of_Borobudur.jpg",
-    "query": "Borobudur aerial"
-  },
-  {
-    "path": "/destinations/dieng-plateau/01.webp",
-    "title": "Dieng Plateau Temple Complex Indonesia 1.jpg",
-    "creator": "Philip Nalangan",
-    "license": "CC BY 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Dieng_Plateau_Temple_Complex_Indonesia_1.jpg",
-    "query": "Dieng Plateau Indonesia"
-  },
-  {
-    "path": "/destinations/dieng-plateau/02.webp",
-    "title": "Sunrise Mt Sikunir Dieng Plateau.jpg",
-    "creator": "Midori",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "source": "https://commons.wikimedia.org/wiki/File:Sunrise_Mt_Sikunir_Dieng_Plateau.jpg",
-    "query": "Sikunir sunrise"
-  },
-  {
-    "path": "/destinations/dieng-plateau/03.webp",
-    "title": "Telaga Warna, Dieng Plateau.jpg",
-    "creator": "AdeRiska",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Telaga_Warna,_Dieng_Plateau.jpg",
-    "query": "Telaga Warna Dieng"
-  },
-  {
-    "path": "/destinations/dieng-plateau/04.webp",
-    "title": "Arjuna Temple Group (Java, Indonesia).jpg",
-    "creator": "Pandu Adnyana",
-    "license": "CC BY 2.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Arjuna_Temple_Group_(Java,_Indonesia).jpg",
-    "query": "Arjuna temple Dieng"
-  },
-  {
-    "path": "/destinations/dieng-plateau/05.webp",
-    "title": "Sikidang crater Dieng Plateau.jpg",
-    "creator": "Midori",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "source": "https://commons.wikimedia.org/wiki/File:Sikidang_crater_Dieng_Plateau.jpg",
-    "query": "Sikidang crater Dieng"
-  },
-  {
-    "path": "/destinations/dieng-plateau/06.webp",
-    "title": "Dieng Plateau Java140.jpg",
-    "creator": "Arabsalam",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Dieng_Plateau_Java140.jpg",
-    "query": "Dieng landscape"
-  },
-  {
-    "path": "/destinations/dieng-plateau/07.webp",
-    "title": "Pintu Masuk Wisata Batu Pandang Ratapan Angin.jpg",
-    "creator": "Fermionisme",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Pintu_Masuk_Wisata_Batu_Pandang_Ratapan_Angin.jpg",
-    "query": "Batu Ratapan Angin Dieng"
-  },
-  {
-    "path": "/destinations/dieng-plateau/08.webp",
-    "title": "052 Dieng Sunrise.jpg",
-    "creator": "Anandajoti",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:052_Dieng_Sunrise.jpg",
-    "query": "Dieng village Indonesia"
-  },
-  {
     "path": "/destinations/gunung-bromo/01.webp",
-    "title": "Mount Bromo at sunrise, showing its volcanoes and Mount Semeru (background).jpg",
-    "creator": "Thomas Hirsch (= user Ravn)",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "source": "https://commons.wikimedia.org/wiki/File:Mount_Bromo_at_sunrise,_showing_its_volcanoes_and_Mount_Semeru_(background).jpg",
-    "query": "Mount Bromo sunrise"
+    "title": "Bromo and Semeru volcanoes, Java, Indonesia, 20220820 0717 9517.jpg",
+    "creator": "Jakub Hałun",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Bromo_and_Semeru_volcanoes,_Java,_Indonesia,_20220820_0717_9517.jpg",
+    "query": "Bromo sea of sand jeep"
   },
   {
     "path": "/destinations/gunung-bromo/02.webp",
-    "title": "Bromo-Tengger-Semeru-National-Park Indonesia Panoramic-view-of-the-caldera-01.jpg",
-    "creator": "CEphoto, Uwe Aranas",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Bromo-Tengger-Semeru-National-Park_Indonesia_Panoramic-view-of-the-caldera-01.jpg",
-    "query": "Bromo Tengger Semeru"
+    "title": "Early morning on the Mount Bromo, 20220820 0539 9410.jpg",
+    "creator": "Jakub Hałun",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Early_morning_on_the_Mount_Bromo,_20220820_0539_9410.jpg",
+    "query": "Bromo savanna Indonesia"
   },
   {
     "path": "/destinations/gunung-bromo/03.webp",
-    "title": "Bromo-Tengger-Semeru-National-Park Indonesia Stairway-to-Bromo-crater-02.jpg",
-    "creator": "CEphoto, Uwe Aranas",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Bromo-Tengger-Semeru-National-Park_Indonesia_Stairway-to-Bromo-crater-02.jpg",
-    "query": "Bromo crater"
+    "title": "Mount Bromo, Java, Indonesia, 20220820 0611 9483.jpg",
+    "creator": "Jakub Hałun",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Mount_Bromo,_Java,_Indonesia,_20220820_0611_9483.jpg",
+    "query": "Bromo crater Indonesia"
   },
   {
     "path": "/destinations/gunung-bromo/04.webp",
+    "title": "Mount Batok and the edge of the Bromo volcanic cone, 20220820 0548 9431.jpg",
+    "creator": "Jakub Hałun",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Mount_Batok_and_the_edge_of_the_Bromo_volcanic_cone,_20220820_0548_9431.jpg",
+    "query": "Bromo Tengger landscape golden hour"
+  },
+  {
+    "path": "/destinations/gunung-bromo/05.webp",
     "title": "Lautan Pasir Bromo.jpg",
     "creator": "Ake Widyastomo Putro",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "source": "https://commons.wikimedia.org/wiki/File:Lautan_Pasir_Bromo.jpg",
-    "query": "Bromo jeep sea sand"
-  },
-  {
-    "path": "/destinations/gunung-bromo/05.webp",
-    "title": "Bromo Savanna.jpg",
-    "creator": "Ariaditow",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Bromo_Savanna.jpg",
-    "query": "Mount Bromo savanna"
+    "query": "Bromo jeep sea of sand"
   },
   {
     "path": "/destinations/gunung-bromo/06.webp",
-    "title": "Bromo-s6-14-2a.jpg",
-    "creator": "Stegop",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Bromo-s6-14-2a.jpg",
-    "query": "Pura Luhur Poten Bromo"
+    "title": "Lushy Bromo Savanna Fields 2.jpg",
+    "creator": "Aditya Prabaswara",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Lushy_Bromo_Savanna_Fields_2.jpg",
+    "query": "Bromo Tengger savanna"
   },
   {
     "path": "/destinations/gunung-bromo/07.webp",
-    "title": "Bromo-Tengger-Semeru-National-Park Indonesia Fog-in-the-Bromo-Caldera-01.jpg",
-    "creator": "CEphoto, Uwe Aranas",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Bromo-Tengger-Semeru-National-Park_Indonesia_Fog-in-the-Bromo-Caldera-01.jpg",
-    "query": "Bromo caldera"
+    "title": "Madakaripura Waterfall.jpg",
+    "creator": "Christography82",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Madakaripura_Waterfall.jpg",
+    "query": "Bromo Tengger waterfall"
   },
   {
     "path": "/destinations/gunung-bromo/08.webp",
-    "title": "Bromo-Tengger-Semeru-National-Park Indonesia Mount-Batok-01.jpg",
-    "creator": "CEphoto, Uwe Aranas",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Bromo-Tengger-Semeru-National-Park_Indonesia_Mount-Batok-01.jpg",
-    "query": "Mount Semeru from Bromo"
-  },
-  {
-    "path": "/destinations/gunung-rinjani/01.webp",
-    "title": "Mt. Barujari descending Mt. Rinjani to Plawangan II.JPG",
-    "creator": "Midori",
-    "license": "CC BY 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Mt._Barujari_descending_Mt._Rinjani_to_Plawangan_II.JPG",
-    "query": "Mount Rinjani Indonesia"
-  },
-  {
-    "path": "/destinations/gunung-rinjani/02.webp",
-    "title": "Rinjani Caldera.jpg",
-    "creator": "Thorsten Peters",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
-    "source": "https://commons.wikimedia.org/wiki/File:Rinjani_Caldera.jpg",
-    "query": "Segara Anak Rinjani"
-  },
-  {
-    "path": "/destinations/gunung-rinjani/03.webp",
-    "title": "Segara Anak.jpg",
-    "creator": "Petter Lindgren",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Segara_Anak.jpg",
-    "query": "Rinjani crater rim"
-  },
-  {
-    "path": "/destinations/gunung-rinjani/04.webp",
-    "title": "Descend Mt. Rinjani summit.JPG",
-    "creator": "Midori",
-    "license": "CC BY 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Descend_Mt._Rinjani_summit.JPG",
-    "query": "Rinjani summit"
-  },
-  {
-    "path": "/destinations/gunung-rinjani/05.webp",
-    "title": "Rinjani Lombok Indo.jpg",
-    "creator": "Nature act",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Rinjani_Lombok_Indo.jpg",
-    "query": "Rinjani trekking"
-  },
-  {
-    "path": "/destinations/gunung-rinjani/06.webp",
-    "title": "Mount Rinjani Ultra 7.jpg",
-    "creator": "Trail Runners Indonesia",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Mount_Rinjani_Ultra_7.jpg",
-    "query": "Mount Rinjani trail"
-  },
-  {
-    "path": "/destinations/gunung-rinjani/07.webp",
-    "title": "Plawangan II Campsite.JPG",
-    "creator": "Midori",
-    "license": "CC BY 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Plawangan_II_Campsite.JPG",
-    "query": "Rinjani campsite"
-  },
-  {
-    "path": "/destinations/gunung-rinjani/08.webp",
-    "title": "Rinjani Volcano, Lombok.JPG",
-    "creator": "Massew64",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Rinjani_Volcano,_Lombok.JPG",
-    "query": "Rinjani Lombok landscape"
+    "title": "Tengger Caldera Panorama (27887761791).jpg",
+    "creator": "Justin Raycraft from Dar es Salaam, Tanzania",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Tengger_Caldera_Panorama_(27887761791).jpg",
+    "query": "Mount Bromo sunrise viewpoint"
   },
   {
     "path": "/destinations/labuan-bajo/01.webp",
-    "title": "Labuan Bajo Harbour - 43602513235.jpg",
-    "creator": "Isabell Schulz",
-    "license": "CC BY-SA 2.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Labuan_Bajo_Harbour_-_43602513235.jpg",
-    "query": "Labuan Bajo harbor"
+    "title": "Pink Beach, Padar Island, Komodo National Park, Indonesia, 20250822 1108 2680.jpg",
+    "creator": "Jakub Hałun",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Pink_Beach,_Padar_Island,_Komodo_National_Park,_Indonesia,_20250822_1108_2680.jpg",
+    "query": "Labuan Bajo harbor sunset"
   },
   {
     "path": "/destinations/labuan-bajo/02.webp",
-    "title": "Adelaar off Padar Island (1998).jpg",
-    "creator": "anoldent from Asheville, NC, USA",
-    "license": "CC BY-SA 2.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Adelaar_off_Padar_Island_(1998).jpg",
-    "query": "Padar Island Indonesia"
+    "title": "View from Kelor Island, Komodo National Park, Indonesia, 20250825 1652 3259.jpg",
+    "creator": "Jakub Hałun",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:View_from_Kelor_Island,_Komodo_National_Park,_Indonesia,_20250825_1652_3259.jpg",
+    "query": "Padar Island viewpoint Indonesia"
   },
   {
     "path": "/destinations/labuan-bajo/03.webp",
-    "title": "Pink Beach, Komodo, 2016 (01).jpg",
-    "creator": "Bahnfrend",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Pink_Beach,_Komodo,_2016_(01).jpg",
-    "query": "Pink Beach Komodo"
+    "title": "Padar Island, Komodo National Park, Indonesia, 20250822 0929 2659.jpg",
+    "creator": "Jakub Hałun",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Padar_Island,_Komodo_National_Park,_Indonesia,_20250822_0929_2659.jpg",
+    "query": "Komodo National Park pink beach"
   },
   {
     "path": "/destinations/labuan-bajo/04.webp",
-    "title": "Heading to Komodo Village.jpg",
-    "creator": "Maxwilly1607",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Heading_to_Komodo_Village.jpg",
+    "title": "Labuan Bajo, Flores, Indonesia, 20250823 0718 2839.jpg",
+    "creator": "Jakub Hałun",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Labuan_Bajo,_Flores,_Indonesia,_20250823_0718_2839.jpg",
     "query": "Komodo National Park boat"
   },
   {
     "path": "/destinations/labuan-bajo/05.webp",
-    "title": "A Flying Manta ray.jpg",
-    "creator": "Siharaditia",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:A_Flying_Manta_ray.jpg",
-    "query": "Manta Point Komodo"
+    "title": "Beach on Kelor Island in Komodo National Park, Indonesia, 20250825 1711 3272.jpg",
+    "creator": "Jakub Hałun",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Beach_on_Kelor_Island_in_Komodo_National_Park,_Indonesia,_20250825_1711_3272.jpg",
+    "query": "Kanawa Island Flores Indonesia"
   },
   {
     "path": "/destinations/labuan-bajo/06.webp",
-    "title": "Pantai Pulau Kelor.JPG",
-    "creator": "Andy lesmana",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Pantai_Pulau_Kelor.JPG",
-    "query": "Kelor Island Komodo"
+    "title": "Komodo - The Giant Lizard from Komodo Island.jpg",
+    "creator": "Khoirul Amri",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Komodo_-_The_Giant_Lizard_from_Komodo_Island.jpg",
+    "query": "Komodo dragon national park"
   },
   {
     "path": "/destinations/labuan-bajo/07.webp",
-    "title": "Kanawa Island.jpg",
-    "creator": "Jordy Meow",
-    "license": "CC BY 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Kanawa_Island.jpg",
-    "query": "Kanawa Island Indonesia"
+    "title": "Sunset on the sea in Komodo National Park, Indonesia, 20250825 1751 3320.jpg",
+    "creator": "Jakub Hałun",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Sunset_on_the_sea_in_Komodo_National_Park,_Indonesia,_20250825_1751_3320.jpg",
+    "query": "Labuan Bajo tropical islands aerial"
   },
   {
     "path": "/destinations/labuan-bajo/08.webp",
-    "title": "KomodoLandscape.JPG",
-    "creator": "Torbenbrinker",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:KomodoLandscape.JPG",
-    "query": "Komodo Island landscape"
+    "title": "View from Kelor Island, Komodo National Park, Indonesia, 20250825 1654 3265.jpg",
+    "creator": "Jakub Hałun",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:View_from_Kelor_Island,_Komodo_National_Park,_Indonesia,_20250825_1654_3265.jpg",
+    "query": "Taka Makassar Komodo"
+  },
+  {
+    "path": "/destinations/dieng-plateau/01.webp",
+    "title": "Sunrise Puncak Sikunir Dieng.jpg",
+    "creator": "Gomboto",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Sunrise_Puncak_Sikunir_Dieng.jpg",
+    "query": "Sikunir sunrise Dieng"
+  },
+  {
+    "path": "/destinations/dieng-plateau/02.webp",
+    "title": "Sikidang Crater in the Dieng Plateau.jpg",
+    "creator": "Nanterjen",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Sikidang_Crater_in_the_Dieng_Plateau.jpg",
+    "query": "Sikidang crater Dieng"
+  },
+  {
+    "path": "/destinations/dieng-plateau/03.webp",
+    "title": "Batu Pandang, Dieng, Jawa Tengah.jpg",
+    "creator": "Tirta Indah Perdana",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Batu_Pandang,_Dieng,_Jawa_Tengah.jpg",
+    "query": "Batu Pandang Dieng"
+  },
+  {
+    "path": "/destinations/dieng-plateau/04.webp",
+    "title": "Dieng Farm.jpg",
+    "creator": "orangpelupa",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Dieng_Farm.jpg",
+    "query": "Arjuna temple Dieng"
+  },
+  {
+    "path": "/destinations/dieng-plateau/05.webp",
+    "title": "Sikunir, Dieng Plateau 2306 mdpl 3.jpg",
+    "creator": "Mhd Redha Maha",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Sikunir,_Dieng_Plateau_2306_mdpl_3.jpg",
+    "query": "Sikidang crater Dieng"
+  },
+  {
+    "path": "/destinations/dieng-plateau/06.webp",
+    "title": "Dieng (Justine Hong).jpg",
+    "creator": "Justine Hong",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Dieng_(Justine_Hong).jpg",
+    "query": "Dieng potato terraces"
+  },
+  {
+    "path": "/destinations/dieng-plateau/07.webp",
+    "title": "Dieng Plateau Temple Complex Indonesia 2.jpg",
+    "creator": "Philip Nalangan",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Dieng_Plateau_Temple_Complex_Indonesia_2.jpg",
+    "query": "Dieng Plateau sunrise Indonesia"
+  },
+  {
+    "path": "/destinations/dieng-plateau/08.webp",
+    "title": "Dieng Plateau Temple Complex Indonesia 3.jpg",
+    "creator": "Philip Nalangan",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Dieng_Plateau_Temple_Complex_Indonesia_3.jpg",
+    "query": "Sikunir sunrise Dieng"
   },
   {
     "path": "/destinations/nusa-penida/01.webp",
-    "title": "19-Indonesia-Bali Nusa-Penida Manta-Point 12 (Manta-Rays)-APiazza.JPG",
-    "creator": "Andrepiazza",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:19-Indonesia-Bali_Nusa-Penida_Manta-Point_12_(Manta-Rays)-APiazza.JPG",
-    "query": "Nusa Penida Indonesia"
+    "title": "Pantai Kelingking, Nusa Penida.jpg",
+    "creator": "Kresnanta",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Pantai_Kelingking,_Nusa_Penida.jpg",
+    "query": "Kelingking Beach Nusa Penida"
   },
   {
     "path": "/destinations/nusa-penida/02.webp",
-    "title": "Wonderfull Nusa Penida.jpg",
-    "creator": "Dini Rosyadah Tridya",
+    "title": "Keindahan Alam Indonesia ( Nusa Penida, Bali. ).jpg",
+    "creator": "Maria Bonay",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Wonderfull_Nusa_Penida.jpg",
-    "query": "Kelingking Beach"
+    "source": "https://commons.wikimedia.org/wiki/File:Keindahan_Alam_Indonesia_(_Nusa_Penida,_Bali._).jpg",
+    "query": "Atuh Beach Nusa Penida"
   },
   {
     "path": "/destinations/nusa-penida/03.webp",
+    "title": "Diamond Beach in Nusa Penida, Bali.jpg",
+    "creator": "Stryn",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Diamond_Beach_in_Nusa_Penida,_Bali.jpg",
+    "query": "Crystal Bay Nusa Penida"
+  },
+  {
+    "path": "/destinations/nusa-penida/04.webp",
+    "title": "Amazing Tree House at Nusa Penida.jpg",
+    "creator": "Dini Rosyadah Tridya",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Amazing_Tree_House_at_Nusa_Penida.jpg",
+    "query": "Angel Billabong Nusa Penida"
+  },
+  {
+    "path": "/destinations/nusa-penida/05.webp",
+    "title": "Pesona Diamond Beach at Nusa Penida.jpg",
+    "creator": "Dini Rosyadah Tridya",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Pesona_Diamond_Beach_at_Nusa_Penida.jpg",
+    "query": "Thousand Islands viewpoint Nusa Penida"
+  },
+  {
+    "path": "/destinations/nusa-penida/06.webp",
     "title": "Broken Beach.jpg",
     "creator": "Aaron Rentfrew",
     "license": "CC BY-SA 4.0",
@@ -459,120 +270,309 @@
     "query": "Broken Beach Nusa Penida"
   },
   {
-    "path": "/destinations/nusa-penida/04.webp",
-    "title": "20-Indonesia-Bali Nusa-Penida Crystal-Bay 08 (Mola-Mola Sunfish1)-APiazza.JPG",
-    "creator": "Andrepiazza",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:20-Indonesia-Bali_Nusa-Penida_Crystal-Bay_08_(Mola-Mola_Sunfish1)-APiazza.JPG",
-    "query": "Crystal Bay Nusa Penida"
-  },
-  {
-    "path": "/destinations/nusa-penida/05.webp",
-    "title": "Angel Billabong, Nusa Penida.jpg",
-    "creator": "Haryanti",
+    "path": "/destinations/nusa-penida/07.webp",
+    "title": "Ngaben di Nusa Penida.jpg",
+    "creator": "Imadedana",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Angel_Billabong,_Nusa_Penida.jpg",
-    "query": "Angel Billabong Nusa Penida"
-  },
-  {
-    "path": "/destinations/nusa-penida/06.webp",
-    "title": "Diamond Beach, Merritt Island, Iceland (Unsplash).jpg",
-    "creator": "lydia harper lids_harper",
-    "license": "CC0",
-    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-    "source": "https://commons.wikimedia.org/wiki/File:Diamond_Beach,_Merritt_Island,_Iceland_(Unsplash).jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Ngaben_di_Nusa_Penida.jpg",
     "query": "Diamond Beach Nusa Penida"
   },
   {
-    "path": "/destinations/nusa-penida/07.webp",
-    "title": "Atuh Beach, Nusa Penida Bali.jpg",
-    "creator": "Hendrojkson",
+    "path": "/destinations/nusa-penida/08.webp",
+    "title": "DSF6870.jpg",
+    "creator": "Syselpunk",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Atuh_Beach,_Nusa_Penida_Bali.jpg",
-    "query": "Atuh Beach Nusa Penida"
-  },
-  {
-    "path": "/destinations/nusa-penida/08.webp",
-    "title": "Nusa Penida 01.jpg",
-    "creator": "User:(WT-shared) Burmesedays",
-    "license": "CC BY-SA 3.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Nusa_Penida_01.jpg",
-    "query": "Nusa Penida coast"
+    "source": "https://commons.wikimedia.org/wiki/File:DSF6870.jpg",
+    "query": "Atuh Beach Nusa Penida Indonesia"
   },
   {
     "path": "/destinations/raja-ampat/01.webp",
-    "title": "Raja Ampat, West Papua, Indonesia.jpg",
-    "creator": "https://www.flickr.com/photos/hulivili/",
-    "license": "CC BY 2.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Raja_Ampat,_West_Papua,_Indonesia.jpg",
-    "query": "Raja Ampat Indonesia"
+    "title": "Nelayan perairan Raja Ampat Lestarikan kekayaan laut.jpg",
+    "creator": "Srijembarrahayu",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Nelayan_perairan_Raja_Ampat_Lestarikan_kekayaan_laut.jpg",
+    "query": "Raja Ampat Piaynemo viewpoint"
   },
   {
     "path": "/destinations/raja-ampat/02.webp",
-    "title": "Annette White on Piaynemo Island in Raja Ampat.jpg",
-    "creator": "Annette White",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Annette_White_on_Piaynemo_Island_in_Raja_Ampat.jpg",
-    "query": "Piaynemo Raja Ampat"
-  },
-  {
-    "path": "/destinations/raja-ampat/03.webp",
-    "title": "Wayag Island, Raja Ampat (14467281965).jpg",
-    "creator": "Elias Levy",
-    "license": "CC BY 2.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Wayag_Island,_Raja_Ampat_(14467281965).jpg",
-    "query": "Wayag Raja Ampat"
-  },
-  {
-    "path": "/destinations/raja-ampat/04.webp",
-    "title": "Lagoon Rufas.jpg",
-    "creator": "Hadi Nyali",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Lagoon_Rufas.jpg",
-    "query": "Raja Ampat lagoon"
-  },
-  {
-    "path": "/destinations/raja-ampat/05.webp",
-    "title": "RajaAmpat dd4-5 -Night Snorkel- orbiculate cardinalfish under the dock..jpg",
-    "creator": "pete Weis",
-    "license": "CC BY 2.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-    "source": "https://commons.wikimedia.org/wiki/File:RajaAmpat_dd4-5_-Night_Snorkel-_orbiculate_cardinalfish_under_the_dock..jpg",
-    "query": "Raja Ampat snorkeling"
-  },
-  {
-    "path": "/destinations/raja-ampat/06.webp",
-    "title": "Kampung Arborek.jpg",
-    "creator": "Anazlombu",
-    "license": "CC BY-SA 4.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Kampung_Arborek.jpg",
-    "query": "Arborek Raja Ampat"
-  },
-  {
-    "path": "/destinations/raja-ampat/07.webp",
-    "title": "Landscape of Raja Ampat; April 2014.jpg",
+    "title": "Raja Ampat - 14162581706.jpg",
     "creator": "Max Mossler",
     "license": "CC BY 2.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Landscape_of_Raja_Ampat;_April_2014.jpg",
-    "query": "Raja Ampat islands"
+    "source": "https://commons.wikimedia.org/wiki/File:Raja_Ampat_-_14162581706.jpg",
+    "query": "Raja Ampat Wayag islands"
+  },
+  {
+    "path": "/destinations/raja-ampat/03.webp",
+    "title": "Raja Ampat fun dive.jpg",
+    "creator": "Fakhrizal Setiawan",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Raja_Ampat_fun_dive.jpg",
+    "query": "Raja Ampat tropical lagoon"
+  },
+  {
+    "path": "/destinations/raja-ampat/04.webp",
+    "title": "Teluk Mayalibit, Raja Ampat, West Papua, Indonesia.jpg",
+    "creator": "Irma Ade",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Teluk_Mayalibit,_Raja_Ampat,_West_Papua,_Indonesia.jpg",
+    "query": "Misool Raja Ampat"
+  },
+  {
+    "path": "/destinations/raja-ampat/05.webp",
+    "title": "A diver in Raja Ampat seascape.jpg",
+    "creator": "Fakhrizal Setiawan",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:A_diver_in_Raja_Ampat_seascape.jpg",
+    "query": "Raja Ampat snorkeling coral reef"
+  },
+  {
+    "path": "/destinations/raja-ampat/06.webp",
+    "title": "Kabui Bay - Gam Island - Raja Ampat - 32506325635.jpg",
+    "creator": "prilfish",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Kabui_Bay_-_Gam_Island_-_Raja_Ampat_-_32506325635.jpg",
+    "query": "Raja Ampat boat islands"
+  },
+  {
+    "path": "/destinations/raja-ampat/07.webp",
+    "title": "Raja Ampat, Papua.jpg",
+    "creator": "Pavel Kirillov",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Raja_Ampat,_Papua.jpg",
+    "query": "Raja Ampat blue water aerial"
   },
   {
     "path": "/destinations/raja-ampat/08.webp",
-    "title": "RajaAmpat dd4-5 017.jpg",
-    "creator": "pete Weis",
-    "license": "CC BY 2.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-    "source": "https://commons.wikimedia.org/wiki/File:RajaAmpat_dd4-5_017.jpg",
-    "query": "Raja Ampat coral reef"
+    "title": "Pulau Piaynemo, Raja Ampat.jpg",
+    "creator": "Rizalubun",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Pulau_Piaynemo,_Raja_Ampat.jpg",
+    "query": "Raja Ampat sunset Indonesia"
+  },
+  {
+    "path": "/destinations/gunung-rinjani/01.webp",
+    "title": "Gunung Rinjani dari Jalur Sembalun.jpg",
+    "creator": "Giovari max",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Gunung_Rinjani_dari_Jalur_Sembalun.jpg",
+    "query": "Mount Rinjani sunrise Indonesia"
+  },
+  {
+    "path": "/destinations/gunung-rinjani/02.webp",
+    "title": "Kabut yang menyelimuti lereng gunung rinjani.jpg",
+    "creator": "Chafidwahyu",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Kabut_yang_menyelimuti_lereng_gunung_rinjani.jpg",
+    "query": "Mount Rinjani summit view"
+  },
+  {
+    "path": "/destinations/gunung-rinjani/03.webp",
+    "title": "Padang sabana di dekat pos 1 jalur sembalun gunung rinjani.jpg",
+    "creator": "Chafidwahyu",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Padang_sabana_di_dekat_pos_1_jalur_sembalun_gunung_rinjani.jpg",
+    "query": "Rinjani Lombok mountain"
+  },
+  {
+    "path": "/destinations/gunung-rinjani/04.webp",
+    "title": "Plawangan sembalun, TN Gunung Rinjani.jpg",
+    "creator": "Chafidwahyu",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Plawangan_sembalun,_TN_Gunung_Rinjani.jpg",
+    "query": "Rinjani volcano panorama"
+  },
+  {
+    "path": "/destinations/gunung-rinjani/05.webp",
+    "title": "Track ke plawangan sembalun dari segara anak, TN Gunung Rinjani.jpg",
+    "creator": "Chafidwahyu",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Track_ke_plawangan_sembalun_dari_segara_anak,_TN_Gunung_Rinjani.jpg",
+    "query": "Rinjani campsite sunrise"
+  },
+  {
+    "path": "/destinations/gunung-rinjani/06.webp",
+    "title": "Lake Segara Anak, Gunung Baru volcanic crater, and the summit of Mount Rinjani.jpg",
+    "creator": "Paxson Woelber",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Lake_Segara_Anak,_Gunung_Baru_volcanic_crater,_and_the_summit_of_Mount_Rinjani.jpg",
+    "query": "Segara Anak lake Rinjani"
+  },
+  {
+    "path": "/destinations/gunung-rinjani/07.webp",
+    "title": "Sunrise from Mount Batur.jpg",
+    "creator": "Aaron Rentfrew",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Sunrise_from_Mount_Batur.jpg",
+    "query": "Rinjani summit sunrise"
+  },
+  {
+    "path": "/destinations/gunung-rinjani/08.webp",
+    "title": "Arak-arakan awan yang berkumpul ke segara anak, TN Gn. Rinjani.jpg",
+    "creator": "Chafidwahyu",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Arak-arakan_awan_yang_berkumpul_ke_segara_anak,_TN_Gn._Rinjani.jpg",
+    "query": "Mount Rinjani crater rim"
+  },
+  {
+    "path": "/destinations/belitung/01.webp",
+    "title": "Bertengger Manis di Pantai Penyabong, Belitung.jpg",
+    "creator": "Stella Nostra G. A",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Bertengger_Manis_di_Pantai_Penyabong,_Belitung.jpg",
+    "query": "Lengkuas Island Belitung lighthouse"
+  },
+  {
+    "path": "/destinations/belitung/02.webp",
+    "title": "Tanjung Tinggi, Belitung.jpg",
+    "creator": "brigitta",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Tanjung_Tinggi,_Belitung.jpg",
+    "query": "Tanjung Kelayang Belitung"
+  },
+  {
+    "path": "/destinations/belitung/03.webp",
+    "title": "Pantai Tanjung Tinggi, Belitung.jpg",
+    "creator": "brigitta",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Pantai_Tanjung_Tinggi,_Belitung.jpg",
+    "query": "Belitung granite beach blue water"
+  },
+  {
+    "path": "/destinations/belitung/04.webp",
+    "title": "Pulau Kepayang, Belitung.jpg",
+    "creator": "Stella Nostra G. A",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Pulau_Kepayang,_Belitung.jpg",
+    "query": "Batu Berlayar Belitung"
+  },
+  {
+    "path": "/destinations/belitung/05.webp",
+    "title": "Pantai Tanjung Tinggi.jpg",
+    "creator": "Ayufib",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Pantai_Tanjung_Tinggi.jpg",
+    "query": "Belitung island boat turquoise"
+  },
+  {
+    "path": "/destinations/belitung/06.webp",
+    "title": "Batu Pantai Tanjung Tinggi.jpg",
+    "creator": "Ayufib",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Batu_Pantai_Tanjung_Tinggi.jpg",
+    "query": "Belitung tropical beach Indonesia"
+  },
+  {
+    "path": "/destinations/belitung/07.webp",
+    "title": "Sunset Girl Tanjung Pendam.jpg",
+    "creator": "Ayufib",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Sunset_Girl_Tanjung_Pendam.jpg",
+    "query": "Kaolin lake Belitung"
+  },
+  {
+    "path": "/destinations/belitung/08.webp",
+    "title": "Beach Swing.jpg",
+    "creator": "Natashapkartika",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Beach_Swing.jpg",
+    "query": "Belitung sunset beach"
+  },
+  {
+    "path": "/destinations/borobudur/01.webp",
+    "title": "Borobudur, Java, Indonesia, 20220817 1001 8685.jpg",
+    "creator": "Jakub Hałun",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Borobudur,_Java,_Indonesia,_20220817_1001_8685.jpg",
+    "query": "Borobudur sunrise Indonesia"
+  },
+  {
+    "path": "/destinations/borobudur/02.webp",
+    "title": "Borobudur, Java, Indonesia, 20220817 1003 8695.jpg",
+    "creator": "Jakub Hałun",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Borobudur,_Java,_Indonesia,_20220817_1003_8695.jpg",
+    "query": "Borobudur temple blue sky"
+  },
+  {
+    "path": "/destinations/borobudur/03.webp",
+    "title": "Borobudur, Java, Indonesia, 20220817 1016 8762.jpg",
+    "creator": "Jakub Hałun",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Borobudur,_Java,_Indonesia,_20220817_1016_8762.jpg",
+    "query": "Borobudur stupas morning"
+  },
+  {
+    "path": "/destinations/borobudur/04.webp",
+    "title": "Borobudur, Java, Indonesia, 20220817 1017 8773.jpg",
+    "creator": "Jakub Hałun",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Borobudur,_Java,_Indonesia,_20220817_1017_8773.jpg",
+    "query": "Borobudur aerial Indonesia"
+  },
+  {
+    "path": "/destinations/borobudur/05.webp",
+    "title": "Borobudur, Java, Indonesia, 20220817 1017 8777.jpg",
+    "creator": "Jakub Hałun",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Borobudur,_Java,_Indonesia,_20220817_1017_8777.jpg",
+    "query": "Borobudur relief stone"
+  },
+  {
+    "path": "/destinations/borobudur/06.webp",
+    "title": "Borobudur-Temple-Park Indonesia Stupas-of-Borobudur-11.jpg",
+    "creator": "CEphoto, Uwe Aranas",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Borobudur-Temple-Park_Indonesia_Stupas-of-Borobudur-11.jpg",
+    "query": "Borobudur misty sunrise"
+  },
+  {
+    "path": "/destinations/borobudur/07.webp",
+    "title": "KITLV 90016, Borobudur relief, dancer with orchestra.jpg",
+    "creator": "Original sculpture unknown from 9th century C.E. Photo by Isidore van Kinsbergen",
+    "license": "CC BY 1.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/1.0",
+    "source": "https://commons.wikimedia.org/wiki/File:KITLV_90016,_Borobudur_relief,_dancer_with_orchestra.jpg",
+    "query": "Borobudur relief"
+  },
+  {
+    "path": "/destinations/borobudur/08.webp",
+    "title": "Borobudur-Temple-Park Indonesia Stupas-of-Borobudur-02.jpg",
+    "creator": "CEphoto, Uwe Aranas",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Borobudur-Temple-Park_Indonesia_Stupas-of-Borobudur-02.jpg",
+    "query": "Borobudur sunrise stupa"
   }
 ]
