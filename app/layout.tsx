@@ -9,7 +9,6 @@ export const metadata: Metadata = {
   icons: { icon: "/kept-logo.png", shortcut: "/kept-logo.png", apple: "/kept-logo.png" },
   openGraph: { title: "Kept — Open Trip yang Bisa Diperiksa", description: "Lihat janji operator sebelum berangkat dan periksa kenyataannya setelah perjalanan.", url: "https://kept.my.id", siteName: "Kept", locale: "id_ID", type: "website", images: [{ url: "/destinations/gunung-bromo/01.webp", width: 1200, height: 630, alt: "Kept — Promise versus Reality untuk open trip" }] },
   twitter: { card: "summary_large_image", title: "Kept — Open Trip yang Bisa Diperiksa", description: "Promise Card, Change Log, Reality Check, dan Truth Guard untuk open trip.", images: ["/destinations/gunung-bromo/01.webp"] },
-  alternates: { canonical: "/" },
   category: "travel",
   other: { "codex-preview": "development" },
 };

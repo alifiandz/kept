@@ -75,9 +75,9 @@ const destinations: Destination[] = [
     id: 1,
     name: "Gunung Bromo",
     place: "Jawa Timur",
-    price: "Rp475.000",
+    price: "Rp649.000",
     category: "Gunung",
-    rating: 92,
+    rating: 94,
     openTours: 3,
     description: "Sunrise vulkanik, Lautan Pasir, dan jalur jeep dalam satu perjalanan singkat.",
     image: "/covers/gunung-bromo.webp",
@@ -123,7 +123,7 @@ const destinations: Destination[] = [
     place: "Bali",
     price: "Rp650.000",
     category: "Laut & Pulau",
-    rating: 91,
+    rating: 93,
     openTours: 3,
     description: "Tebing dramatis, pantai tersembunyi, dan laut biru dalam perjalanan pulau sehari.",
     image: "/covers/nusa-penida.webp",
@@ -168,7 +168,7 @@ const destinations: Destination[] = [
     place: "Kepulauan Bangka Belitung",
     price: "Rp1.250.000",
     category: "Laut & Pulau",
-    rating: 90,
+    rating: 91,
     openTours: 3,
     description: "Pantai putih, batu granit raksasa, dan island hopping di perairan yang tenang.",
     image: "/covers/belitung.webp",
@@ -183,7 +183,7 @@ const destinations: Destination[] = [
     place: "Magelang, Jawa Tengah",
     price: "Rp325.000",
     category: "Budaya",
-    rating: 89,
+    rating: 91,
     openTours: 3,
     description: "Warisan budaya, desa sekitar candi, dan lanskap perbukitan dalam satu rute.",
     image: "/covers/borobudur.webp",
@@ -215,6 +215,7 @@ export default function Home() {
   const [compareTwo, setCompareTwo] = useState("Dieng Plateau");
   const [passCode, setPassCode] = useState("");
   const [submittedQuery, setSubmittedQuery] = useState("");
+  const [submittedTripFilters, setSubmittedTripFilters] = useState<{ from: string; date: string; travellers: string } | null>(null);
   const [comparison, setComparison] = useState<Destination[] | null>(null);
   const [savedDestinations, setSavedDestinations] = useState<number[]>([]);
   const [savedLoaded, setSavedLoaded] = useState(false);
@@ -252,11 +253,20 @@ export default function Home() {
     const normalized = submittedQuery.trim().toLowerCase();
     return destinations.filter((destination) => {
       const categoryMatch = category === "Semua" || destination.category === category;
-      const searchMatch = !normalized || `${destination.name} ${destination.place} ${destination.category}`.toLowerCase().includes(normalized);
+      const destinationTours = sharedTours.filter((tour) => tour.destinationSlug === toSlug(destination.name));
+      const searchMatch = !normalized || `${destination.name} ${destination.place} ${destination.category} ${destinationTours.map((tour) => `${tour.name} ${tour.operator.name}`).join(" ")}`.toLowerCase().includes(normalized);
+      const tripMatch = !submittedTripFilters || destinationTours.some((tour) => {
+        const requestedFrom = submittedTripFilters.from.trim().toLowerCase();
+        const requestedMonth = submittedTripFilters.date.trim().toLowerCase().replace("oktober", "okt").replace("september", "sep");
+        const requestedTravellers = Number(submittedTripFilters.travellers.match(/\d+/)?.[0] ?? 1);
+        const originMatches = !requestedFrom || requestedFrom === "semua" || tour.departure.toLowerCase().includes(requestedFrom);
+        const dateMatches = !requestedMonth || tour.date.toLowerCase().includes(requestedMonth);
+        return originMatches && dateMatches && tour.capacity >= requestedTravellers;
+      });
       const savedMatch = !showSaved || savedDestinations.includes(destination.id);
-      return categoryMatch && searchMatch && savedMatch;
+      return categoryMatch && searchMatch && tripMatch && savedMatch;
     });
-  }, [category, submittedQuery, savedDestinations, showSaved]);
+  }, [category, submittedQuery, submittedTripFilters, savedDestinations, showSaved]);
 
   const scrollToResults = () => document.getElementById("destinations")?.scrollIntoView({ behavior: "smooth", block: "start" });
 
@@ -266,9 +276,17 @@ export default function Home() {
 
     if (mode === "trips") {
       setSubmittedQuery(query);
+      setSubmittedTripFilters({ from, date, travellers });
       setCategory("Semua");
-      const count = destinations.filter((destination) => !query.trim() || `${destination.name} ${destination.place} ${destination.category}`.toLowerCase().includes(query.toLowerCase())).length;
-      setResultMessage(`${count} destinasi ditemukan dari ${from} untuk ${travellers} pada ${date}.`);
+      const requestedFrom = from.trim().toLowerCase();
+      const requestedMonth = date.trim().toLowerCase().replace("oktober", "okt").replace("september", "sep");
+      const requestedTravellers = Number(travellers.match(/\d+/)?.[0] ?? 1);
+      const matchedDestinationSlugs = new Set(sharedTours.filter((tour) => {
+        const destination = getSharedDestination(tour.destinationSlug);
+        const text = `${destination?.name ?? ""} ${destination?.place ?? ""} ${destination?.category ?? ""} ${tour.name} ${tour.operator.name}`.toLowerCase();
+        return (!query.trim() || text.includes(query.trim().toLowerCase())) && (!requestedFrom || requestedFrom === "semua" || tour.departure.toLowerCase().includes(requestedFrom)) && (!requestedMonth || tour.date.toLowerCase().includes(requestedMonth)) && tour.capacity >= requestedTravellers;
+      }).map((tour) => tour.destinationSlug));
+      setResultMessage(matchedDestinationSlugs.size ? `${matchedDestinationSlugs.size} destinasi memiliki trip yang cocok dari ${from} untuk ${travellers} pada ${date}.` : `Belum ada trip yang cocok dari ${from} untuk ${travellers} pada ${date}. Ubah salah satu kriteria.`);
       scrollToResults();
       return;
     }
@@ -276,10 +294,12 @@ export default function Home() {
     if (mode === "operator") {
       const matchedTours = sharedTours.filter((tour) => tour.operator.name.toLowerCase().includes(operatorQuery.toLowerCase()));
       if (matchedTours.length) {
-        const matchedTour = matchedTours[0];
+        const matchedTour = matchedTours.find((tour) => tour.score !== null) ?? matchedTours[0];
         const matchedDestination = getSharedDestination(matchedTour.destinationSlug);
         setSubmittedQuery(matchedDestination?.name ?? "");
-        setResultMessage(matchedTour.score !== null ? `${matchedTour.operator.name} ditemukan dengan Truth Score ${matchedTour.score}% pada ${matchedTour.name}.` : `${matchedTour.operator.name} ditemukan. ${matchedTour.name} belum memiliki Truth Score karena belum selesai.`);
+        setSubmittedTripFilters(null);
+        const completedCount = matchedTours.filter((tour) => tour.score !== null).length;
+        setResultMessage(matchedTour.score !== null ? `${matchedTour.operator.name} terverifikasi · ${completedCount} perjalanan selesai · Truth Score ${matchedTour.score}% pada ${matchedTour.name}.` : `${matchedTour.operator.name} terverifikasi, tetapi belum memiliki perjalanan selesai untuk dihitung.`);
       } else {
         setSubmittedQuery("");
         setResultMessage("Operator belum ditemukan. Coba “Jelajah Aruna”, “Nusa Sail”, atau “Langkah Pagi”.");
@@ -303,10 +323,10 @@ export default function Home() {
 
     if (passCode.trim().toUpperCase() === "BRM-2409-017") {
       if (!readKeptUser()) {
-        window.dispatchEvent(new CustomEvent("kept-auth-required", { detail: { tab: "login", redirect: "/tour?slug=bromo-sunrise-weekend&pass=1" } }));
+        window.dispatchEvent(new CustomEvent("kept-auth-required", { detail: { tab: "login", redirect: "/tour?slug=bromo-sunrise-weekend&pass=BRM-2409-017" } }));
         return;
       }
-      window.location.href = "/tour?slug=bromo-sunrise-weekend&pass=1";
+      window.location.href = "/tour?slug=bromo-sunrise-weekend&pass=BRM-2409-017";
     } else {
       setResultMessage("Trip Pass tidak ditemukan. Coba kode demo BRM-2409-017.");
       scrollToResults();
@@ -328,6 +348,7 @@ export default function Home() {
     }
     setShowSaved(true);
     setSubmittedQuery("");
+    setSubmittedTripFilters(null);
     setCategory("Semua");
     setResultMessage(savedDestinations.length ? `${savedDestinations.length} destinasi tersimpan.` : "Belum ada destinasi tersimpan. Tekan ikon hati pada kartu destinasi.");
     scrollToResults();
@@ -405,7 +426,7 @@ export default function Home() {
 
       <section className="category-section" aria-label="Kategori destinasi">
         <div className="category-row">
-          {categories.map(({ label, icon: Icon }) => <button key={label} className={category === label ? "category-chip active" : "category-chip"} onClick={() => { setCategory(label); setSubmittedQuery(""); setShowSaved(false); }}><Icon />{label}</button>)}
+          {categories.map(({ label, icon: Icon }) => <button key={label} className={category === label ? "category-chip active" : "category-chip"} onClick={() => { setCategory(label); setSubmittedQuery(""); setSubmittedTripFilters(null); setShowSaved(false); }}><Icon />{label}</button>)}
         </div>
         <div className="trust-prompt"><BadgeCheck /><span><strong>Truth Score bukan rating kepuasan.</strong> Persentase menunjukkan janji yang dipenuhi.</span></div>
       </section>
@@ -413,7 +434,7 @@ export default function Home() {
       <section className="recommended section-wrap" id="destinations">
         <div className="section-heading">
           <div><span className="section-kicker">JELAJAHI INDONESIA</span><h2>Destinasi open trip pilihan</h2><p>Pilih tempatnya dahulu, lalu bandingkan operator dan bukti perjalanan yang tersedia.</p></div>
-          {(submittedQuery || showSaved) && <button className="view-all" onClick={() => { setSubmittedQuery(""); setShowSaved(false); setResultMessage(""); }}>Tampilkan semua <X /></button>}
+          {(submittedQuery || submittedTripFilters || showSaved) && <button className="view-all" onClick={() => { setSubmittedQuery(""); setSubmittedTripFilters(null); setShowSaved(false); setResultMessage(""); }}>Tampilkan semua <X /></button>}
         </div>
 
         {resultMessage && <div className="result-message"><CheckCircle2 />{resultMessage}</div>}
@@ -432,7 +453,7 @@ export default function Home() {
                 <p>{destination.description}</p>
                 <div className="destination-facts">
                   <div><small>Estimasi mulai</small><strong>{destination.price}</strong></div>
-                  <div><small>Truth Score destinasi</small><strong className="rating-value"><ShieldCheck />{destination.rating}%</strong></div>
+                  <div><small>Skor trip selesai</small><strong className="rating-value"><ShieldCheck />{destination.rating}%</strong></div>
                 </div>
                 <a className="tour-count" href={`/destination?slug=${toSlug(destination.name)}`}><span><strong>{destination.openTours}</strong> open trip terkurasi</span><ArrowRight /></a>
               </div>

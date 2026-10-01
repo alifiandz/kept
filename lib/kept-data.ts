@@ -46,6 +46,7 @@ export type Tour = {
   departureTime: string;
   promiseVersion: string;
   promiseLockedAt: string;
+  tripPassCode?: string;
   promises: PromiseItem[];
   changes: ChangeItem[];
   reality: RealityItem[];
@@ -82,7 +83,7 @@ const operators: Record<string, Operator> = {
 
 export const destinations: Destination[] = [
   {
-    id: 1, slug: "gunung-bromo", name: "Gunung Bromo", place: "Jawa Timur", category: "Gunung", score: 92,
+    id: 1, slug: "gunung-bromo", name: "Gunung Bromo", place: "Jawa Timur", category: "Gunung", score: 94,
     description: "Sunrise vulkanik, Lautan Pasir, dan jalur jeep dalam satu perjalanan singkat.",
     longDescription: "Gunung Bromo adalah salah satu tujuan open trip paling populer di Jawa Timur. Bandingkan rute, kapasitas jeep, penginapan, dan biaya berdasarkan janji yang tercatat sebelum keberangkatan.",
     heroImage: image("gunung-bromo", 1),
@@ -133,7 +134,7 @@ export const destinations: Destination[] = [
     ],
   },
   {
-    id: 4, slug: "nusa-penida", name: "Nusa Penida", place: "Bali", category: "Laut & Pulau", score: 91,
+    id: 4, slug: "nusa-penida", name: "Nusa Penida", place: "Bali", category: "Laut & Pulau", score: 93,
     description: "Tebing dramatis, pantai tersembunyi, dan laut biru dalam perjalanan pulau sehari.",
     longDescription: "Nusa Penida memiliki jarak antarlokasi dan kondisi jalan yang perlu diperhitungkan. Bandingkan rute, kendaraan, tiket fast boat, dan durasi nyata di setiap titik.",
     heroImage: image("nusa-penida", 7),
@@ -141,7 +142,7 @@ export const destinations: Destination[] = [
       { src: image("nusa-penida", 2), label: "Kelingking Beach", alt: "Tebing Kelingking Beach Nusa Penida" },
       { src: image("nusa-penida", 3), label: "Broken Beach", alt: "Lengkungan alami Broken Beach" },
       { src: image("nusa-penida", 4), label: "Crystal Bay", alt: "Pantai dan perairan Crystal Bay" },
-      { src: image("nusa-penida", 5), label: "Diamond Beach", alt: "Tebing dan pantai Diamond Beach" },
+      { src: image("nusa-penida", 5), label: "Teluk berbatu", alt: "Teluk berbatu di pesisir Nusa Penida" },
     ],
     facts: [
       { label: "Daya tarik", value: "Kelingking, Broken Beach, Crystal Bay, dan Diamond Beach." },
@@ -184,7 +185,7 @@ export const destinations: Destination[] = [
     ],
   },
   {
-    id: 7, slug: "belitung", name: "Belitung", place: "Kepulauan Bangka Belitung", category: "Laut & Pulau", score: 90,
+    id: 7, slug: "belitung", name: "Belitung", place: "Kepulauan Bangka Belitung", category: "Laut & Pulau", score: 91,
     description: "Pantai putih, batu granit raksasa, dan island hopping di perairan yang tenang.",
     longDescription: "Belitung cocok untuk perjalanan santai yang menggabungkan pantai, pulau kecil, dan kuliner. Periksa jenis kendaraan, kelas hotel, kapal, dan kondisi pembatalan karena cuaca.",
     heroImage: image("belitung", 1),
@@ -201,15 +202,15 @@ export const destinations: Destination[] = [
     ],
   },
   {
-    id: 8, slug: "borobudur", name: "Borobudur", place: "Magelang, Jawa Tengah", category: "Budaya", score: 89,
+    id: 8, slug: "borobudur", name: "Borobudur", place: "Magelang, Jawa Tengah", category: "Budaya", score: 91,
     description: "Warisan budaya, desa sekitar candi, dan lanskap perbukitan dalam satu rute.",
     longDescription: "Perjalanan Borobudur dapat menggabungkan candi, desa, dan kuliner lokal. Kept menjelaskan tiket yang termasuk, akses naik candi, transportasi, dan pendamping perjalanan.",
     heroImage: image("borobudur", 1),
     gallery: [
       { src: image("borobudur", 2), label: "Relief candi", alt: "Relief batu di Candi Borobudur" },
       { src: image("borobudur", 3), label: "Stupa", alt: "Stupa di teras Candi Borobudur" },
-      { src: image("borobudur", 4), label: "Lanskap Menoreh", alt: "Borobudur dan lanskap perbukitan Menoreh" },
-      { src: image("borobudur", 5), label: "Desa sekitar", alt: "Suasana desa di sekitar Borobudur" },
+      { src: image("borobudur", 4), label: "Stupa utama", alt: "Stupa utama di kompleks Candi Borobudur" },
+      { src: image("borobudur", 5), label: "Teras stupa", alt: "Deretan stupa di teras Candi Borobudur" },
     ],
     facts: [
       { label: "Daya tarik", value: "Candi Borobudur, desa wisata, dan lanskap Menoreh." },
@@ -234,6 +235,17 @@ const completedReality = (capacity: number, special: string): RealityItem[] => [
   { promise: special, reality: "Penyesuaian diberitahukan sebelum kegiatan dan pengganti disetujui peserta", status: "Berubah transparan", kind: "changed" },
 ];
 
+const completedPromiseLocks: Record<string, string> = {
+  "bromo-sunrise-weekend": "5 September 2026, 14.32 WIB",
+  "komodo-weekend-cruise": "4 September 2026, 10.15 WIB",
+  "dieng-golden-sunrise": "6 September 2026, 09.20 WIB",
+  "west-penida-day-trip": "8 September 2026, 16.05 WIB",
+  "piaynemo-essential": "1 September 2026, 11.10 WIB",
+  "rinjani-crater-rim": "2 September 2026, 13.45 WIB",
+  "belitung-island-hopping": "3 September 2026, 08.30 WIB",
+  "borobudur-village-trail": "7 September 2026, 15.20 WIB",
+};
+
 const tour = (
   slug: string, destinationSlug: string, name: string, operator: Operator, departure: string,
   date: string, duration: string, price: number, score: number | null, capacity: number,
@@ -243,11 +255,12 @@ const tour = (
   const completed = status === "Selesai";
   return {
     slug, destinationSlug, name, operator, departure, date, duration, price,
-    // Three fulfilled promises (100) plus one transparent change (75): 93.75, rounded to 94.
-    score: completed ? 94 : score, capacity,
+    score, capacity,
     verifiedParticipants: completed ? capacity - 1 : 0, summary, image: image(destinationSlug, imageIndex), status,
     meetingPoint, departureTime: status === "Tersedia" ? "Konfirmasi H-2" : "23.30 WIB",
-    promiseVersion: "v1.0", promiseLockedAt: completed ? "20 September 2026, 14.32 WIB" : "28 September 2026, 10.15 WIB",
+    promiseVersion: "v1.0",
+    promiseLockedAt: completed ? completedPromiseLocks[slug] : "28 September 2026, 10.15 WIB",
+    tripPassCode: slug === "bromo-sunrise-weekend" ? "BRM-2409-017" : undefined,
     promises: basePromises(transport, stay, capacity, inclusions),
     changes: completed ? [{
       recordedAt: "Saat perjalanan",
