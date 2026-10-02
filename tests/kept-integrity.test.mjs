@@ -106,3 +106,15 @@ test("starts discovery broadly and fully resets visible search filters", () => {
   assert.match(homePage, /setDate\("Semua bulan"\)/);
   assert.match(homePage, /requestedFrom\.startsWith\("semua"\)/);
 });
+
+test("uses the approved demo identity and visible Traveler role language", () => {
+  const accountData = readFileSync(join(root, "lib", "kept-account.ts"), "utf8");
+  const accountUi = [
+    readFileSync(join(root, "components", "account-controls.tsx"), "utf8"),
+    readFileSync(join(root, "app", "account", "page.tsx"), "utf8"),
+  ].join("\n");
+  assert.match(accountData, /name: "Alifian Dzaky Makarim"/);
+  assert.match(accountData, /initials: "AD"/);
+  assert.doesNotMatch(accountUi, /Traveller/);
+  assert.match(accountUi, /Traveler Mode/);
+});

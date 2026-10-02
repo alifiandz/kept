@@ -58,12 +58,12 @@ export function AccountControls({ showWelcome = false }: { showWelcome?: boolean
   const authenticate = (event: FormEvent<HTMLFormElement>, kind: "login" | "register") => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    if (kind === "login" && (String(data.get("email")) !== "alif@kept.id" || String(data.get("password")) !== "keptdemo")) {
+    if (kind === "login" && (String(data.get("email")) !== demoUser.email || String(data.get("password")) !== "keptdemo")) {
       setMessage("Akun belum ditemukan. Sebelum backend produksi aktif, gunakan kredensial demo yang sudah terisi.");
       return;
     }
-    const name = kind === "register" ? String(data.get("name") || "Traveller Kept") : "Alif Makarim";
-    const email = String(data.get("email") || "alif@kept.id");
+    const name = kind === "register" ? String(data.get("name") || "Traveler Kept") : demoUser.name;
+    const email = String(data.get("email") || demoUser.email);
     const nextUser: KeptUser = kind === "register" ? { name, email, initials: initialsFromName(name), mode: "traveller", organizerStatus: "none" } : demoUser;
     saveKeptUser(nextUser);
     setUser(nextUser);
@@ -85,9 +85,9 @@ export function AccountControls({ showWelcome = false }: { showWelcome?: boolean
   return <>
     {user ? <div className="account-chip">
       <a className="account-avatar" href="/account" aria-label="Buka Account Center">{user.initials}</a>
-      <a className="account-identity" href="/account"><strong>{user.name.split(" ")[0]}</strong><small>{user.mode === "organizer" ? "Organizer Mode" : "Traveller Mode"}</small></a>
+      <a className="account-identity" href="/account"><strong>{user.name.split(" ")[0]}</strong><small>{user.mode === "organizer" ? "Organizer Mode" : "Traveler Mode"}</small></a>
       <div className="mode-switch" role="group" aria-label="Pilih mode akun" title={user.organizerStatus === "verified" ? "Ganti mode akun" : "Daftar sebagai organizer"}>
-        <button type="button" className={user.mode === "traveller" ? "active" : ""} aria-pressed={user.mode === "traveller"} onClick={() => changeMode(false)}>Traveller</button>
+        <button type="button" className={user.mode === "traveller" ? "active" : ""} aria-pressed={user.mode === "traveller"} onClick={() => changeMode(false)}>Traveler</button>
         <button type="button" className={`${user.mode === "organizer" ? "active" : ""}${user.organizerStatus === "verified" ? "" : " locked-mode"}`} aria-pressed={user.mode === "organizer"} onClick={() => changeMode(true)}>Organizer</button>
       </div>
     </div> : <div className="guest-account-actions"><Button variant="ghost" className="login-button" onClick={() => openAuth("login")}>Masuk</Button><Button className="signup-button" onClick={() => openAuth("register")}>Daftar</Button></div>}
@@ -96,7 +96,7 @@ export function AccountControls({ showWelcome = false }: { showWelcome?: boolean
       <DialogContent className="welcome-dialog">
         <DialogHeader className="welcome-heading"><span className="welcome-logo"><KeptLogo /></span><DialogTitle>Selamat datang di Kept</DialogTitle><DialogDescription>Pilih cara kamu ingin menggunakan Kept hari ini.</DialogDescription></DialogHeader>
         <div className="welcome-choice-grid">
-          <button onClick={() => { finishWelcome(); openAuth("register"); }}><span className="welcome-choice-icon traveller"><Compass /></span><strong>Jelajahi sebagai Traveller</strong><small>Temukan destinasi dan bandingkan open trip berdasarkan bukti.</small><b>Buat akun Traveller <ArrowRight /></b></button>
+          <button onClick={() => { finishWelcome(); openAuth("register"); }}><span className="welcome-choice-icon traveller"><Compass /></span><strong>Jelajahi sebagai Traveler</strong><small>Temukan destinasi dan bandingkan open trip berdasarkan bukti.</small><b>Buat akun Traveler <ArrowRight /></b></button>
           <button onClick={() => { finishWelcome(); setAuthTab("register"); setPostAuthPath("/account?tab=eligibility"); setAuthOpen(true); }}><span className="welcome-choice-icon organizer"><BriefcaseBusiness /></span><strong>Kelola Open Trip</strong><small>Buat Promise Card dan bangun rekam jejak operator.</small><b>Buat akun lalu daftar organizer <ArrowRight /></b></button>
         </div>
         <button className="guest-entry" onClick={finishWelcome}>Hanya ingin melihat-lihat? Lanjut tanpa akun</button>
@@ -108,7 +108,7 @@ export function AccountControls({ showWelcome = false }: { showWelcome?: boolean
         <DialogHeader><span className="auth-mark"><ShieldCheck /></span><DialogTitle>Masuk ke Kept</DialogTitle><DialogDescription>Mode prototype menyimpan sesi di perangkat ini. Akun bersama lintas perangkat akan diaktifkan bersama backend VPS.</DialogDescription></DialogHeader>
         <Tabs value={authTab} onValueChange={setAuthTab}>
           <TabsList className="auth-tabs"><TabsTrigger value="login">Masuk</TabsTrigger><TabsTrigger value="register">Daftar</TabsTrigger></TabsList>
-          <TabsContent value="login"><form className="auth-form" onSubmit={(event) => authenticate(event, "login")}><label>Email<input name="email" type="email" defaultValue="alif@kept.id" required /></label><label>Password<input name="password" type="password" defaultValue="keptdemo" required /></label>{message && <p role="alert">{message}</p>}<Button type="submit"><LogIn /> Masuk Demo</Button><button type="button" className="demo-account" onClick={() => { saveKeptUser(demoUser); setUser(demoUser); setAuthOpen(false); if (postAuthPath) window.location.href = postAuthPath; }}><BadgeCheck /> Gunakan akun demo terverifikasi</button></form></TabsContent>
+          <TabsContent value="login"><form className="auth-form" onSubmit={(event) => authenticate(event, "login")}><label>Email<input name="email" type="email" defaultValue={demoUser.email} required /></label><label>Password<input name="password" type="password" defaultValue="keptdemo" required /></label>{message && <p role="alert">{message}</p>}<Button type="submit"><LogIn /> Masuk Demo</Button><button type="button" className="demo-account" onClick={() => { saveKeptUser(demoUser); setUser(demoUser); setAuthOpen(false); if (postAuthPath) window.location.href = postAuthPath; }}><BadgeCheck /> Gunakan akun demo terverifikasi</button></form></TabsContent>
           <TabsContent value="register"><form className="auth-form" onSubmit={(event) => authenticate(event, "register")}><label>Nama lengkap<input name="name" placeholder="Nama lengkap" required /></label><label>Email<input name="email" type="email" placeholder="nama@email.com" required /></label><label>Password<input name="password" type="password" placeholder="Minimal 8 karakter" minLength={8} required /></label><Button type="submit"><UserRound /> Buat Profil Demo</Button></form></TabsContent>
         </Tabs>
       </DialogContent>

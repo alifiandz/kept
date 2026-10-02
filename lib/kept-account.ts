@@ -10,9 +10,9 @@ export type KeptUser = {
 };
 
 export const demoUser: KeptUser = {
-  name: "Alif Makarim",
-  email: "alif@kept.id",
-  initials: "AM",
+  name: "Alifian Dzaky Makarim",
+  email: "alifian@kept.id",
+  initials: "AD",
   mode: "traveller",
   organizerStatus: "verified",
 };
@@ -23,7 +23,13 @@ export function readKeptUser(): KeptUser | null {
   if (typeof window === "undefined") return null;
   const saved = window.localStorage.getItem(userKey);
   if (!saved) return null;
-  try { return JSON.parse(saved) as KeptUser; } catch { return null; }
+  try {
+    const parsed = JSON.parse(saved) as KeptUser;
+    if (parsed.email === "alif@kept.id" && parsed.organizerStatus === "verified") {
+      return { ...parsed, name: demoUser.name, email: demoUser.email, initials: demoUser.initials };
+    }
+    return parsed;
+  } catch { return null; }
 }
 
 export function saveKeptUser(user: KeptUser | null) {
