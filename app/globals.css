@@ -755,6 +755,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
 /* Account entry and mode controls */
 .guest-account-actions { display: flex; align-items: center; gap: 4px; }
+.account-control-cluster { display: flex; align-items: center; gap: 7px; }
+.mobile-mode-quick { display: none; }
+.organizer-entry-button { height: 39px !important; padding-inline: 12px !important; color: var(--blue) !important; border-color: rgba(73,106,241,.28) !important; font-size: 12px !important; font-weight: 800 !important; }
+.organizer-entry-button svg { width: 16px; }
 .account-chip { min-width: 346px; height: 48px; padding: 5px 6px 5px 5px; display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 14px; background: white; box-shadow: 0 7px 20px rgba(9,42,67,.07); }
 .account-avatar { width: 37px; height: 37px; display: grid; place-items: center; flex: 0 0 auto; color: white; background: linear-gradient(145deg,var(--blue-bright),var(--blue)); border-radius: 50%; font-size: 10px; font-weight: 900; }
 .account-identity { min-width: 62px; display: grid; gap: 2px; }
@@ -1094,6 +1098,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 }
 
 @media (max-width: 680px) {
+  .mobile-mode-quick { min-height: 40px; padding: 0 10px; display: flex; align-items: center; gap: 5px; color: var(--blue); border: 1px solid rgba(73,106,241,.25); border-radius: 10px; background: #f4f6ff; font-size: 12px; font-weight: 850; }
+  .mobile-mode-quick svg { width: 15px; }
+  .organizer-entry-button { min-height: 40px !important; padding-inline: 10px !important; }
   .account-chip { min-width: auto; width: 48px; padding: 5px; }
   .account-chip .account-identity,.account-chip .mode-switch { display: none; }
   .mobile-role-switch { padding: 4px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }

@@ -80,17 +80,32 @@ export function AccountControls({ showWelcome = false }: { showWelcome?: boolean
     const next = { ...user, mode: checked ? "organizer" as const : "traveller" as const };
     saveKeptUser(next);
     setUser(next);
+    window.location.href = checked ? "/account?tab=organizer" : "/account?tab=overview";
+  };
+
+  const enterOrganizer = () => {
+    if (user) {
+      changeMode(true);
+      return;
+    }
+    setAuthTab("register");
+    setPostAuthPath("/account?tab=eligibility");
+    setMessage("");
+    setAuthOpen(true);
   };
 
   return <>
-    {user ? <div className="account-chip">
-      <a className="account-avatar" href="/account" aria-label="Buka Account Center">{user.initials}</a>
-      <a className="account-identity" href="/account"><strong>{user.name.split(" ")[0]}</strong><small>{user.mode === "organizer" ? "Organizer Mode" : "Traveler Mode"}</small></a>
-      <div className="mode-switch" role="group" aria-label="Pilih mode akun" title={user.organizerStatus === "verified" ? "Ganti mode akun" : "Daftar sebagai organizer"}>
-        <button type="button" className={user.mode === "traveller" ? "active" : ""} aria-pressed={user.mode === "traveller"} onClick={() => changeMode(false)}>Traveler</button>
-        <button type="button" className={`${user.mode === "organizer" ? "active" : ""}${user.organizerStatus === "verified" ? "" : " locked-mode"}`} aria-pressed={user.mode === "organizer"} onClick={() => changeMode(true)}>Organizer</button>
+    {user ? <div className="account-control-cluster">
+      <button type="button" className="mobile-mode-quick" onClick={() => changeMode(user.mode !== "organizer")} aria-label={user.mode === "organizer" ? "Ganti ke Traveler" : "Ganti ke Organizer"}>{user.mode === "organizer" ? <><Compass /> Traveler</> : <><BriefcaseBusiness /> Organizer</>}</button>
+      <div className="account-chip">
+        <a className="account-avatar" href="/account" aria-label="Buka Account Center">{user.initials}</a>
+        <a className="account-identity" href="/account"><strong>{user.name.split(" ")[0]}</strong><small>{user.mode === "organizer" ? "Organizer Mode" : "Traveler Mode"}</small></a>
+        <div className="mode-switch" role="group" aria-label="Pilih mode akun" title={user.organizerStatus === "verified" ? "Ganti mode akun" : "Daftar sebagai organizer"}>
+          <button type="button" className={user.mode === "traveller" ? "active" : ""} aria-pressed={user.mode === "traveller"} onClick={() => changeMode(false)}>Traveler</button>
+          <button type="button" className={`${user.mode === "organizer" ? "active" : ""}${user.organizerStatus === "verified" ? "" : " locked-mode"}`} aria-pressed={user.mode === "organizer"} onClick={() => changeMode(true)}>Organizer</button>
+        </div>
       </div>
-    </div> : <div className="guest-account-actions"><Button variant="ghost" className="login-button" onClick={() => openAuth("login")}>Masuk</Button><Button className="signup-button" onClick={() => openAuth("register")}>Daftar</Button></div>}
+    </div> : <div className="guest-account-actions"><Button variant="outline" className="organizer-entry-button" onClick={enterOrganizer}><BriefcaseBusiness /> <span>Organizer</span></Button><Button variant="ghost" className="login-button" onClick={() => openAuth("login")}>Masuk</Button><Button className="signup-button" onClick={() => openAuth("register")}>Daftar</Button></div>}
 
     <Dialog open={welcomeOpen} onOpenChange={(open) => { setWelcomeOpen(open); if (!open) finishWelcome(); }}>
       <DialogContent className="welcome-dialog">
