@@ -400,7 +400,7 @@ export default function Home() {
         <div className="search-shell">
           <div className="mode-tabs" role="tablist" aria-label="Pilihan layanan Kept">
             {searchModes.map(({ id, label, helper, icon: Icon }) => (
-              <button key={id} className={mode === id ? "mode-tab active" : "mode-tab"} onClick={() => { setMode(id); setResultMessage(""); }} role="tab" aria-selected={mode === id}>
+              <button key={id} className={mode === id ? "mode-tab active" : "mode-tab"} onClick={() => { setMode(id); setCategory("Semua"); setSubmittedQuery(""); setSubmittedTripFilters(null); setComparison(null); setShowSaved(false); setResultMessage(""); }} role="tab" aria-selected={mode === id}>
                 <span className="mode-icon"><Icon /></span><span><strong>{label}</strong><small>{helper}</small></span>
               </button>
             ))}

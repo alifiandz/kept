@@ -90,3 +90,19 @@ test("keeps product language consistent and avoids remote runtime images", () =>
   assert.doesNotMatch(sources, /<img[^>]+src=["']https?:\/\//i);
   assert.match(sources, /Kept tidak memproses booking atau pembayaran/);
 });
+
+test("keeps direct-link error states from getting stuck in loading", () => {
+  const tourPage = readFileSync(join(root, "app", "tour", "page.tsx"), "utf8");
+  const destinationPage = readFileSync(join(root, "app", "destination", "page.tsx"), "utf8");
+  assert.match(tourPage, /getTour\(params\.get\("slug"\)\) \?\? null/);
+  assert.match(destinationPage, /getDestination\(new URLSearchParams\(window\.location\.search\)\.get\("slug"\)\) \?\? null/);
+});
+
+test("starts discovery broadly and fully resets visible search filters", () => {
+  const homePage = readFileSync(join(root, "app", "page.tsx"), "utf8");
+  assert.match(homePage, /useState\("Semua kota"\)/);
+  assert.match(homePage, /useState\("Semua bulan"\)/);
+  assert.match(homePage, /setFrom\("Semua kota"\)/);
+  assert.match(homePage, /setDate\("Semua bulan"\)/);
+  assert.match(homePage, /requestedFrom\.startsWith\("semua"\)/);
+});
