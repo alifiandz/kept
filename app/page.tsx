@@ -452,7 +452,7 @@ export default function Home() {
           {filteredDestinations.length ? filteredDestinations.map((destination) => (
             <article className="destination-card" key={destination.id}>
               <a className="destination-image" href={`/destination?slug=${toSlug(destination.name)}`} aria-label={`Buka halaman ${destination.name}`}>
-                <img src={destination.image} alt={`Pemandangan ${destination.name}`} loading="lazy" />
+                <img src={destination.image} alt={`Pemandangan ${destination.name}`} loading="lazy" decoding="async" fetchPriority="low" />
                 <span className="category-label">{destination.category}</span>
               </a>
               <button className={savedDestinations.includes(destination.id) ? "heart-button saved" : "heart-button"} onClick={() => toggleSaved(destination.id)} aria-label={savedDestinations.includes(destination.id) ? "Hapus dari tersimpan" : "Simpan destinasi"}><Heart /></button>
