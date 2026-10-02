@@ -1345,3 +1345,158 @@ button, [role="button"], input, select, textarea { min-height: 42px; }
   .destination-image { height: 220px; }
   .how-section { width: min(100% - 24px,1180px); margin-block: 46px; padding: 44px 18px; border-radius: 24px; }
 }
+
+/* Phone-only compact layout. Desktop and tablet rules stay unchanged. */
+@media (max-width: 600px) {
+  .section-wrap,
+  .operator-home-wrap,
+  .account-shell { width: calc(100% - 20px); }
+
+  .site-header { height: 58px; padding-inline: 12px; gap: 10px; }
+  .brand { gap: 7px; font-size: 16px; }
+  .brand-mark { width: 32px; height: 32px; }
+  .menu-button,.account-chip { width: 40px; height: 40px; min-height: 40px; }
+  .detail-mobile-nav { min-height: 42px; top: 58px; padding: 4px 10px; }
+  .detail-mobile-nav a { padding: 7px 10px; font-size: 12px; }
+
+  .hero { padding: 42px 10px 14px; background-position: 58% center; }
+  .hero-copy { margin-bottom: 18px; }
+  .hero h1 { max-width: 330px; margin: 10px 0 12px; font-size: 35px; line-height: 1; }
+  .hero-copy > p { max-width: 330px; font-size: 14px; line-height: 1.5; }
+  .eyebrow { font-size: 11px; }
+  .search-shell { border-radius: 16px; }
+  .mode-tabs { padding: 5px 5px 0; grid-template-columns: repeat(4,minmax(72px,1fr)); }
+  .mode-tab { min-height: 55px; padding: 6px 3px 8px; gap: 3px; }
+  .mode-icon { width: 26px; height: 26px; }
+  .mode-icon svg { width: 14px; }
+  .mode-tab strong { font-size: 11px; }
+  .search-form { min-height: auto; padding: 10px; gap: 7px; }
+  .search-field,.search-field.wide { min-height: 52px; padding: 8px 10px; flex: 1 1 calc(50% - 4px); }
+  .search-field small { font-size: 11px; }
+  .search-field input { font-size: 13px; }
+  .search-button { min-height: 44px; flex: 1 1 100%; }
+  .pass-note { padding: 10px 12px; flex-basis: 100%; }
+
+  .category-section { width: calc(100% - 20px); min-height: auto; padding: 14px 0 18px; gap: 12px; }
+  .category-chip { height: 38px; min-height: 38px; padding-inline: 12px; font-size: 12px; }
+  .trust-prompt { font-size: 12px; }
+  .recommended { width: calc(100% - 20px); margin-block: 6px 30px; padding: 24px 10px 18px; border-radius: 18px; }
+  .section-heading { margin-bottom: 18px; gap: 8px; }
+  .section-heading h2,.operator-copy h2,.how-section h2,.operator-cta h2 { font-size: 28px; }
+  .section-heading p { margin-top: 7px; font-size: 14px; line-height: 1.5; }
+
+  .destination-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .destination-card { display: grid; grid-template-columns: 112px minmax(0,1fr); border-radius: 14px; }
+  .destination-image { width: 112px; height: 100%; min-height: 158px; }
+  .destination-card > .heart-button { width: 34px; height: 34px; top: 8px; right: 8px; }
+  .category-label { left: 7px; bottom: 7px; height: 24px; padding-inline: 8px; font-size: 10px; }
+  .destination-body { min-width: 0; padding: 12px 42px 10px 12px; }
+  .destination-place { font-size: 11px; }
+  .destination-body h3 { margin: 5px 0 7px; font-size: 18px; }
+  .destination-body > p { display: none; }
+  .destination-facts { margin-top: 4px; padding: 8px 0; gap: 6px; }
+  .destination-facts small { font-size: 10px; }
+  .destination-facts strong { font-size: 12px; }
+  .tour-count { min-height: 34px; font-size: 12px; }
+
+  .why-kept,.operator-showcase { padding: 48px 0; }
+  .benefit-grid { gap: 9px; }
+  .benefit-grid article { min-height: auto; padding: 17px; }
+  .benefit-grid article > svg { width: 26px; height: 26px; }
+  .benefit-grid h3 { margin: 14px 0 6px; font-size: 17px; }
+  .benefit-grid p { font-size: 14px; line-height: 1.5; }
+  .how-section { width: calc(100% - 20px); margin-block: 30px; padding: 30px 12px; border-radius: 18px; }
+  .how-grid { gap: 9px; }
+  .how-grid article { min-height: auto; padding: 18px; }
+  .how-grid article > span { font-size: 42px; }
+  .how-grid article > svg { width: 30px; height: 30px; }
+  .how-grid h3 { margin: 20px 0 7px; font-size: 18px; }
+  .how-grid p { font-size: 14px; line-height: 1.5; }
+  .operator-cta { margin-bottom: 36px; padding: 24px 18px; gap: 18px; border-radius: 18px; }
+  .site-footer,.expanded-footer { min-height: auto; padding: 28px 16px; gap: 20px; }
+
+  .breadcrumb { padding: 15px 0 12px; font-size: 11px; }
+  .destination-hero,.tour-detail-hero { padding-bottom: 34px; }
+  .place-hero { height: 260px; border-radius: 15px; }
+  .place-hero-overlay { left: 15px; right: 15px; bottom: 15px; }
+  .place-hero-overlay h1 { margin: 7px 0 12px; font-size: 38px; }
+  .place-hero-stats { gap: 5px; }
+  .place-hero-stats span { min-height: 30px; padding: 5px 9px; font-size: 10px; }
+  .place-intro-grid { gap: 10px; }
+  .place-description-card,.place-gallery-card { padding: 16px; border-radius: 14px; }
+  .place-description-card h2,.place-gallery-heading h2 { font-size: 23px; }
+  .place-description-card > p { font-size: 14px; line-height: 1.55; }
+  .place-facts { margin-top: 15px; gap: 7px; }
+  .place-facts > div { padding: 10px 0; }
+  .place-thumbnail-grid { margin-top: 12px; gap: 6px; }
+  .place-thumbnail-grid button { height: 86px; }
+  .tour-market { padding-block: 38px; }
+  .tour-filter-bar { gap: 7px; }
+  .tour-filter-bar > label { min-height: 52px; padding: 8px 10px; }
+  .tour-market-grid { gap: 10px; }
+  .tour-market-image { height: 170px; }
+  .tour-market-body { padding: 15px; }
+  .tour-market-body h3 { font-size: 18px; }
+
+  .tour-detail-copy h1 { margin: 8px 0 12px; font-size: 38px; }
+  .tour-detail-copy > p { font-size: 14px; line-height: 1.55; }
+  .tour-detail-meta { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px; font-size: 12px; }
+  .tour-price-row { margin-top: 18px; padding-top: 16px; }
+  .tour-price-row strong { font-size: 20px; }
+  .tour-visual-panel > img { height: 245px; border-radius: 15px; }
+  .operator-profile-inline { position: static; width: 100%; margin-top: 8px; padding: 12px; border-radius: 13px; }
+  .promise-section,.reality-report,.truth-guard-section { padding-block: 42px; }
+  .promise-detail-grid { gap: 8px; }
+  .promise-detail-grid article { min-height: auto; padding: 15px; gap: 9px; }
+  .change-detail-section { padding-block: 44px; }
+  .change-detail-card { padding: 17px; gap: 13px; }
+  .integrity-summary { min-height: auto; padding: 20px; gap: 17px; border-radius: 15px; }
+  .score-circle { width: 102px; height: 102px; border-width: 7px; }
+  .summary-breakdown { gap: 9px; }
+  .reality-table article { min-height: auto; padding: 13px; gap: 8px; }
+  .truth-guard-grid { gap: 9px; }
+  .truth-guard-grid article { padding: 17px; }
+  .tour-bottom-cta { margin-bottom: 38px; padding: 18px; gap: 14px; }
+
+  .account-shell { margin: 10px auto 38px; gap: 10px; }
+  .account-sidebar { padding: 9px; border-radius: 14px; }
+  .account-sidebar > div:first-child,.logout-button { display: none; }
+  .account-tab-list { display: flex !important; grid-template-columns: none; gap: 5px; overflow-x: auto; scrollbar-width: none; }
+  .account-tab-list::-webkit-scrollbar { display: none; }
+  .account-tab-list .account-nav-button { width: auto; min-width: max-content; min-height: 40px; padding: 0 11px; font-size: 12px; }
+  .account-tab-list .account-nav-button svg:last-child { display: none; }
+  .mobile-role-switch { min-height: 40px; }
+  .account-content { min-height: auto; padding: 18px 13px; border-radius: 14px; }
+  .account-page-title { margin-bottom: 18px; gap: 10px; }
+  .account-page-title h1 { margin: 6px 0; font-size: 29px; }
+  .account-page-title p { font-size: 14px; line-height: 1.5; }
+  .account-stat-grid,.account-stat-grid.four { margin-bottom: 12px; gap: 7px; }
+  .account-stat { min-height: 86px; padding: 12px; gap: 4px; }
+  .account-stat > span { width: 30px; height: 30px; margin-bottom: 2px; }
+  .account-stat strong { font-size: 18px; }
+  .account-panel { padding: 14px; border-radius: 13px; }
+  .operator-home { padding: 10px 0 38px; }
+  .operator-home-wrap { gap: 9px; }
+  .operator-home-top { padding: 21px 17px; gap: 16px; border-radius: 16px; }
+  .operator-home-top h1 { font-size: 30px; }
+  .operator-home-actions { flex-direction: row; }
+  .operator-home-metrics { grid-template-columns: 1fr 1fr; gap: 7px; }
+  .operator-metric { min-height: 92px; padding: 12px; gap: 8px; }
+  .operator-metric > span { width: 32px; height: 32px; }
+  .operator-metric strong { font-size: 20px; }
+  .operator-card,.operator-tour-grid > article { padding: 15px; }
+  .operator-performance-grid { grid-template-columns: 1fr 1fr; gap: 7px; }
+
+  .welcome-dialog,.auth-dialog,.destination-dialog,.compare-dialog,.gallery-dialog,.contact-operator-dialog,.reality-check-dialog { width: calc(100vw - 20px) !important; max-height: 90vh; padding: 18px !important; overflow-y: auto; }
+  .welcome-choice-grid > button { min-height: 128px; padding: 17px; }
+  .dialog-destination-image { height: 150px; }
+  .dialog-destination-stats { margin-inline: 0; }
+  .available-tours { margin-inline: 0; }
+}
+
+@media (max-width: 380px) {
+  .search-field,.search-field.wide { flex-basis: 100%; }
+  .destination-card { grid-template-columns: 100px minmax(0,1fr); }
+  .destination-image { width: 100px; }
+  .account-stat-grid,.account-stat-grid.four,.operator-home-metrics,.operator-performance-grid { grid-template-columns: 1fr; }
+}
