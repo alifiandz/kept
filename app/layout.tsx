@@ -14,5 +14,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="id"><body>{children}<CompetitionLogos /></body></html>;
+  return <html lang="id"><head><link rel="preload" as="image" href="/bromo.webp" type="image/webp" fetchPriority="high" /></head><body>{children}<CompetitionLogos /></body></html>;
 }
