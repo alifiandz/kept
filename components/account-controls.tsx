@@ -5,7 +5,6 @@ import { ArrowRight, BadgeCheck, BriefcaseBusiness, Compass, LogIn, ShieldCheck,
 import { KeptLogo } from "@/components/kept-logo";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { demoUser, initialsFromName, readKeptUser, saveKeptUser, type KeptUser } from "@/lib/kept-account";
 
@@ -87,8 +86,9 @@ export function AccountControls({ showWelcome = false }: { showWelcome?: boolean
     {user ? <div className="account-chip">
       <a className="account-avatar" href="/account" aria-label="Buka Account Center">{user.initials}</a>
       <a className="account-identity" href="/account"><strong>{user.name.split(" ")[0]}</strong><small>{user.mode === "organizer" ? "Organizer Mode" : "Traveller Mode"}</small></a>
-      <div className="mode-switch" title={user.organizerStatus === "verified" ? "Ganti mode akun" : "Daftar sebagai organizer"}>
-        <span>Traveller</span><Switch checked={user.mode === "organizer"} onCheckedChange={changeMode} aria-label="Ganti Traveller dan Organizer Mode" /><span className={user.organizerStatus === "verified" ? "" : "locked-mode"}>Organizer</span>
+      <div className="mode-switch" role="group" aria-label="Pilih mode akun" title={user.organizerStatus === "verified" ? "Ganti mode akun" : "Daftar sebagai organizer"}>
+        <button type="button" className={user.mode === "traveller" ? "active" : ""} aria-pressed={user.mode === "traveller"} onClick={() => changeMode(false)}>Traveller</button>
+        <button type="button" className={`${user.mode === "organizer" ? "active" : ""}${user.organizerStatus === "verified" ? "" : " locked-mode"}`} aria-pressed={user.mode === "organizer"} onClick={() => changeMode(true)}>Organizer</button>
       </div>
     </div> : <div className="guest-account-actions"><Button variant="ghost" className="login-button" onClick={() => openAuth("login")}>Masuk</Button><Button className="signup-button" onClick={() => openAuth("register")}>Daftar</Button></div>}
 
