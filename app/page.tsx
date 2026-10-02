@@ -207,8 +207,8 @@ export default function Home() {
   const [mode, setMode] = useState<SearchMode>("trips");
   const [category, setCategory] = useState("Semua");
   const [query, setQuery] = useState("");
-  const [from, setFrom] = useState("Yogyakarta");
-  const [date, setDate] = useState("Oktober 2026");
+  const [from, setFrom] = useState("Semua kota");
+  const [date, setDate] = useState("Semua bulan");
   const [travellers, setTravellers] = useState("2 orang");
   const [operatorQuery, setOperatorQuery] = useState("");
   const [compareOne, setCompareOne] = useState("Gunung Bromo");
@@ -228,6 +228,12 @@ export default function Home() {
     const syncMode = () => {
       const user = readKeptUser();
       setOrganizerName(user?.mode === "organizer" && user.organizerStatus === "verified" ? user.name : null);
+      const pendingSave = Number(window.localStorage.getItem("kept-pending-save"));
+      if (user && pendingSave) {
+        setSavedDestinations((current) => current.includes(pendingSave) ? current : [...current, pendingSave]);
+        window.localStorage.removeItem("kept-pending-save");
+        setResultMessage("Destinasi berhasil disimpan setelah kamu masuk.");
+      }
     };
     syncMode();
     window.addEventListener("kept-user-change", syncMode);
@@ -257,9 +263,10 @@ export default function Home() {
       const searchMatch = !normalized || `${destination.name} ${destination.place} ${destination.category} ${destinationTours.map((tour) => `${tour.name} ${tour.operator.name}`).join(" ")}`.toLowerCase().includes(normalized);
       const tripMatch = !submittedTripFilters || destinationTours.some((tour) => {
         const requestedFrom = submittedTripFilters.from.trim().toLowerCase();
-        const requestedMonth = submittedTripFilters.date.trim().toLowerCase().replace("oktober", "okt").replace("september", "sep");
+        const requestedMonthRaw = submittedTripFilters.date.trim().toLowerCase();
+        const requestedMonth = requestedMonthRaw.startsWith("semua") ? "" : requestedMonthRaw.replace("oktober", "okt").replace("september", "sep");
         const requestedTravellers = Number(submittedTripFilters.travellers.match(/\d+/)?.[0] ?? 1);
-        const originMatches = !requestedFrom || requestedFrom === "semua" || tour.departure.toLowerCase().includes(requestedFrom);
+        const originMatches = !requestedFrom || requestedFrom.startsWith("semua") || tour.departure.toLowerCase().includes(requestedFrom);
         const dateMatches = !requestedMonth || tour.date.toLowerCase().includes(requestedMonth);
         return originMatches && dateMatches && tour.capacity >= requestedTravellers;
       });
@@ -279,14 +286,15 @@ export default function Home() {
       setSubmittedTripFilters({ from, date, travellers });
       setCategory("Semua");
       const requestedFrom = from.trim().toLowerCase();
-      const requestedMonth = date.trim().toLowerCase().replace("oktober", "okt").replace("september", "sep");
+      const requestedMonthRaw = date.trim().toLowerCase();
+      const requestedMonth = requestedMonthRaw.startsWith("semua") ? "" : requestedMonthRaw.replace("oktober", "okt").replace("september", "sep");
       const requestedTravellers = Number(travellers.match(/\d+/)?.[0] ?? 1);
       const matchedDestinationSlugs = new Set(sharedTours.filter((tour) => {
         const destination = getSharedDestination(tour.destinationSlug);
         const text = `${destination?.name ?? ""} ${destination?.place ?? ""} ${destination?.category ?? ""} ${tour.name} ${tour.operator.name}`.toLowerCase();
-        return (!query.trim() || text.includes(query.trim().toLowerCase())) && (!requestedFrom || requestedFrom === "semua" || tour.departure.toLowerCase().includes(requestedFrom)) && (!requestedMonth || tour.date.toLowerCase().includes(requestedMonth)) && tour.capacity >= requestedTravellers;
+        return (!query.trim() || text.includes(query.trim().toLowerCase())) && (!requestedFrom || requestedFrom.startsWith("semua") || tour.departure.toLowerCase().includes(requestedFrom)) && (!requestedMonth || tour.date.toLowerCase().includes(requestedMonth)) && tour.capacity >= requestedTravellers;
       }).map((tour) => tour.destinationSlug));
-      setResultMessage(matchedDestinationSlugs.size ? `${matchedDestinationSlugs.size} destinasi memiliki trip yang cocok dari ${from} untuk ${travellers} pada ${date}.` : `Belum ada trip yang cocok dari ${from} untuk ${travellers} pada ${date}. Ubah salah satu kriteria.`);
+      setResultMessage(matchedDestinationSlugs.size ? `${matchedDestinationSlugs.size} destinasi memiliki trip yang cocok untuk ${travellers}.` : "Belum ada trip yang cocok dengan filter tersebut. Ubah salah satu kriteria.");
       scrollToResults();
       return;
     }
@@ -335,6 +343,7 @@ export default function Home() {
 
   const toggleSaved = (destinationId: number) => {
     if (!readKeptUser()) {
+      window.localStorage.setItem("kept-pending-save", String(destinationId));
       window.dispatchEvent(new CustomEvent("kept-auth-required", { detail: { tab: "register" } }));
       return;
     }
@@ -434,7 +443,7 @@ export default function Home() {
       <section className="recommended section-wrap" id="destinations">
         <div className="section-heading">
           <div><span className="section-kicker">JELAJAHI INDONESIA</span><h2>Destinasi open trip pilihan</h2><p>Pilih tempatnya dahulu, lalu bandingkan operator dan bukti perjalanan yang tersedia.</p></div>
-          {(submittedQuery || submittedTripFilters || showSaved) && <button className="view-all" onClick={() => { setSubmittedQuery(""); setSubmittedTripFilters(null); setShowSaved(false); setResultMessage(""); }}>Tampilkan semua <X /></button>}
+          {(submittedQuery || submittedTripFilters || showSaved) && <button className="view-all" onClick={() => { setQuery(""); setFrom("Semua kota"); setDate("Semua bulan"); setTravellers("2 orang"); setCategory("Semua"); setSubmittedQuery(""); setSubmittedTripFilters(null); setShowSaved(false); setResultMessage(""); }}>Tampilkan semua <X /></button>}
         </div>
 
         {resultMessage && <div className="result-message"><CheckCircle2 />{resultMessage}</div>}

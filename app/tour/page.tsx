@@ -29,7 +29,7 @@ export default function TourPage() {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const matchedTour = getTour(params.get("slug"));
+    const matchedTour = getTour(params.get("slug")) ?? null;
     setTour(matchedTour);
     const requestedPass = params.get("pass");
     const validPass = Boolean(matchedTour?.tripPassCode && requestedPass === matchedTour.tripPassCode);

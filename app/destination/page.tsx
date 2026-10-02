@@ -20,7 +20,7 @@ export default function DestinationPage() {
   const [search, setSearch] = useState("");
   const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null);
 
-  useEffect(() => setDestination(getDestination(new URLSearchParams(window.location.search).get("slug"))), []);
+  useEffect(() => setDestination(getDestination(new URLSearchParams(window.location.search).get("slug")) ?? null), []);
 
   const tours = useMemo(() => destination ? getToursForDestination(destination.slug) : [], [destination]);
   const departures = useMemo(() => [...new Set(tours.map((tour) => tour.departure))], [tours]);
