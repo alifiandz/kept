@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { ArrowRight, BadgeCheck, BriefcaseBusiness, Compass, LogIn, ShieldCheck, UserRound } from "lucide-react";
 import { KeptLogo } from "@/components/kept-logo";
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { demoUser, initialsFromName, readKeptUser, saveKeptUser, type KeptUser } from "@/lib/kept-account";
 
 export function AccountControls({ showWelcome = false }: { showWelcome?: boolean }) {
+  const router = useRouter();
   const [user, setUser] = useState<KeptUser | null>(null);
   const [welcomeOpen, setWelcomeOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
@@ -23,7 +25,7 @@ export function AccountControls({ showWelcome = false }: { showWelcome?: boolean
       const detail = (event as CustomEvent<{ tab?: "login" | "register"; redirect?: string }>).detail;
       const currentUser = readKeptUser();
       if (currentUser) {
-        if (detail?.redirect) window.location.href = detail.redirect;
+        if (detail?.redirect) router.push(detail.redirect);
         return;
       }
       setWelcomeOpen(false);
@@ -41,7 +43,7 @@ export function AccountControls({ showWelcome = false }: { showWelcome?: boolean
       window.removeEventListener("storage", sync);
       window.removeEventListener("kept-auth-required", requireAuth);
     };
-  }, [showWelcome]);
+  }, [showWelcome, router]);
 
   const finishWelcome = () => {
     window.localStorage.setItem("kept-welcome-seen", "1");
@@ -68,19 +70,19 @@ export function AccountControls({ showWelcome = false }: { showWelcome?: boolean
     saveKeptUser(nextUser);
     setUser(nextUser);
     setAuthOpen(false);
-    if (postAuthPath) window.location.href = postAuthPath;
+    if (postAuthPath) router.push(postAuthPath);
   };
 
   const changeMode = (checked: boolean) => {
     if (!user) return;
     if (checked && user.organizerStatus !== "verified") {
-      window.location.href = "/account?tab=eligibility";
+      router.push("/account?tab=eligibility");
       return;
     }
     const next = { ...user, mode: checked ? "organizer" as const : "traveller" as const };
     saveKeptUser(next);
     setUser(next);
-    window.location.href = checked ? "/account?tab=organizer" : "/account?tab=overview";
+    router.push(checked ? "/account?tab=organizer" : "/account?tab=overview");
   };
 
   const enterOrganizer = () => {
@@ -96,7 +98,7 @@ export function AccountControls({ showWelcome = false }: { showWelcome?: boolean
 
   return <>
     {user ? <div className="account-control-cluster">
-      <button type="button" className="mobile-mode-quick" onClick={() => changeMode(user.mode !== "organizer")} aria-label={user.mode === "organizer" ? "Ganti ke Traveler" : "Ganti ke Organizer"}>{user.mode === "organizer" ? <><Compass /> Traveler</> : <><BriefcaseBusiness /> Organizer</>}</button>
+      <button type="button" className="mobile-mode-quick" onClick={() => changeMode(user.mode !== "organizer")} aria-label={user.mode === "organizer" ? "Ganti ke Traveler" : "Ganti ke Organizer"}>{user.mode === "organizer" ? <><Compass /><span>Traveler</span></> : <><BriefcaseBusiness /><span>Organizer</span></>}</button>
       <div className="account-chip">
         <a className="account-avatar" href="/account" aria-label="Buka Account Center">{user.initials}</a>
         <a className="account-identity" href="/account"><strong>{user.name.split(" ")[0]}</strong><small>{user.mode === "organizer" ? "Organizer Mode" : "Traveler Mode"}</small></a>
@@ -123,7 +125,7 @@ export function AccountControls({ showWelcome = false }: { showWelcome?: boolean
         <DialogHeader><span className="auth-mark"><ShieldCheck /></span><DialogTitle>Masuk ke Kept</DialogTitle><DialogDescription>Mode prototype menyimpan sesi di perangkat ini. Akun bersama lintas perangkat akan diaktifkan bersama backend VPS.</DialogDescription></DialogHeader>
         <Tabs value={authTab} onValueChange={setAuthTab}>
           <TabsList className="auth-tabs"><TabsTrigger value="login">Masuk</TabsTrigger><TabsTrigger value="register">Daftar</TabsTrigger></TabsList>
-          <TabsContent value="login"><form className="auth-form" onSubmit={(event) => authenticate(event, "login")}><label>Email<input name="email" type="email" defaultValue={demoUser.email} required /></label><label>Password<input name="password" type="password" defaultValue="keptdemo" required /></label>{message && <p role="alert">{message}</p>}<Button type="submit"><LogIn /> Masuk Demo</Button><button type="button" className="demo-account" onClick={() => { saveKeptUser(demoUser); setUser(demoUser); setAuthOpen(false); if (postAuthPath) window.location.href = postAuthPath; }}><BadgeCheck /> Gunakan akun demo terverifikasi</button></form></TabsContent>
+          <TabsContent value="login"><form className="auth-form" onSubmit={(event) => authenticate(event, "login")}><label>Email<input name="email" type="email" defaultValue={demoUser.email} required /></label><label>Password<input name="password" type="password" defaultValue="keptdemo" required /></label>{message && <p role="alert">{message}</p>}<Button type="submit"><LogIn /> Masuk Demo</Button><button type="button" className="demo-account" onClick={() => { saveKeptUser(demoUser); setUser(demoUser); setAuthOpen(false); if (postAuthPath) router.push(postAuthPath); }}><BadgeCheck /> Gunakan akun demo terverifikasi</button></form></TabsContent>
           <TabsContent value="register"><form className="auth-form" onSubmit={(event) => authenticate(event, "register")}><label>Nama lengkap<input name="name" placeholder="Nama lengkap" required /></label><label>Email<input name="email" type="email" placeholder="nama@email.com" required /></label><label>Password<input name="password" type="password" placeholder="Minimal 8 karakter" minLength={8} required /></label><Button type="submit"><UserRound /> Buat Profil Demo</Button></form></TabsContent>
         </Tabs>
       </DialogContent>

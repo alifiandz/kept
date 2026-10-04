@@ -118,3 +118,49 @@ test("uses the approved demo identity and visible Traveler role language", () =>
   assert.doesNotMatch(accountUi, /Traveller/);
   assert.match(accountUi, /Traveler Mode/);
 });
+
+test("keeps common phone widths in a stable single-column interaction layout", () => {
+  const css = readFileSync(join(root, "app", "globals.css"), "utf8");
+  const phoneRules = css.slice(css.lastIndexOf("@media (max-width: 480px)"));
+  assert.match(phoneRules, /\.mode-tabs\s*\{\s*grid-template-columns:\s*repeat\(2,minmax\(0,1fr\)\)/);
+  assert.match(phoneRules, /\.search-field,\.search-field\.wide\s*\{\s*flex-basis:\s*100%/);
+  assert.match(phoneRules, /\.operator-home-actions\s*\{\s*flex-direction:\s*column/);
+  assert.match(phoneRules, /\.operator-home-metrics,\.operator-performance-grid,\.operator-quick-grid\s*\{\s*grid-template-columns:\s*1fr/);
+  assert.match(phoneRules, /\.mobile-mode-quick span\s*\{\s*display:\s*none/);
+});
+
+test("keeps internal navigation client-side to avoid full-page flashes", () => {
+  const navigation = readFileSync(join(root, "components", "smooth-navigation.tsx"), "utf8");
+  const layout = readFileSync(join(root, "app", "layout.tsx"), "utf8");
+  const interactiveSources = [
+    join(root, "app", "page.tsx"),
+    join(root, "app", "account", "page.tsx"),
+    join(root, "components", "account-controls.tsx"),
+  ].map((path) => readFileSync(path, "utf8")).join("\n");
+  assert.match(navigation, /router\.push\(next/);
+  assert.match(navigation, /router\.prefetch/);
+  assert.match(layout, /<SmoothNavigation\s*\/>/);
+  assert.doesNotMatch(interactiveSources, /window\.location\.href\s*=/);
+});
+
+test("prevents Account Center content from widening the mobile viewport", () => {
+  const css = readFileSync(join(root, "app", "globals.css"), "utf8");
+  const phoneRules = css.slice(css.lastIndexOf("@media (max-width: 480px)"));
+  assert.match(phoneRules, /\.account-shell,[\s\S]*\.mobile-role-switch\s*\{\s*min-width:\s*0;\s*max-width:\s*100%/);
+  assert.match(phoneRules, /\.account-tab-list\s*\{\s*width:\s*100%\s*!important;\s*overflow-x:\s*auto/);
+  assert.match(phoneRules, /\.mobile-role-switch\s*\{\s*width:\s*100%;\s*grid-template-columns:\s*minmax\(0,1fr\)\s*minmax\(0,1fr\)/);
+  assert.match(phoneRules, /\.organizer-tour-row\s*\{\s*width:\s*100%;\s*min-width:\s*0;\s*grid-template-columns:\s*minmax\(0,1fr\)/);
+  assert.match(phoneRules, /\.account-content fieldset,[\s\S]*\.account-form textarea\s*\{\s*min-width:\s*0;\s*max-width:\s*100%/);
+});
+
+test("keeps Promise Card and Reality Check as one traceable six-promise flow", () => {
+  const data = readFileSync(join(root, "lib", "kept-data.ts"), "utf8");
+  const tourPage = readFileSync(join(root, "app", "tour", "page.tsx"), "utf8");
+  assert.match(data, /title: "Itinerary utama"/);
+  assert.match(data, /completedReality\(promises, capacity\)/);
+  assert.match(data, /realityResponses:/);
+  assert.match(tourPage, /Peserta tidak mengubah Promise Card/);
+  assert.match(tourPage, /Lihat cara mengisi/);
+  assert.match(tourPage, /PRATINJAU ALUR PESERTA/);
+  assert.match(tourPage, /tour\.realityResponses} dari {tour\.verifiedParticipants}/);
+});
