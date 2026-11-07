@@ -24,11 +24,11 @@ npm run dev
 
 ```sh
 npm run typecheck
-node --test tests/kept-integrity.test.mjs tests/ui-components.test.mjs
+node --test tests/kept-integrity.test.mjs
 npm run build:webuzo
 ```
 
-The portable Next.js configuration exports static files into `out/`. Serve that output on a staging host to review before any production release. `npm run build` retains the original Sites/Vinext build path; its helper scripts expect Linux utilities. The rendered-HTML test targets that Worker build rather than the static export.
+The portable Next.js configuration exports static files into `out/`. Serve that output on a staging host to review before any production release. `npm run build` retains the original Sites/Vinext build path; its helper scripts expect Linux utilities. The rendered-HTML test and CSS portion of the component suite require that Worker build in `dist/`, rather than the static export. Run the full existing test suite after a successful Worker build on its supported Linux environment.
 
 ## Source provenance
 
