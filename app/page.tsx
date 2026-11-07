@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import {
   AlertCircle,
   ArrowRight,
-  AtSign,
   BadgeCheck,
   BriefcaseBusiness,
   CalendarDays,
@@ -695,20 +694,19 @@ export default function Home() {
       ) : (
         <>
           <section className="hero" id="top">
-            <div className="hero-shade" />
-            <div className="hero-copy">
-              <span className="eyebrow">
-                <ShieldCheck /> BUKTI SEBELUM KAMU PERCAYA
-              </span>
-              <h1>
-                Temukan trip yang
-                <br />
-                layak dipercaya.
-              </h1>
-              <p>
-                Jelajahi open trip berdasarkan janji yang tercatat dan bukti
-                dari peserta terverifikasi.
-              </p>
+            <div className="hero-intro">
+              <div className="hero-copy">
+                <span className="eyebrow"><span className="status-dot" /> PERJALANAN BAIK DIMULAI DARI KEJELASAN</span>
+                <h1>Pergi lebih jauh.<br /><em>Ragu lebih sedikit.</em></h1>
+                <p>Temukan tempat yang ingin kamu tuju. Periksa janji di balik setiap trip. Berangkat dengan pilihan yang lebih yakin.</p>
+                <div className="hero-links"><a className="primary-explore" href="#destinations">Jelajahi destinasi <ArrowRight /></a><a href="#how-it-works">Kenali cara Kept bekerja <ArrowRight /></a></div>
+                <div className="hero-footnote"><ShieldCheck /><span>Janji tercatat. Perubahan terlihat. Pengalaman diperiksa.</span></div>
+              </div>
+              <div className="hero-visual">
+                <img className="hero-landscape" src="/bromo.webp" alt="Lanskap Gunung Bromo di bawah langit pagi" fetchPriority="high" />
+                <div className="photo-caption"><span>01 / JAWA TIMUR</span><strong>Bromo, sebelum dunia terbangun.</strong></div>
+                <a className="hero-proof" href="/tour?slug=bromo-sunrise-weekend"><span className="proof-top"><ShieldCheck /> CONTOH PROMISE CARD <ArrowRight /></span><strong>Perjalanan punya janji.<br />Sekarang, ada catatannya.</strong><span className="proof-item"><CheckCircle2 /> Itinerary & fasilitas</span><span className="proof-item"><CheckCircle2 /> Riwayat perubahan</span><span className="proof-bottom">Lihat contoh trip <ArrowRight /></span></a>
+              </div>
             </div>
 
             <div className="search-shell">
@@ -881,10 +879,10 @@ export default function Home() {
             <div className="section-heading">
               <div>
                 <span className="section-kicker">JELAJAHI INDONESIA</span>
-                <h2>Destinasi open trip pilihan</h2>
+                <h2>Tempat baru. Cerita berikutnya.</h2>
                 <p>
-                  Pilih tempatnya dahulu, lalu bandingkan operator dan bukti
-                  perjalanan yang tersedia.
+                  Dari pagi di pegunungan sampai sore di tepi laut. Pilih
+                  destinasi, lalu lihat cerita di balik tripnya.
                 </p>
               </div>
               {(submittedQuery || submittedTripFilters || showSaved) && (
@@ -998,10 +996,10 @@ export default function Home() {
                   <span className="section-kicker light">
                     KENAPA MEMILIH Kept?
                   </span>
-                  <h2>Kepercayaan yang bisa diperiksa.</h2>
+                  <h2>Bukan sekadar foto yang indah.</h2>
                   <p>
-                    Kept membantu kamu melihat lebih dari foto promosi dan
-                    testimoni.
+                    Di balik perjalanan yang baik, ada janji yang jelas.
+                    Kept membantu kamu memeriksanya sebelum memilih.
                   </p>
                 </div>
               </div>
@@ -1123,20 +1121,12 @@ export default function Home() {
               <strong>Untuk Operator</strong>
               <a href="#for-operators">Buat Profil</a>
               <a href="/account?tab=eligibility">Masuk Operator</a>
-              <a href="mailto:hello@kept.id?subject=Pusat%20Bantuan%20Kept">
-                Pusat Bantuan
-              </a>
+              <a href="#how-it-works">Panduan Kept</a>
             </div>
             <div className="footer-column contact-column">
-              <strong>Prototype JHIC 2.0</strong>
-              <span>
-                <AtSign />
-                Kept Prototype
-              </span>
-              <span>
-                <MapPin />
-                Team Knot — SMA LHI
-              </span>
+              <strong>Kept, untuk perjalanan yang lebih jelas.</strong>
+              <span>Jelajahi. Periksa. Berangkat.</span>
+              <small>Versi demo · Data perjalanan merupakan contoh.</small>
               <a href="/credits">Kredit foto & lisensi</a>
             </div>
           </footer>

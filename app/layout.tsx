@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { CompetitionLogos } from "@/components/competition-logos";
 import { SmoothNavigation } from "@/components/smooth-navigation";
 import "./globals.css";
+import "./standalone.css";
 import { siteUrl } from "@/lib/site-url";
 
 export const metadata: Metadata = {
@@ -15,5 +15,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="id"><head><link rel="preload" as="image" href="/bromo.webp" type="image/webp" fetchPriority="high" /></head><body><SmoothNavigation />{children}<CompetitionLogos /></body></html>;
+  return <html lang="id"><head><link rel="preload" as="image" href="/bromo.webp" type="image/webp" fetchPriority="high" /></head><body><SmoothNavigation />{children}</body></html>;
 }

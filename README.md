@@ -1,6 +1,8 @@
 # Kept
 
-Editable source for the Kept open-trip transparency prototype.
+Kept is an independent open-trip transparency product. This review version introduces a redesigned travel-led homepage and shared visual system, with no competition or sponsor branding.
+
+The current experience uses sample trip data and device-local accounts. This is disclosed in the interface; cross-device accounts and production verification are not implemented.
 
 ## Development
 
