@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { SmoothNavigation } from "@/components/smooth-navigation";
 import "./globals.css";
-import "./standalone.css";
 import { siteUrl } from "@/lib/site-url";
 
 export const metadata: Metadata = {

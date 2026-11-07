@@ -1,8 +1,8 @@
 # Kept
 
-Kept is an independent open-trip transparency product. This review version introduces a redesigned travel-led homepage and shared visual system, with no competition or sponsor branding.
+Kept is an independent open-trip transparency product. The original interface and functionality are preserved; only competition, sponsor, and team branding has been removed.
 
-The current experience uses sample trip data and device-local accounts. This is disclosed in the interface; cross-device accounts and production verification are not implemented.
+The current experience uses sample trip data and device-local accounts. Cross-device accounts and production verification are not implemented.
 
 ## Development
 
