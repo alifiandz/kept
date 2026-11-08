@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import {
   AlertCircle,
   ArrowRight,
-  AtSign,
   BadgeCheck,
   BriefcaseBusiness,
   CalendarDays,
@@ -1128,15 +1127,9 @@ export default function Home() {
               </a>
             </div>
             <div className="footer-column contact-column">
-              <strong>Prototype JHIC 2.0</strong>
-              <span>
-                <AtSign />
-                kept.my.id
-              </span>
-              <span>
-                <MapPin />
-                Team Knot — SMA LHI
-              </span>
+              <strong>Kept</strong>
+              <span>Did they keep their promise?</span>
+              <small>Data perjalanan merupakan data demonstrasi.</small>
               <a href="/credits">Kredit foto & lisensi</a>
             </div>
           </footer>

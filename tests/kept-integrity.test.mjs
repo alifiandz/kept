@@ -69,10 +69,10 @@ test("records the homepage hero source and license", () => {
   assert.ok(credits[0].license);
 });
 
-test("uses official competition logos and the locked Kept brand color", () => {
-  for (const name of ["jhic-2.png", "jagoan-hosting.png", "komdigi.png", "garuda-spark.png", "ngalup.png"]) {
-    assert.equal(existsSync(join(root, "public", "partners", name)), true, name);
-  }
+test("keeps the standalone identity and Kept brand color", () => {
+  const layout = readFileSync(join(root, "app", "layout.tsx"), "utf8");
+  const home = readFileSync(join(root, "app", "page.tsx"), "utf8");
+  assert.doesNotMatch(layout + home, /JHIC|Team Knot|SMA LHI|CompetitionLogos/i);
   const css = readFileSync(join(root, "app", "globals.css"), "utf8");
   assert.match(css, /--blue:\s*#496af1/i);
 });

@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
+import { siteUrl } from "@/lib/site-url";
 import { destinations, tours } from "@/lib/kept-data";
 
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://kept.my.id";
+  const base = siteUrl;
   return [
     { url: base, changeFrequency: "weekly", priority: 1 },
     { url: `${base}/credits`, changeFrequency: "yearly", priority: 0.2 },
