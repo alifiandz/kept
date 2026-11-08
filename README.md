@@ -1,52 +1,91 @@
-# Kept
+<div align="center">
+  <img src="public/kept-logo.png" alt="Kept logo" width="88" />
+  <h1>Kept</h1>
+  <p><strong>Did they keep their promise?</strong></p>
+  <p>An open-trip transparency platform that connects promises, changes, and participant experiences.</p>
+</div>
 
-Kept is an independent open-trip transparency product. The original interface and functionality are preserved; only competition, sponsor, and team branding has been removed.
+## About
 
-The current experience uses sample trip data and device-local accounts. Cross-device accounts and production verification are not implemented.
+Kept helps travelers inspect what an operator promises before a trip and compare it with what participants experienced afterward. It focuses on evidence and transparency rather than promotional photos or a single star rating.
 
-## Development
+This repository contains the complete current application source, local image assets, attribution, dependency lockfile, build configuration, and tests. It is a working interactive prototype, not a finished production service.
 
-Requires Node.js 22.13 or newer and npm.
+## Features
+
+- **Trip discovery:** browse destinations and filter trips by departure, month, and group size.
+- **Operator lookup:** inspect sample operator records and promise-fulfillment scores.
+- **Promise Card:** review the itinerary, facilities, price, and participant limits.
+- **Change Log:** inspect changes, explanations, and replacement arrangements.
+- **Trip Pass and Reality Check:** explore the demonstration participant flow and compare promises with experiences.
+- **Traveler and organizer views:** saved destinations, comparison, and local account workflows.
+- **Responsive interface:** shared layouts for desktop and mobile.
+
+## Project status
+
+| Implemented in the prototype | Still required for production |
+| --- | --- |
+| Interactive discovery, trip details, and sample evidence | Live operator onboarding and moderation |
+| Device-local account and saved-item flows | Secure server-side authentication and authorization |
+| Demonstration participant verification and reviews | Reliable verification with real participant records |
+| Sample data and browser-local persistence | Shared database, backups, and cross-device persistence |
+| Static deployment build and integrity checks | Operational monitoring and production security review |
+
+Kept does not process bookings or payments. Demonstration verification and scores should not be interpreted as independently verified claims about real operators.
+
+## Run locally
+
+Requirements: Node.js **22.13+** and npm.
 
 ```sh
+git clone https://github.com/alifiandz/kept.git
+cd kept
 npm ci
-npm run dev
+npm run dev:next
 ```
 
-## Structure
+Open the local address printed by Next.js. No secret or environment file is required for the current static prototype.
 
-- `app/`: pages, layouts, styles, and metadata
-- `components/`, `hooks/`, `lib/`: interface components and prototype logic
-- `public/`: original images, logos, and image attribution
-- `tests/`: existing integrity and component checks
-- `worker/`, `build/`, `scripts/`, `.openai/`: retained Sites build support
-- `db/`, `drizzle/`, `examples/`: existing database scaffolding
-
-## Build and checks
+## Build and validate
 
 ```sh
 npm run typecheck
 node --test tests/kept-integrity.test.mjs
-npm run build:webuzo
+npm run build:static
 ```
 
-The portable Next.js configuration exports static files into `out/`. Serve that output on a staging host to review before any production release. `npm run build` retains the original Sites/Vinext build path; its helper scripts expect Linux utilities. The rendered-HTML test and CSS portion of the component suite require that Worker build in `dist/`, rather than the static export. Run the full existing test suite after a successful Worker build on its supported Linux environment.
+The static build writes to `out/`. Upload the complete output, including every image, to a static host. `NEXT_PUBLIC_SITE_URL` can optionally supply the canonical origin at build time; it is public configuration, not a secret.
 
-## Source provenance
+The original Sites/Vinext path is retained through `npm run dev`, `npm run build`, and `npm run start`. Its build helpers expect Linux utilities. The rendered-HTML test and CSS portion of the component suite require the Worker build in `dist/`; they do not target the Next.js static export.
 
-Migrated from the existing `kept-free-hosting` editable checkout. Its baseline matches original Sites version 37, commit `22851350a968b4cd89da8cfe2a92246e952334c3`. The existing portable hosting adaptations are preserved. This repository begins with a sanitized source snapshot; old Git history and local runtime data are not imported.
+## Repository structure
 
-This remains a prototype using browser local storage. Stored browser data is separate from the source repository. No production database or authentication backend was added.
+```text
+app/             Pages, layouts, styles, and page metadata
+components/      Shared interface and account components
+hooks/           Shared React hooks
+lib/             Sample trip data and local account logic
+public/          Images, Kept logo, and asset attribution
+tests/           Integrity, rendering, and component checks
+worker/          Original Worker entry point
+build/, scripts/ Original Sites build helpers
+db/, drizzle/    Database scaffolding; not a production database
+examples/        Optional integration examples
+.openai/         Original Sites hosting manifest
+```
 
-## Future releases
+## Stack
 
-1. Work on a feature branch and review the diff.
-2. Install from the lockfile and run the checks above.
-3. Build and validate a staging copy, including all assets and attribution.
-4. Release only after review, retaining a backup of the current production files.
+Next.js · React · TypeScript · Tailwind CSS · shadcn/ui · Lucide
 
-The migration does not connect automatic deployment, alter DNS, or change existing hosting. Domain configuration is intentionally omitted here. The existing Vercel configuration supports a static export; a future deployment should upload the complete output, including every image. Existing deployments may use a separate image asset project, so keep current projects intact until a replacement is tested.
+The retained alternate build path uses Vinext, Vite, and Cloudflare Workers. Database scaffolding uses Drizzle.
 
-## Secrets and generated files
+## Safe changes and releases
 
-Environment files, credentials, dependency folders, build output, caches, logs, and local deployment records are excluded. Configure any future secrets through the deployment provider. No secret is required for the current static prototype. Third-party assets retain their existing credit and license files.
+Work on a branch, review the diff, run the checks, and validate a separate preview before replacing production. Keep the previous deployment available for rollback. GitHub stores source code; pushing a commit does not itself publish the current website.
+
+Environment files, dependencies, build artifacts, local credentials, logs, and runtime caches are excluded by `.gitignore`. Never commit real user data or deployment secrets.
+
+## Assets and attribution
+
+Destination photographs retain their creator and license records in `public/hero-credits.json`, `public/cover-credits.json`, and `public/image-credits.json`. The app also exposes a photo credits page. Third-party assets retain their respective rights and license conditions; repository visibility does not replace them.
