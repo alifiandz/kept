@@ -41,3 +41,12 @@ next-env.d.ts
 /.sites-runtime/
 /outputs/
 /work/
+
+# Local credentials and deployment records
+*.key
+*.p12
+*.pfx
+credentials*.json
+vercel-production.json
+vercel-asset-files.json
+*.log
