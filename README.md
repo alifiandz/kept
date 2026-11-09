@@ -5,6 +5,12 @@
   <p>An open-trip transparency platform that connects promises, changes, and participant experiences.</p>
 </div>
 
+## Development history
+
+Kept grew through **37 real source commits** before this public release. The original dates and development lineage are now preserved.
+
+[Explore the original development timeline →](docs/development-history.md)
+
 ## About
 
 Kept helps travelers inspect what an operator promises before a trip and compare it with what participants experienced afterward. It focuses on evidence and transparency rather than promotional photos or a single star rating.
